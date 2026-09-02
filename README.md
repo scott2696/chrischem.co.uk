@@ -25,7 +25,7 @@ is a directory and no page has a `.html` extension.
 | `_build/gen_images.py` | All generated imagery |
 | `_build/operators.json` | Single source of truth for operator facts + affiliate links |
 | `_build/pages/*.html` | Authored content fragments, ordered by filename prefix |
-| `assets/css/site.css` | The whole stylesheet. Shared house template |
+| `assets/css/home.css` | The whole stylesheet. Arthouse template classes, instrument aesthetic |
 | `logos/`, `images/` | Brand artwork, author avatars, OG image |
 | `research/` | Competitor analysis and keyword strategy |
 
@@ -43,7 +43,27 @@ is a directory and no page has a `.html` extension.
 Authored markup is deliberately simple — `<div class="table-scroll">`,
 `<div class="callout tip|warn|note|law">`, `<div class="faq"><details>`,
 `<div class="toplist"><article class="op-card">` — and `transform()` in
-`build.py` maps it onto the template classes.
+`build.py` maps it onto the template classes (`.datatable`, `.callout`,
+`.snippet`, `.afl-row`, `.opcard`, `.cardgrid`, `.toc`).
+
+## Template and design
+
+Markup follows the Arthouse template class system: `.site-header` / `.hero` /
+`main > .wrap > .content` / `.afl-list` / `.opcard` / `.datatable` / `.callout` /
+`.snippet` / `.toc` / `.cardgrid` / `.faq` / `.rg` / `.site-footer`.
+
+The aesthetic is deliberately not the template's cinema treatment. It is an
+**engraved instrument panel**: warm paper ground (`--paper`), deep petrol-green
+chrome (`--petrol`), brass (`--brass`) and signal-mint (`--mint`) accents,
+Archivo for display and IBM Plex Mono for data readouts. The hero replaces the
+template's film-sprocket `.ticks` with a brass measurement `.scale` along its
+base, a graph-paper engraving, and `.gauges` stat readouts pulled from the
+page's authored `hero-stats`. Prose sits at 840px; leaderboards, tables and card
+grids break out to 1060px on desktop.
+
+If you change a `<div>` to another tag in `transform()`, consume its closing
+`</div>` in the same regex — `main()` asserts div balance on every page and will
+fail the build if you don't.
 
 ## Notes
 

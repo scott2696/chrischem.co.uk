@@ -322,7 +322,7 @@ for slug, c in COPY.items():
 <section class="section"><div class="wrap">
 <div class="answer"><span class="label">Our verdict</span><p>%(verdict)s</p></div>
 
-<div class="updated"><span><span class="dot"></span> Last updated <strong>%(upd)s</strong></span><span>Score <strong>%(rating)s/5</strong> <span style="color:var(--gold-2)">%(stars)s</span></span><span>Tested by <a href="/authors/">%(author)s</a></span><span>Scored using our <a href="/how-we-review/">published methodology</a></span></div>
+<div class="updated"><span><span class="dot"></span> Last updated <strong>%(upd)s</strong></span><span>Score <strong>%(rating)s/5</strong></span><span>Tested by <a href="/authors/">%(author)s</a></span><span>Scored using our <a href="/how-we-review/">published methodology</a></span></div>
 
 <div class="review-head" style="border:0;padding:0;margin-bottom:18px">
 <span class="op-logo" aria-hidden="true">%(initials)s</span>

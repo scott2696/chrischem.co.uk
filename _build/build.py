@@ -16,6 +16,7 @@ BRAND_WORD = "CHRIS&nbsp;CHEM"
 TAGLINE = "UK Casino &amp; Betting Guide"
 UPDATED = "2026-09-02"
 UPDATED_HUMAN = "02/09/2026"
+UPDATED_LONG = "2 September 2026"
 
 # The brief asked for every canonical to point at the homepage. That would tell
 # Google the 30+ money pages are duplicates of "/" and drop them from the index —
@@ -126,46 +127,41 @@ def resolve_tokens(s):
     return s
 
 # ---------------------------------------------------------------- chrome
-MARK = ('<svg class="eng-mark" viewBox="0 0 70 40" aria-hidden="true">'
-  '<path d="M5 7 L21 20 L5 33" fill="none" stroke="var(--gold)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"></path>'
-  '<path d="M22 7 L38 20 L22 33" fill="none" stroke="var(--gold)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"></path>'
-  '<path d="M40 5 L66 20 L40 35 Z" fill="%s"></path></svg>')
+TAGLINE_LONG = "The house that checks the numbers."
+HERO_SUB = "Casino &middot; Bonuses &middot; Betting"
+HERO_META = ["Great Britain &middot; Pounds sterling", "Tested from Manchester &mdash; Est. 2026"]
+SCALE = '<span class="scale" aria-hidden="true">' + '<i></i>' * 44 + '</span>'
+
 
 def nav_html():
-    out = ['<header class="nav"><div class="wrap">',
-      '<a class="eng-logo" href="/" aria-label="%s — %s"><span class="eng-lockup">'
-      '<span class="eng-word">%s</span>%s</span>'
-      '<span class="eng-tag">%s</span></a>' % (SITE, TAGLINE, BRAND_WORD, MARK % "var(--slate)", TAGLINE),
-      '<nav class="nav-links">']
-    caret = ('<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
-             '<path d="M3 4.5l3 3 3-3"></path></svg>')
+    out = ['<header class="site-header"><div class="wrap">',
+      '<a class="brand" href="/"><img src="/favicon.svg" alt="%s logo" width="30" height="30">'
+      '<span>ChrisChem<span class="tld">.uk</span></span></a>' % SITE,
+      '<button class="nav-toggle" aria-label="Menu" aria-expanded="false" '
+      'onclick="var n=document.getElementById(\'nav\');n.classList.toggle(\'open\');'
+      'this.setAttribute(\'aria-expanded\',n.classList.contains(\'open\'))">&#9776;</button>',
+      '<nav class="nav" id="nav">']
     for label, href, kids in NAV:
         if not kids:
-            out.append('<a href="%s">%s</a>' % (href, label))
+            out.append('<div class="nav-item"><a href="%s" class="nav-top">%s</a></div>' % (href, label))
         else:
-            trig = ('<a class="nav-trigger" href="%s">%s %s</a>' % (href, label, caret) if href
-                    else '<span class="nav-trigger" tabindex="0">%s %s</span>' % (label, caret))
-            links = "".join('<a href="%s">%s</a>' % (h, l) for l, h in kids)
-            out.append('<div class="nav-item">%s<div class="nav-dd"><div class="nav-dd-inner">%s</div></div></div>'
-                       % (trig, links))
-    out.append('</nav>')
-    out.append('<details class="menu"><summary aria-label="Open menu"><svg viewBox="0 0 24 24" width="22" height="22" '
-      'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"></path>'
-      '</svg></summary><div class="menu-panel">')
-    for label, href, kids in NAV:
-        if kids:
-            out.append('<b>%s</b>' % label)
-            out += ['<a href="%s">%s</a>' % (h, l) for l, h in kids]
-        else:
-            out.append('<a href="%s">%s</a>' % (href, label))
-    out.append('<b>Company</b><a href="/about/">About Us</a><a href="/contact/">Contact Us</a>'
-               '<a href="/authors/">Authors</a><a href="/responsible-gambling/">Responsible Gambling</a>')
-    out.append('</div></details></div></header>')
+            top = ('<a href="%s" class="nav-top" aria-haspopup="true">%s'
+                   '<span class="nav-caret" aria-hidden="true">&#9662;</span></a>' % (href or "#", label))
+            links = "".join('<a href="%s" role="menuitem">%s</a>' % (h, l) for l, h in kids)
+            out.append('<div class="nav-item has-sub">%s<div class="nav-drop" role="menu">%s</div></div>'
+                       % (top, links))
+    out.append('</nav></div></header>')
     return "".join(out)
 
 
-def hero_html(fm, lede):
+def hero_html(fm, lede, extra=None):
+    """Home gets the full instrument panel: wordmark, gauges, badges.
+    Inner pages get the compact variant with breadcrumbs."""
+    extra = extra or {}
     a = AUTHORS[fm.get("author", "team")]
+    home = fm["url"] == "/"
+    meta = "".join('<span>%s</span>' % m for m in HERO_META)
+
     crumbs = ""
     if fm.get("crumbs"):
         parts = ['<a href="/">Home</a>']
@@ -173,38 +169,67 @@ def hero_html(fm, lede):
             parts.append('<span>&rsaquo;</span>')
             parts.append(n if i == len(fm["crumbs"]) - 1 else '<a href="%s">%s</a>' % (h, n))
         crumbs = '<nav class="crumbs" aria-label="Breadcrumb">%s</nav>' % "".join(parts)
-    facts = ""
-    if fm.get("facts"):
-        facts = '<div class="hero-facts">' + "".join(
-            '<span class="hero-fact">%s</span>' % f for f in fm["facts"]) + '</div>'
-    return '''<section class="hero"><div class="wrap">
-%s<h1>%s</h1>
-<div class="hero-by">
-<a href="/authors/" aria-label="%s, author"><img src="%s" srcset="%s 1x, %s 2x" alt="%s" width="42" height="42" loading="eager"></a>
-<div class="hero-by-txt">
-<span>By <a class="by-link" href="/authors/"><b>%s</b></a>, %s</span>
-<span class="eng-mono hero-by-date">%s Updated %s</span>
-</div></div>
-<p class="lede">%s</p>%s
-</div></section>''' % (crumbs, fm["h1"], a['name'], a['photo'], a['photo'],
-                       a['photo'].replace('.jpg','@2x.jpg'), a['name'], a['name'], a['role'],
-                       ic("clock"), UPDATED_HUMAN, lede, facts)
 
+    gauges = ""
+    if extra.get("stats"):
+        gauges = '<div class="gauges">' + "".join(
+            '<div class="gauge"><span class="k">%s</span><span class="v">%s</span></div>' % (k, v)
+            for k, v in extra["stats"]) + '</div>'
+
+    badges = ""
+    pills = extra.get("pills") or fm.get("facts") or []
+    if pills:
+        badges = '<div class="badges">' + "".join(
+            '<span class="badge">%s</span>' % p for p in pills) + '</div>'
+
+    ctas = ""
+    if extra.get("ctas"):
+        ctas = '<div class="hero-cta">' + "".join(
+            '<a class="%s" href="%s">%s</a>' % ("cta-btn" if i == 0 else "cta-ghost", h, t)
+            for i, (h, t) in enumerate(extra["ctas"])) + '</div>'
+    elif home:
+        ctas = ('<div class="hero-cta"><a class="cta-btn" href="#leaderboard">View the rankings</a>'
+                '<a class="cta-ghost" href="/how-we-review/">How we test</a></div>')
+
+    fine = '<p class="hero-fine">%s</p>' % extra["fine"] if extra.get("fine") else ""
+
+    lockup = ""
+    if home:
+        lockup = ('<p class="wordmark">ChrisChem<span class="dot">.</span></p>'
+                  '<p class="hero-tagline">%s</p><p class="hero-sub">%s</p>'
+                  % (TAGLINE_LONG, HERO_SUB))
+
+    return '''<section class="hero%s">%s<div class="wrap">
+<div class="hero-meta">%s</div>
+%s%s<h1>%s</h1>
+<p class="lede">%s</p>
+%s%s%s%s
+<div class="meta-line">Written by <a href="/authors/">%s</a> &middot; Fact-checked by <a href="/authors/#priya-raval">Priya Raval</a> &middot; Updated %s &middot; <a href="/gambling-winnings-tax-uk/">Do I pay tax?</a></div>
+</div></section>''' % ("" if home else " hero--page", SCALE, meta, crumbs, lockup,
+                        fm["h1"], lede, gauges, ctas, badges, fine,
+                        a["name"], UPDATED_LONG)
+
+
+FOOT_BLURB = ("Independent UK reviews of online casinos, bonuses and betting sites. We test with "
+              "real money in pounds, time every withdrawal ourselves, and only ever recommend "
+              "playing within a budget you can afford to lose.")
 
 def foot_html():
     cols = ""
     for title, links in FOOTER:
         items = "".join('<a href="%s">%s</a>' % (h, l) for l, h in links)
-        cols += '<div class="foot-col"><b>%s</b>%s</div>' % (title, items)
-    return '''<footer class="foot"><div class="wrap">
-<div class="foot-top">
-<div><a class="eng-logo" href="/" aria-label="%s"><span class="eng-lockup"><span class="eng-word">%s</span>%s</span>
-<span class="eng-tag">%s</span></a>
-<p style="margin:.7em 0 0;max-width:44ch;color:#9FB0D4">The UK's independent guide to online casinos, bonuses and betting sites. We test with real GBP deposits and timed withdrawals so you don't have to.</p></div>
-<div class="foot-cols">%s</div>
+        cols += '<div><h4>%s</h4>%s</div>' % (title, items)
+    return '''<footer class="site-footer"><div class="wrap">
+<div class="cols">
+<div><h4>ChrisChem.uk</h4><p>%s</p>
+<div class="rg-mini"><span class="gc-18">18+</span> Gambling can be harmful. Free, confidential help: <a href="tel:08088020133">National Gambling Helpline 0808 8020 133</a> &middot; <a href="https://www.begambleaware.org/" rel="nofollow noopener" target="_blank">BeGambleAware</a> &middot; <a href="https://www.gamstop.co.uk/" rel="nofollow noopener" target="_blank">GamStop</a>.</div></div>
+%s</div>
+<div class="legal">
+<p><strong>Affiliate disclosure:</strong> ChrisChem is reader-supported. When you open an account through a link on this site we may earn a commission, at no cost to you. It never influences our ratings &mdash; the commission rate is identical across every operator we list, position cannot be bought, and our <a href="/how-we-review/">methodology</a> is applied identically to every brand.</p>
+<p><strong>Important:</strong> every operator featured here is licensed offshore (Cura&ccedil;ao, Anjouan) and is <strong>not licensed by the UK Gambling Commission</strong>. That means they sit outside <strong>GamStop</strong>, outside UKGC stake limits and affordability checks, and outside IBAS dispute resolution. <strong>If you are registered with GamStop, or have ever self-excluded, please do not use these sites</strong> &mdash; <a href="/responsible-gambling/">read this instead</a>.</p>
+<p>&copy; 2026 %s. You must be 18 or over to gamble in the United Kingdom. Bonuses, odds and terms were accurate at our last update (%s) and are subject to change &mdash; always check the operator&rsquo;s current terms. Please gamble responsibly.</p>
 </div>
-<div class="foot-rg"><strong>18+. Gamble responsibly.</strong> Operators listed on this site are licensed offshore (Cura&ccedil;ao, Anjouan and similar) and are <strong>not licensed by the UK Gambling Commission</strong>. That means they are outside GamStop, outside the UKGC deposit-limit and affordability rules, and outside the Independent Betting Adjudication Service. <strong>If you are registered with GamStop, or have ever self-excluded, do not use these sites.</strong> Gambling carries real risk. Free, confidential help: <strong>GamCare&rsquo;s National Gambling Helpline on 0808 8020 133</strong>, 24/7, <strong>GamStop</strong> at gamstop.co.uk, <strong>Gordon Moody</strong>, and <strong>BeGambleAware</strong> at begambleaware.org. Affiliate links never affect our tested rankings &mdash; see <a href="/how-we-review/" style="color:#E9B949">how we review</a>. &copy; 2026 %s.</div>
-</div></footer>''' % (SITE, BRAND_WORD, MARK % "#fff", TAGLINE, cols, SITE)
+</div></footer>''' % (FOOT_BLURB, cols, SITE, UPDATED_LONG)
 
 
 # ---------------------------------------------------------------- transformer
@@ -232,52 +257,38 @@ UK_NOTICE_BODY = ('No operator on this list holds a <strong>UK Gambling Commissi
 
 
 def lb_row(i, name, sub, offer, terms, rating10, href, logo, badge="", feat=""):
-    """One leaderboard row. Shared by the authored-toplist and itemlist paths."""
+    """One .afl-row. Shared by the authored-toplist and itemlist paths."""
     plain = re.sub(r'<[^>]+>', '', name)
-    fast = '<span class="lb-fast">%s%s</span>' % (ic("bolt"), badge) if badge else ""
-    return '''<li class="lb-row%s">
-<a class="lb-cover" href="%s" rel="nofollow sponsored noopener" target="_blank" aria-label="Visit %s"></a>
-<span class="lb-rank">%d</span>
-<div class="lb-brand"><img class="lb-logo" src="%s" alt="%s logo" loading="lazy" width="96" height="48"><div class="lb-name">%s<span class="lb-sub">%s</span></div></div>
-<div class="lb-speed"><div class="lb-payout">%s%s</div><div class="lb-bar"><span class="lb-bar-fill" style="width:%d%%"></span></div></div>
-<div class="lb-bonus"><span class="lb-bonus-l">Welcome offer</span><span class="lb-bonus-v">%s</span></div>
-<div class="lb-cta"><a class="eng-btn" href="%s" rel="nofollow sponsored noopener" target="_blank">Get bonus</a><span class="lb-min">%s</span></div>
-</li>''' % (feat, href, plain, i, logo, plain, name, sub, stars_row(rating10), fast,
-            min(99, int(rating10*10)), offer, href, terms)
+    slug = re.sub(r'[^a-z0-9]+', '-', plain.lower()).strip('-')
+    stars5 = rating10 / 2.0
+    full = int(stars5)
+    stars = "&#9733;" * full + "&#9734;" * (5 - full)
+    if badge:
+        bcls, btxt = ("top", badge) if feat else ("", badge)
+    else:
+        bcls, btxt = "num", "#%d" % i
+    pills = "".join('<span class="afl-pill">%s</span>' % p
+                    for p in [x.strip() for x in re.split(r'\s*&middot;\s*|\s*·\s*', sub) if x.strip()][:4])
+    return '''<div class="afl-row%s" id="%s">
+<span class="afl-rank">%02d</span>
+<div class="afl-logo"><span class="afl-chip"><img class="oplogo" src="%s" alt="%s logo" loading="lazy" width="150" height="64"></span><span class="afl-brandname">%s</span></div>
+<div class="afl-body">
+<div class="afl-head"><span class="afl-badge %s">%s</span></div>
+<div class="afl-bonus">%s</div>
+<div class="afl-feats">%s<span class="afl-stars">%s<b>%s/10</b></span></div>
+</div>
+<div class="afl-cta"><a class="cta-btn" href="%s" rel="sponsored nofollow noopener" target="_blank">Get Bonus</a><span class="afl-tc">%s</span></div>
+</div>''' % (" is-top" if feat else "", slug, i, logo, plain, plain,
+              bcls, btxt, offer, pills, stars, rating10, href, terms)
 
 
 def lb_shell(heading, intro, lis):
-    """The section wrapper around a set of leaderboard rows."""
-    intro_html = '<p class="lb-intro">%s</p>' % intro if intro else ""
-    return '''<section id="leaderboard" class="sec sec--white"><div class="wrap">
-<div class="sec-head sec--lead"><h2>%s</h2>%s</div>
-<div class="lb">
-<div class="lb-head" aria-hidden="true"><span>#</span><span>Casino</span><span>Our rating</span><span>Welcome offer</span><span></span></div>
-<ol class="lb-rows">%s</ol>
-</div>
-<div style="max-width:820px;margin:22px auto 0">
-<p>The leaderboard sorts our verdict &mdash; number one scored highest across payout speed, game range, bonus value and cashier reliability, and the scores step down from there. The full scoring weights are on our <a href="/how-we-review/">review methodology</a> page, and every brand has a <a href="/casino-reviews/">full written review</a>.</p>
-</div></div></section>''' % (heading, intro_html, "".join(lis))
-
-
-def leaderboard_from_ops(fm, heading, sports=False):
-    """Build the leaderboard from the page's `itemlist`, so a ranking page does
-    not have to hand-author operator cards. `lbNotes` overrides the meta line
-    per slug so each page can frame the same operator for its own intent."""
-    notes = fm.get("lbNotes", {})
-    lis = []
-    for i, slug in enumerate(fm["itemlist"], 1):
-        op = OPS[slug]
-        sub = notes.get(slug) or "%s &middot; %s &middot; %s" % (op["tag"], op["licence"], op["games"])
-        terms = "%s wagering &middot; %s min &middot; 18+ T&amp;Cs apply" % (op["wagering"], op["minDep"])
-        lis.append(lb_row(i, op["name"], sub, op["welcome"], terms,
-                          round(op["rating"] * 2, 1), aff(slug, "sports" if sports else "casino"),
-                          op_logo(slug, sports), op["tag"] if i <= 3 else "",
-                          " lb-row--feat" if i == 1 else ""))
-    notice = '''<section class="sec sec--alt" id="licensing-notice"><div class="wrap"><div class="prose">
-<div class="cal cal--warn">%s<div><b>One thing to know up front</b>%s</div></div>
-</div></div></section>''' % (ic("warn"), UK_NOTICE_BODY)
-    return lb_shell(heading, fm.get("lbIntro", ""), lis), notice
+    """The .afl-list block, headed and introduced."""
+    intro_html = '<p>%s</p>' % intro if intro else ""
+    return '''<h2 id="leaderboard">%s</h2>
+%s<div class="afl-list">%s</div>
+<p style="font-size:.86rem;color:#71827E">Ranked by our verdict &mdash; number one scored highest across payout speed, game range, bonus value and cashier reliability. Full scoring weights are on our <a href="/how-we-review/">review methodology</a> page and every brand has a <a href="/casino-reviews/">written review</a>. Bonuses shown were the advertised new-player offers at our last update. 18+, T&amp;Cs apply, wagering requirements vary &mdash; always read the operator&rsquo;s full terms.</p>
+''' % (heading, intro_html, "".join(lis))
 
 
 def build_leaderboard(toplist_html, heading, sports=False, intro=""):
@@ -311,98 +322,132 @@ def build_leaderboard(toplist_html, heading, sports=False, intro=""):
         return "", ""
     sec = lb_shell(heading, intro, lis)
 
-    notice = '''<section class="sec sec--alt" id="licensing-notice"><div class="wrap"><div class="prose">
-<div class="cal cal--warn">%s<div><b>One thing to know up front</b>%s</div></div>
-</div></div></section>''' % (ic("warn"), UK_NOTICE_BODY)
+    notice = ('<div class="callout callout--warn" id="licensing-notice">'
+              '<span class="t">One thing to know up front</span><p>%s</p></div>' % UK_NOTICE_BODY)
     return sec, notice
+
+
+def leaderboard_from_ops(fm, heading, sports=False):
+    """Build the .afl-list from the page's `itemlist`, so a ranking page does not
+    have to hand-author operator cards. `lbNotes` overrides the pill line per
+    slug so each page frames the same operator for its own intent."""
+    notes = fm.get("lbNotes", {})
+    lis = []
+    for i, slug in enumerate(fm["itemlist"], 1):
+        op = OPS[slug]
+        sub = notes.get(slug) or "%s &middot; %s &middot; %s" % (op["tag"], op["licence"], op["games"])
+        terms = "18+ &middot; %s wagering &middot; T&amp;Cs apply" % op["wagering"]
+        lis.append(lb_row(i, op["name"], sub, op["welcome"], terms,
+                          round(op["rating"] * 2, 1),
+                          aff(slug, "sports" if sports else "casino"),
+                          op_logo(slug, sports),
+                          op["tag"] if i <= 3 else "",
+                          " is-top" if i == 1 else ""))
+    notice = ('<div class="callout callout--warn" id="licensing-notice">'
+              '<span class="t">One thing to know up front</span><p>%s</p></div>' % UK_NOTICE_BODY)
+    return lb_shell(heading, fm.get("lbIntro", ""), lis), notice
 
 
 def transform(body, review_slug=None):
     """Map authored content markup onto the template's classes."""
+    # answer box -> .snippet
     body = re.sub(r'<div class="answer">\s*<span class="label">(.*?)</span>\s*(.*?)</div>',
-        lambda m: '<div class="cal cal--info">%s<div><b>%s</b>%s</div></div>' % (ic("info"), m.group(1), m.group(2)),
+        lambda m: '<div class="snippet"><p><strong>%s:</strong> %s</p></div>'
+                  % (m.group(1), re.sub(r'</?p>', '', m.group(2)).strip()),
         body, flags=re.S)
-    CAL = {"tip":"good","warn":"warn","note":"gold","law":"info"}
-    ICO = {"tip":"check","warn":"warn","note":"info","law":"info"}
+    # callouts -> .callout with modifier
+    CAL = {"tip": " callout--good", "warn": " callout--warn", "note": "", "law": " callout--info"}
     body = re.sub(r'<div class="callout (tip|warn|note|law)"[^>]*>\s*<span class="t">(.*?)</span>\s*(.*?)</div>',
-        lambda m: '<div class="cal cal--%s">%s<div><b>%s</b>%s</div></div>'
-                  % (CAL[m.group(1)], ic(ICO[m.group(1)]), m.group(2), m.group(3)),
+        lambda m: '<div class="callout%s"><span class="t">%s</span>%s</div>'
+                  % (CAL[m.group(1)], m.group(2), m.group(3)),
         body, flags=re.S)
+    # verification strip -> .upd. Keep the <span> items so the CSS can separate
+    # them; only the decorative dot span is dropped.
+    body = re.sub(r'<div class="updated">(.*?)</div>',
+        lambda m: '<p class="upd">%s</p>' % m.group(1).replace('<span class="dot"></span>', ''),
+        body, flags=re.S)
+    # tables -> .t-scroll > table.datatable
     def tbl(m):
-        inner = m.group(1)
-        cap = re.search(r'<caption>(.*?)</caption>', inner, re.S)
-        capd = '<figcaption>%s</figcaption>' % cap.group(1) if cap else ""
-        inner = re.sub(r'<caption>.*?</caption>', '', inner, flags=re.S)
-        inner = inner.replace('<table class="data">', '<table class="t">')
-        return '<figure class="fig">%s<div class="t-scroll">%s</div></figure>' % (capd, inner)
+        inner = m.group(1).replace('<table class="data">', '<table class="datatable">')
+        return '<div class="t-scroll">%s</div>' % inner
     body = re.sub(r'<div class="table-scroll">(.*?)</div>', tbl, body, flags=re.S)
-    body = body.replace('<div class="faq">', '<div class="faqs">')
-    body = re.sub(r'<details( open)?><summary>', lambda m: '<details class="faq"%s><summary>' % (m.group(1) or ""), body)
+    # TOC -> nav.toc. Match the whole block so the closing </div> is consumed too,
+    # otherwise the stray tag closes .content and the rest of the page escapes it.
+    body = re.sub(r'<div class="toc">\s*<h2>(.*?)</h2>\s*(.*?)\s*</div>',
+                  lambda m: '<nav class="toc" aria-label="On this page"><strong>%s</strong>%s</nav>'
+                            % (m.group(1), m.group(2)),
+                  body, flags=re.S)
+    # FAQ: <div class="faq"><details><summary>Q</summary><div class="a">A</div></details>
     body = body.replace('<div class="a">', '<div class="faq-a">')
+    # operator reviews -> .opcard
     def rev(m):
         rid, inner = m.group(1), m.group(2)
         h = re.search(r'<div class="review-head">\s*<span class="op-logo"[^>]*>(.*?)</span>\s*'
                       r'<div><h3>(.*?)</h3><p class="rk">(.*?)</p></div>\s*'
                       r'<span class="score-pill">([\d.]+)</span>\s*</div>', inner, re.S)
-        if h:
-            rest = inner[h.end():]
-            title, meta, score = h.group(2), h.group(3), round(float(h.group(4))*2, 1)
-            rank = re.match(r'\s*(\d+)\.', title)
-            rankb = '<span class="rev-rank">#%s</span>' % rank.group(1) if rank else ""
-            title = re.sub(r'^\s*\d+\.\s*', '', title)
-            plain = re.sub(r'<[^>]+>', '', title)
-            logo = ('<img class="lb-logo" src="%s" alt="%s logo" loading="lazy" width="96" height="48">'
-                    % (op_logo(rid), plain)) if rid in OPS else ""
-            cta = re.search(r'<a class="btn btn-gold" href="([^"]+)"[^>]*>(.*?)</a>', rest, re.S)
-            ctab = ('<a class="eng-btn rev-cta-btn" href="%s" rel="nofollow sponsored noopener" target="_blank">Get bonus</a>'
-                    % cta.group(1) if cta else "")
-            head = ('<div class="rev-head">%s%s<div class="rev-h"><h3>%s</h3>'
-                    '<span class="rev-meta">%s &middot; %s %s/10</span></div>%s</div>'
-                    % (rankb, logo, title, meta, ic("star"), score, ctab))
-            return '<article class="rev" id="%s">%s<div class="rev-body">%s</div></article>' % (rid, head, rest)
-        return '<article class="rev" id="%s"><div class="rev-body">%s</div></article>' % (rid, inner)
+        if not h:
+            return '<div class="opcard" id="%s">%s</div>' % (rid, inner)
+        rest = inner[h.end():]
+        title, meta, score = h.group(2), h.group(3), h.group(4)
+        plain = re.sub(r'<[^>]+>', '', title)
+        mark = ('<img class="oplogo" src="%s" alt="%s logo" loading="lazy" width="88" height="44">'
+                % (op_logo(rid), plain)) if rid in OPS else '<span class="rev-logo">%s</span>' % h.group(1)
+        head = ('<div class="head">%s<div><div class="opname">%s</div>'
+                '<span class="tag">%s</span></div><div class="r">%s/5</div></div>'
+                % (mark, title, meta, score))
+        return '<div class="opcard" id="%s">%s%s</div>' % (rid, head, rest)
     body = re.sub(r'<article class="review" id="([^"]+)">(.*?)</article>', rev, body, flags=re.S)
-    body = re.sub(r'<article class="review">(.*?)</article>',
-                  lambda m: '<article class="rev"><div class="rev-body">%s</div></article>' % m.group(1), body, flags=re.S)
+    # standalone review-head (used on the authors page and review pages)
     def head_std(m):
-        ini, title, rk, score = m.group(1), m.group(2), m.group(3), float(m.group(4))
-        mark = ('<img class="lb-logo" src="%s" alt="%s logo" loading="lazy" width="96" height="48">'
+        ini, title, rk, score = m.group(1), m.group(2), m.group(3), m.group(4)
+        mark = ('<img class="oplogo" src="%s" alt="%s logo" loading="lazy" width="88" height="44">'
                 % (op_logo(review_slug), OPS[review_slug]["name"])) if review_slug in OPS \
                else '<span class="rev-logo">%s</span>' % ini
-        return ('<div class="rev-head">%s<div class="rev-h"><h2 style="margin:0;font-size:1.3rem">%s</h2>'
-                '<span class="rev-meta">%s</span></div>'
-                '<span class="rev-score">%s %s/10</span></div>'
-                % (mark, title, rk, ic("star"), round(score*2, 1)))
+        return ('<div class="opcard opcard--summary"><div class="head">%s'
+                '<div><div class="opname">%s</div>'
+                '<span class="tag">%s</span></div><div class="r">%s/5</div></div></div>'
+                % (mark, title, rk, score))
     body = re.sub(r'<div class="review-head"[^>]*>\s*<span class="op-logo"[^>]*>(.*?)</span>\s*'
                   r'<div><h[23][^>]*>(.*?)</h[23]><p class="rk">(.*?)</p></div>\s*'
                   r'<span class="score-pill">([\d.]+)</span>\s*</div>', head_std, body, flags=re.S)
-    body = body.replace('<div class="pros-cons">', '<div class="rev-pc">')
-    body = body.replace('<div class="pros">', '<div class="rev-pros">')
-    body = body.replace('<div class="cons">', '<div class="rev-cons">')
-    body = body.replace('<div class="spec-grid">', '<div class="specs">')
-    body = body.replace('<p><strong>Verdict:</strong>', '<p class="rev-for"><b>Verdict:</b>')
-    def linkrow(m):
-        links = re.findall(r'<a class="card link-card" href="([^"]+)"><h3>(.*?)</h3>', m.group(1), re.S)
-        if links:
-            return '<div class="linkrow">' + "".join('<a href="%s">%s</a>' % (h, t) for h, t in links) + '</div>'
-        return m.group(0)
-    body = re.sub(r'<div class="grid grid-\d">(.*?)</div>\s*(?=<|$)', linkrow, body, flags=re.S)
+    body = re.sub(r'<article class="review">(.*?)</article>',
+                  lambda m: '<div class="opcard">%s</div>' % m.group(1), body, flags=re.S)
+    # pros / cons
+    body = body.replace('<div class="pros-cons">', '<div class="proscons">')
+    # link-card grids -> .cardgrid
+    def cardgrid(m):
+        cards = re.findall(r'<a class="card link-card" href="([^"]+)">\s*<h3>(.*?)</h3>\s*(?:<p>(.*?)</p>)?',
+                           m.group(0), re.S)
+        if not cards:
+            return m.group(0)
+        out = "".join('<a href="%s"><span class="t">%s</span>%s</a>'
+                      % (h, t, '<span class="d">%s</span>' % d if d else "") for h, t, d in cards)
+        return '<div class="cardgrid">%s</div>' % out
+    body = re.sub(r'<div class="grid grid-\d">.*?</div>\s*(?=<h|<p|<div|<nav|$)', cardgrid, body, flags=re.S)
+    # feature cards -> checklist
     def cards(m):
-        items = re.findall(r'<div class="card"><div class="ico">(?:.*?)</div><h3>(.*?)</h3>(.*?)</div>', m.group(0), re.S)
+        items = re.findall(r'<div class="card"><div class="ico">(?:.*?)</div><h3>(.*?)</h3>(.*?)</div>',
+                           m.group(0), re.S)
         if not items:
             return m.group(0)
-        lis = "".join('<li>%s<div><strong>%s</strong>%s</div></li>' % (ic("check"), t, b) for t, b in items)
+        lis = "".join('<li><div><strong>%s</strong>%s</div></li>' % (t, b) for t, b in items)
         return '<ul class="checklist">%s</ul>' % lis
-    body = re.sub(r'<div class="grid grid-2"[^>]*>(?:\s*<div class="card">.*?</div>\s*)+</div>', cards, body, flags=re.S)
-    body = re.sub(r'<div class="cta-band">\s*<div><h3>(.*?)</h3><p>(.*?)</p></div>\s*<a class="btn btn-gold" href="([^"]+)"([^>]*)>(.*?)</a>\s*</div>',
-        lambda m: ('<div class="method"><div class="method-ic">%s</div><div><span class="lab">%s</span>'
-                   '<p>%s</p><p style="margin-top:12px"><a class="eng-btn" href="%s"%s>%s</a></p></div></div>'
-                   % (ic("star"), m.group(1), m.group(2), m.group(3), m.group(4), m.group(5))),
+    body = re.sub(r'<div class="grid grid-2"[^>]*>(?:\s*<div class="card">.*?</div>\s*)+</div>',
+                  cards, body, flags=re.S)
+    # cta band
+    body = re.sub(r'<div class="cta-band">\s*<div><h3>(.*?)</h3><p>(.*?)</p></div>\s*'
+                  r'<a class="btn btn-gold" href="([^"]+)"([^>]*)>(.*?)</a>\s*</div>',
+        lambda m: ('<div class="ctaband"><div><h3>%s</h3><p>%s</p></div>'
+                   '<a class="cta-btn" href="%s"%s>%s</a></div>'
+                   % (m.group(1), m.group(2), m.group(3), m.group(4), m.group(5))),
         body, flags=re.S)
-    body = re.sub(r'class="btn btn-ghost[^"]*"', 'class="eng-btn eng-btn--ghost"', body)
-    body = re.sub(r'class="btn btn-[a-z]+(?: btn-[a-z]+)*"', 'class="eng-btn"', body)
-    body = body.replace('<p class="fine">', '<p style="font-size:13px;color:var(--mut)">')
-    body = body.replace('<span class="fine">', '<span style="font-size:12.5px;color:var(--mut)">')
+    # remaining buttons
+    body = re.sub(r'class="btn btn-ghost[^"]*"', 'class="cta-ghost"', body)
+    body = re.sub(r'class="btn btn-[a-z]+(?: btn-[a-z]+)*"', 'class="cta-btn"', body)
+    body = body.replace('<div class="spec-grid">', '<div class="specs">')
+    body = body.replace('<p><strong>Verdict:</strong>', '<p><strong>Verdict:</strong>')
+    body = body.replace('<p class="fine">', '<p style="font-size:13px;color:#71827E">')
+    body = body.replace('<span class="fine">', '<span style="font-size:12.5px;color:#71827E">')
     body = body.replace('<p class="lede">', '<p>')
     return body
 
@@ -412,24 +457,36 @@ SECA_OPEN = '<section class="section section-alt"><div class="wrap">'
 SEC_CLOSE = '</div></section>'
 
 def split_fragment(raw):
-    lede = h1 = ""
+    """Pull the authored hero apart into the pieces the template hero needs, then
+    flatten the section shells — the template renders one content column."""
+    x = {}
     m = re.search(r'<p class="hero-lede">(.*?)</p>', raw, re.S)
-    if m:
-        lede = m.group(1).strip()
+    lede = m.group(1).strip() if m else ""
     m = re.search(r'<section class="hero">.*?<h1>(.*?)</h1>', raw, re.S)
-    if m:
-        h1 = m.group(1).strip()
+    h1 = m.group(1).strip() if m else ""
+    hero = re.search(r'<section class="hero">(.*?)</section>', raw, re.S)
+    if hero:
+        h = hero.group(1)
+        stats = re.findall(r'<span class="k">(.*?)</span><span class="v">(.*?)</span>', h, re.S)
+        if stats:
+            x["stats"] = stats
+        pills = re.findall(r'<span class="hero-pill">(.*?)</span>', h, re.S)
+        if pills:
+            x["pills"] = pills
+        ctas = re.findall(r'<a class="btn btn-(?:gold|ghost)" href="([^"]+)">(.*?)</a>', h, re.S)
+        if ctas:
+            x["ctas"] = [(href, re.sub(r'\s*&(?:rarr|larr);\s*', '', t).strip()) for href, t in ctas]
+        f = re.search(r'<p class="hero-fine">(.*?)</p>', h, re.S)
+        if f:
+            x["fine"] = f.group(1).strip()
     raw = re.sub(r'<section class="hero">.*?</section>\s*', '', raw, flags=re.S)
     raw = re.sub(r'<div class="trust-bar">.*?</ul></div></div>\s*', '', raw, flags=re.S)
-    raw = raw.replace(SECA_OPEN, "\x00ALT\x00").replace(SEC_OPEN, "\x00SEC\x00")
+    raw = raw.replace(SECA_OPEN, "\x00OPEN\x00").replace(SEC_OPEN, "\x00OPEN\x00")
     raw = raw.replace(SEC_CLOSE, "\x00END\x00")
-    n_open = raw.count("\x00ALT\x00") + raw.count("\x00SEC\x00")
-    n_close = raw.count("\x00END\x00")
+    n_open, n_close = raw.count("\x00OPEN\x00"), raw.count("\x00END\x00")
     assert n_open == n_close, "section open/close mismatch: %d vs %d" % (n_open, n_close)
-    raw = raw.replace("\x00ALT\x00", '<section class="sec sec--alt"><div class="wrap"><div class="prose">')
-    raw = raw.replace("\x00SEC\x00", '<section class="sec"><div class="wrap"><div class="prose">')
-    raw = raw.replace("\x00END\x00", '</div></div></section>')
-    return h1, lede, raw
+    raw = raw.replace("\x00OPEN\x00", "").replace("\x00END\x00", "")
+    return h1, lede, raw, x
 
 
 # ---------------------------------------------------------------- schema
@@ -504,33 +561,83 @@ def review_notice(slug):
     op = OPS.get(slug)
     if not op:
         return ""
-    return '''<section class="sec sec--alt" id="licensing-notice"><div class="wrap"><div class="prose">
-<div class="cal cal--warn">%s<div><b>One thing to know up front</b>%s does not hold a UK Gambling Commission licence &mdash; it runs on %s. That is why it sits outside <a href="/non-gamstop-casinos/">GamStop</a> and outside UKGC affordability checks, and it is also why your recourse in a dispute runs through a foreign regulator rather than the Commission or IBAS. Playing here has never been an offence for a UK resident and winnings remain <a href="/gambling-winnings-tax-uk/">tax-free</a>. <strong>If you are registered with GamStop, do not open an account.</strong></div></div>
-</div></div></section>''' % (ic("warn"), op["name"], op["licence"])
+    return '''<div class="callout callout--warn" id="licensing-notice">
+<span class="t">One thing to know up front</span><p>%s%s does not hold a UK Gambling Commission licence &mdash; it runs on %s. That is why it sits outside <a href="/non-gamstop-casinos/">GamStop</a> and outside UKGC affordability checks, and it is also why your recourse in a dispute runs through a foreign regulator rather than the Commission or IBAS. Playing here has never been an offence for a UK resident and winnings remain <a href="/gambling-winnings-tax-uk/">tax-free</a>. <strong>If you are registered with GamStop, do not open an account.</strong></p></div>''' % ("", op["name"], op["licence"])
 
 
-def render(fm, lede, body):
+def render(fm, lede, body, extra=None):
     url = DOMAIN + fm["url"]
     canonical = DOMAIN + "/" if CANONICAL_TO_HOME else url
     t, d = html.escape(fm["title"]), html.escape(fm["description"])
-    robots = fm.get("robots","index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1")
-    return '''<!DOCTYPE html><html lang="en-GB"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>%s</title><link rel="canonical" href="%s"><meta name="description" content="%s"><meta name="robots" content="%s"><meta name="rating" content="adult"><link rel="alternate" hreflang="en-gb" href="%s"><link rel="alternate" hreflang="x-default" href="%s"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png"><link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png"><link rel="icon" type="image/png" sizes="144x144" href="/favicon-144x144.png"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="shortcut icon" href="/favicon.ico">%s<meta property="og:title" content="%s">
-<meta property="og:description" content="%s">
+    robots = fm.get("robots", "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1")
+    body_cls = "home-instrument" if fm["url"] == "/" else "page-instrument"
+    return '''<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>%s</title>
+<meta name="description" content="%s">
+<link rel="canonical" href="%s">
+<link rel="alternate" hreflang="en-gb" href="%s">
+<link rel="alternate" hreflang="x-default" href="%s">
+<meta name="robots" content="%s">
+<meta name="rating" content="adult">
 <meta property="og:type" content="%s">
+<meta property="og:title" content="%s">
+<meta property="og:description" content="%s">
 <meta property="og:url" content="%s">
 <meta property="og:site_name" content="%s">
 <meta property="og:locale" content="en_GB">
 <meta property="og:image" content="%s/images/og-chrischem.jpg">
-<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="%s">
 <meta name="twitter:description" content="%s">
-<meta name="twitter:image" content="%s/images/og-chrischem.jpg"><link rel="stylesheet" href="/assets/css/site.css"></head> <body> %s %s
+<meta name="twitter:image" content="%s/images/og-chrischem.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png">
+<link rel="icon" href="/favicon-96x96.png" sizes="96x96" type="image/png">
+<link rel="icon" href="/favicon-144x144.png" sizes="144x144" type="image/png">
+<link rel="icon" href="/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/home.css">
 %s
- %s </body></html>
-''' % (t, canonical, d, robots, url, url, schema_blocks(fm, body, url), t, d,
-       fm.get('ogType','article'), url, SITE, DOMAIN, t, d, DOMAIN,
-       nav_html(), hero_html(fm, lede), body, foot_html())
+</head>
+<body class="%s">
+%s
+%s
+<main><div class="wrap"><div class="content">
+%s
+%s
+</div></div></main>
+%s
+</body>
+</html>
+''' % (t, d, canonical, url, url, robots, fm.get("ogType", "article"), t, d, url, SITE,
+        DOMAIN, t, d, DOMAIN, schema_blocks(fm, body, url), body_cls,
+        nav_html(), hero_html(fm, lede, extra), body, RG_PANEL, foot_html())
+
+
+RG_PANEL = '''<div class="rg">
+<h3>Responsible Gambling &mdash; Stay in Control</h3>
+<p>Gambling is entertainment that costs money. It is not an income strategy, the house edge is permanent, and the only reliable way to finish ahead is to stop while you are. Set a deposit limit before you play, never chase a loss, and take regular breaks.</p>
+<p><strong>Every operator on this site is licensed offshore and is not connected to GamStop.</strong> If you are registered with GamStop, or have ever self-excluded from any gambling operator, please do not use them &mdash; install <strong>BetBlocker</strong> (free) or <strong>Gamban</strong>, which do cover offshore sites, and switch on your bank&rsquo;s gambling block.</p>
+<p>Free, confidential help in the UK, 24 hours a day:</p>
+<ul>
+<li><strong>National Gambling Helpline (GamCare)</strong> &mdash; call <a href="tel:08088020133">0808 8020 133</a> or chat at <a href="https://www.gamcare.org.uk/" rel="nofollow noopener" target="_blank">gamcare.org.uk</a></li>
+<li><strong>GamStop</strong> &mdash; free national self-exclusion at <a href="https://www.gamstop.co.uk/" rel="nofollow noopener" target="_blank">gamstop.co.uk</a></li>
+<li><strong>BeGambleAware</strong> &mdash; <a href="https://www.begambleaware.org/" rel="nofollow noopener" target="_blank">begambleaware.org</a></li>
+<li><strong>Gordon Moody</strong> &mdash; residential treatment at <a href="https://gordonmoody.org.uk/" rel="nofollow noopener" target="_blank">gordonmoody.org.uk</a></li>
+<li><strong>Samaritans</strong> &mdash; call <a href="tel:116123">116 123</a>, free, any time</li>
+</ul>
+<p style="margin-bottom:0"><span class="gc-18">18+</span> You must be at least 18 to gamble online in the United Kingdom. Read our full <a href="/responsible-gambling/">responsible gambling guide</a>.</p>
+</div>'''
 
 
 FM_RE = re.compile(r"^\s*<!--@(.*?)@-->\s*", re.S)
@@ -548,12 +655,11 @@ def main():
 
     for fn, fm, frag in pages:
         try:
-            full_h1, lede, unwrapped = split_fragment(frag)
+            full_h1, lede, unwrapped, extra = split_fragment(frag)
         except AssertionError as e:
             raise SystemExit("%s: %s" % (fn, e))
         if full_h1:
             fm = dict(fm, h1=full_h1)
-        lb_html = lb_notice = ""
         base = re.split(r'\s*[:·|]\s*', fm["h1"])[0]
         heading = fm.get("lbHeading") or (('The %s' % base) if base.lower().startswith("best")
                                           else ('The Best %s' % base))
@@ -561,20 +667,42 @@ def main():
                                "/non-gamstop-betting-sites-uk/",
                                "/football-betting-sites-not-on-gamstop/",
                                "/casino-reviews/tenobet/")
+        lb_html = lb_notice = ""
+        splice_at = None
         tl = re.search(r'<div class="toplist">(.*?</article>)\s*</div>', unwrapped, re.S)
         if tl:
             lb_html, lb_notice = build_leaderboard(tl.group(1), heading, sports, fm.get("lbIntro", ""))
             if lb_html:
+                splice_at = tl.start()
                 unwrapped = unwrapped[:tl.start()] + unwrapped[tl.end():]
         elif fm.get("itemlist"):
             lb_html, lb_notice = leaderboard_from_ops(fm, heading, sports)
+
         body = transform(unwrapped, fm.get("reviewOf"))
         if not lb_notice and fm.get("reviewOf"):
             lb_notice = review_notice(fm["reviewOf"])
-        body = lb_html + body + lb_notice
-        doc = resolve_tokens(render(fm, resolve_tokens(lede) or html.escape(fm["description"]), body))
+
+        if lb_html:
+            if splice_at is not None:
+                # authored toplist: it already sat under its own H2, so drop ours
+                lb_html = re.sub(r'^<h2 id="leaderboard">.*?</h2>\n', '', lb_html, flags=re.S)
+                lb_html = '<div id="leaderboard"></div>' + lb_html
+                m = re.search(r'<h2 id="toplist">', body)
+                anchor = body.index('</p>', m.end()) + 4 if m else None
+                body = (body[:anchor] + lb_html + body[anchor:]) if anchor else lb_html + body
+            else:
+                # itemlist-driven: place it straight after the answer snippet
+                m = re.search(r'</div>\s*(?=<p class="upd">|<nav class="toc")', body)
+                cut = m.end() if m else 0
+                body = body[:cut] + lb_html + body[cut:]
+        body = body + lb_notice
+        doc = resolve_tokens(render(fm, resolve_tokens(lede) or html.escape(fm["description"]),
+                                    body, extra))
         out_dir = os.path.join(ROOT, fm["url"].strip("/"))
         os.makedirs(out_dir, exist_ok=True)
+        opens = len(re.findall(r'<div\b', doc)); closes = doc.count('</div>')
+        assert opens == closes, ("%s: unbalanced <div> — %d open, %d close"
+                                 % (fm["url"], opens, closes))
         open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8").write(doc)
 
     urls = [(fm["url"], fm.get("modified",UPDATED), fm.get("changefreq","weekly"), fm.get("priority","0.7"))
