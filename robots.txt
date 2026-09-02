@@ -1,0 +1,29 @@
+# robots.txt for https://chrischem.co.uk
+User-agent: *
+Allow: /
+Disallow: /go/
+Disallow: /*?
+
+Sitemap: https://chrischem.co.uk/sitemap.xml
+
+# SEO crawlers — blocked to keep our link graph and content out of third-party indexes.
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: Rogerbot
+Disallow: /
+
+User-agent: serpstatbot
+Disallow: /
+
+User-agent: SistrixBot
+Disallow: /
