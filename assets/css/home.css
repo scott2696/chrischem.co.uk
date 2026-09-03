@@ -186,7 +186,7 @@ main{padding:44px 0 60px}
 
 /* ---------------- affiliate list ---------------- */
 .afl-list{display:flex;flex-direction:column;gap:12px;margin:26px 0}
-.afl-row{position:relative;display:grid;grid-template-columns:190px 1fr 210px;gap:20px;align-items:center;
+.afl-row{position:relative;display:grid;grid-template-columns:210px 1fr 210px;gap:20px;align-items:center;
   background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;
   box-shadow:var(--sh);transition:box-shadow .15s ease,transform .15s ease}
 .afl-row:hover{box-shadow:var(--sh-2);transform:translateY(-1px)}
@@ -196,9 +196,11 @@ main{padding:44px 0 60px}
 .afl-rank{position:absolute;top:-9px;left:16px;font-family:var(--mono);font-size:10.5px;font-weight:600;
   letter-spacing:.14em;background:var(--petrol);color:var(--brass);padding:3px 9px;border-radius:999px}
 .afl-logo{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
-.afl-chip{display:flex;align-items:center;justify-content:center;width:150px;height:64px;
-  background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px}
-.afl-chip img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+/* The tile is the logo's box: artwork fills it edge to edge. object-fit:contain
+   keeps every mark undistorted whatever its aspect ratio. */
+.afl-chip{display:block;width:200px;height:86px;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:6px;overflow:hidden}
+.afl-chip img{display:block;width:100%;height:100%;object-fit:contain}
 .afl-brandname{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--ink)}
 .afl-body{min-width:0}
 .afl-head{margin-bottom:8px}
@@ -207,8 +209,19 @@ main{padding:44px 0 60px}
   background:var(--paper-3);color:var(--body)}
 .afl-badge.top{background:linear-gradient(180deg,var(--brass),var(--brass-2));color:#1B1305}
 .afl-badge.num{background:var(--petrol);color:#CFE0DC}
-.afl-bonus{font-family:var(--disp);font-weight:700;font-size:1.14rem;color:var(--ink);
-  line-height:1.3;margin-bottom:9px}
+/* The offer is what people are scanning for — give it a highlight panel,
+   heavier type and its own label so it reads before anything else. */
+.afl-bonus{position:relative;display:block;font-family:var(--disp);font-weight:800;
+  font-size:clamp(1.2rem,1.7vw,1.5rem);line-height:1.22;color:var(--ink);
+  letter-spacing:-.015em;margin:0 0 10px;padding:11px 14px 11px 15px;border-radius:10px;
+  background:linear-gradient(100deg,#FFF4DA 0%,#FFFBF0 62%,#fff 100%);
+  border:1px solid #F0DCA9;border-left:5px solid var(--brass);
+  box-shadow:0 1px 0 rgba(227,165,72,.28)}
+.afl-bonus::before{content:"WELCOME OFFER";display:block;font-family:var(--mono);
+  font-size:9.5px;font-weight:600;letter-spacing:.17em;color:var(--brass-2);
+  margin-bottom:5px;line-height:1}
+.afl-row.is-top .afl-bonus{background:linear-gradient(100deg,#FFEFC8 0%,#FFF8E6 60%,#FFFDF7 100%);
+  border-color:#E9CE8B;box-shadow:0 2px 10px rgba(227,165,72,.30)}
 .afl-feats{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .afl-pill{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--paper-2);
   border:1px solid var(--line);font-size:12.4px;color:var(--body)}
@@ -330,10 +343,10 @@ main{padding:44px 0 60px}
   .nav-drop{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;
     background:transparent;border:0;padding:0 0 6px 14px;min-width:0}
   .nav-drop a{padding:8px 6px;font-size:14.2px}
-  .afl-row{grid-template-columns:150px 1fr;gap:16px}
+  .afl-row{grid-template-columns:190px 1fr;gap:16px}
   .afl-cta{grid-column:1/-1}
   .afl-cta .cta-btn{width:auto;align-self:center;padding-left:38px;padding-right:38px}
-  .afl-chip{width:130px;height:56px}
+  .afl-chip{width:180px;height:78px}
 }
 @media (max-width:760px){
   body{font-size:16.4px}
@@ -345,7 +358,7 @@ main{padding:44px 0 60px}
   .proscons{grid-template-columns:1fr}
   .afl-row{grid-template-columns:1fr;text-align:center;padding:18px 16px}
   .afl-logo{flex-direction:row;justify-content:center;gap:12px}
-  .afl-chip{width:120px;height:52px}
+  .afl-chip{width:200px;height:84px}
   .afl-feats{justify-content:center}
   .afl-stars{margin-left:0;width:100%;justify-content:center;margin-top:4px}
   .afl-rank{left:50%;transform:translateX(-50%)}
