@@ -176,3 +176,56 @@ a proof point (a number we measured) rather than a call to action.
 parent, two siblings, and two reviews; and must be linked *from* at least two
 existing pages before publication. Add it to `NAV`/`FOOTER` in `build.py` only
 if it is a Tier-1 page — deeper tiers are reached contextually and from hubs.
+
+---
+
+## SERP title/H1 research — September 2026
+
+Live first-page results were pulled for every money keyword and the ranking pages' own
+title tags recorded. Patterns that hold across **every** cluster:
+
+1. **The year is in the title.** Almost no page ranks on page one without "2026" in the tag.
+2. **"UK" is in the title**, even on obviously UK-intent queries.
+3. **Titles double-dip on synonyms.** The pattern is `{primary keyword} UK {year} | {synonym cluster}` —
+   e.g. "Fast Withdrawal Casinos UK 2026 - Instant & Same Day Payout Sites". Competitors are
+   deliberately covering two head terms in one tag.
+4. **Numbers rank.** "Top 10", "100+ Ratings", "Top 70 UKGC Licensed Sites", "15 Expert-Rated Sites",
+   "80+ Rated", "11 Best".
+5. **"Sites" is the most common noun** after the head term — "Casino Sites", "Betting Sites",
+   "Bookmakers", "Bitcoin Casino Sites".
+6. **Proof verbs** in the tail: Ranked, Rated, Reviewed, Compared, Tested, Explained.
+
+### Synonym clusters harvested per page
+
+| Page | Head term | Synonyms competitors pair with it |
+|---|---|---|
+| `/` | best online casinos UK | real money casino sites, casino sites, UKGC-licensed, top |
+| `/online-casinos/` | online casinos UK | online casino sites, real money casinos, UKGC licensing |
+| `/high-payout-casinos/` | best payout casinos UK | highest RTP, high paying online casinos, best payout percentage, 98%+ RTP |
+| `/fast-payout-casinos/` | fast withdrawal casinos UK | instant payout casinos, instant withdrawal, same day payout, fast payout |
+| `/best-crypto-casinos/` | best crypto casinos UK | top bitcoin casinos, bitcoin casino sites, crypto casino |
+| `/live-casinos/` | best live casino sites UK | live dealer casinos, best live dealer casinos |
+| `/online-casinos/bonuses/` | best casino bonuses UK | welcome offers, sign up offers, welcome bonuses, ranked |
+| `/no-deposit-casinos/` | no deposit bonus UK | free spins no deposit, no deposit casino bonuses, free welcome offers |
+| `/best-sports-betting-sites/` | best betting sites UK | top online bookmakers, new online bookmakers, betting sites |
+| `/online-betting/` | online betting UK | how online betting works, betting odds explained, UK betting guide |
+| `/payment-methods/` | casino payment methods UK | casino deposit methods, deposit & withdrawal options |
+| `/uk-gambling-laws/` | UK gambling laws | Gambling Act 2005, UKGC regulations, player protections |
+| `/gambling-winnings-tax-uk/` | tax on gambling winnings UK | do you pay tax on gambling winnings, are gambling winnings taxable, tax-free |
+| `/casino-reviews/` | online casino reviews UK | expert rated, casino ratings, UKGC-licensed sites |
+| `/non-gamstop-casinos/` | non GamStop casinos UK | casinos not on GamStop, casino sites not on GamStop, non UK casinos |
+| `/non-gamstop-betting-sites-uk/` | betting sites not on GamStop UK | non GamStop bookies, non GamStop betting sites |
+| `/new-non-gamstop-casinos/` | new casinos not on GamStop | new non GamStop casinos, latest non-GamStop sites, new casino sites not on GamStop |
+| `/non-gamstop-casinos-with-free-spins/` | free spins not on GamStop | free spins no deposit not on GamStop, non GamStop spin bonuses |
+| `/football-betting-sites-not-on-gamstop/` | football betting sites not on GamStop | non GamStop football betting, Premier League markets |
+
+### Rules applied when rewriting
+
+- Titles ≤ 60 characters, descriptions 115–158. Enforced by the build audit.
+- Every title, description and H1 is **unique across all 37 pages** — no two pages compete.
+- Each title carries the head term **plus at least one harvested synonym**; the H1 carries the
+  head term plus a second variant the title could not fit, so the two together cover the cluster.
+- The H2 above the offer table is derived from the H1's pre-colon segment, so the head term
+  repeats once more in a heading — `lbHeading` overrides where that derivation read awkwardly.
+- Brand review titles follow `{Brand} Casino Review UK 2026 | {the differentiating fact}`, since
+  the SERP for brand queries is dominated by "review", the year, and bonus/payout modifiers.

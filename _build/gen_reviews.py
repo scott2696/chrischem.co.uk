@@ -378,14 +378,61 @@ def faq(op, slug):
     return "".join(out)
 
 
+# SERP-tuned meta titles and descriptions, keyed by operator slug.
+# Keep these in sync with _build/pages/*-review-*.html; regeneration reapplies them.
+META = {
+    "aphrodite": (
+        'Aphrodite Casino Review UK 2026 | Bonus & Wagering',
+        'Aphrodite Casino review for UK players — 200% up to £2,000 at 25x wagering, 10p minimum spins and 96.2% RTP. Built for small stakes. Payouts and verdict.',
+        'Aphrodite Casino Review UK 2026: Best for &pound;10&ndash;&pound;20 Bankrolls, 25x Wagering'),
+    "gambiva": (
+        'Gambiva Casino Review UK 2026 | Bonus & GBP Payments',
+        'Gambiva Casino review for UK players — cards, Apple Pay, open banking and six coins in GBP, plus 200 free spins drip-fed daily. Bonus terms, payouts, verdict.',
+        'Gambiva Casino Review UK 2026: The Most Complete GBP Cashier on This Site'),
+    "kingdom": (
+        'Kingdom Casino Review UK 2026 | Bonus & Payout Test',
+        'Kingdom Casino review for UK players — 2-4 hour crypto payouts, 600% up to £9,500 at 30x wagering, 7,000+ games and 96.4% RTP. Tested with real GBP deposits.',
+        'Kingdom Casino Review UK 2026: Fastest Payouts of 38 Sites Tested'),
+    "rivo": (
+        'Rivo Casino Review UK 2026 | 1000% Bonus at 10x',
+        'Rivo Casino review for UK players — the biggest match bonus we list at 1000% up to £10,000, 10x wagering and 25% VIP cashback. Payouts, KYC and our verdict.',
+        'Rivo Casino Review UK 2026: Biggest Match Bonus, 10x Wagering, 25% Cashback'),
+    "seven": (
+        'Seven Casino Review UK 2026 | Live Dealer & Bonus',
+        'Seven Casino review for UK players — five live dealer studios, 210+ tables at UK peak and Infinite Blackjack at 99.60% RTP. Limits, bonus terms and payouts.',
+        'Seven Casino Review UK 2026: Deepest Live Dealer Floor, UK-Hours English Tables'),
+    "smash": (
+        'Smash Casino Review UK 2026 | 600% Bonus at 10x',
+        'Smash Casino review for UK players — 600% up to £10,000 at just 10x wagering, plus 250% on sport. Bonus terms, payout speed and the Anjouan licence tested.',
+        'Smash Casino Review UK 2026: Lowest Wagering of Any Offshore Site Here'),
+    "spinkings": (
+        'Spin Kings Casino Review UK 2026 | Bonus & Payouts',
+        'Spin Kings review for UK players — casino, sportsbook and crypto payments in one wallet from a 2025 launch. What we know, what is unverified, who it suits.',
+        'Spin Kings Casino Review UK 2026: New Casino and Sportsbook, Still Building a Record'),
+    "spinpin": (
+        'Spin Pin Casino Review UK 2026 | 550% + 450 Spins',
+        'Spin Pin review for UK players — the biggest welcome bonus we list at 550% up to £7,000 plus 450 free spins, with casino, sportsbook and crypto in one wallet.',
+        'Spin Pin Casino Review UK 2026: The Biggest Welcome Bonus on This Site'),
+    "tenobet": (
+        'TenoBet Review UK 2026 | Sportsbook Odds & Free Bet',
+        'TenoBet review for UK punters — 180+ markets per Premier League fixture, 101.8% overround, a 6x welcome free bet and no stake restrictions. Season-tested.',
+        'TenoBet Review UK 2026: The Sportsbook Specialist &mdash; No Casino Attached'),
+    "wildzy": (
+        'Wildzy Casino Review UK 2026 | Free Spins & Payouts',
+        'Wildzy Casino review for UK players — weekly recurring free spins for a £20 deposit, 5,000+ games and fast UK-hours live chat. Wagering, payouts and verdict.',
+        'Wildzy Casino Review UK 2026: Best Recurring Free Spins Programme'),
+}
+
 for slug, c in COPY.items():
     op = OPS[slug]
     initials = "".join(w[0] for w in op["name"].split()[:2]).upper()
     fm = {
         "url": "/casino-reviews/%s/" % slug,
-        "title": ("%s Review UK 2026 | Bonus, Payouts & Verdict" % op["name"])[:70],
-        "description": ("%s review for UK players 2026. Bonus terms, wagering, tested payout speed, "
-                        "games, licensing and our verdict — tested with real GBP deposits." % op["name"])[:158],
+        "title": META[slug][0] if slug in META else
+                 ("%s Review UK 2026 | Bonus, Payouts & Verdict" % op["name"])[:60],
+        "description": META[slug][1] if slug in META else
+                 ("%s review for UK players 2026. Bonus terms, wagering, tested payout speed, "
+                  "games, licensing and our verdict — tested with real GBP deposits." % op["name"])[:158],
         "h1": "%s Review" % op["name"],
         "author": c["author"],
         "published": "2026-03-08",
@@ -397,7 +444,7 @@ for slug, c in COPY.items():
     }
     body = """<section class="hero"><div class="wrap">
 <p class="eyebrow">%(kind)s review &middot; Updated %(upd)s</p>
-<h1>%(name)s Review UK 2026: %(tag)s</h1>
+<h1>%(fullh1)s</h1>
 <p class="hero-lede">%(verdict)s</p>
 <div class="hero-stats">
 <div class="hero-stat"><span class="k">Our score</span><span class="v">%(rating)s/5</span></div>
@@ -455,6 +502,7 @@ for slug, c in COPY.items():
 """ % dict(
         kind="Sportsbook" if not op["casino"] else "Casino",
         upd=UPDATED_HUMAN, name=op["name"], tag=c["tag"], verdict=c["verdict"],
+        fullh1=(META[slug][2] if slug in META else "%s Review UK 2026: %s" % (op["name"], c["tag"])),
         rating=op["rating"], lic=op["licence"].split("(")[0].strip()[:22],
         wag=op["wagering"].split(" ")[0], fast=op["payoutFast"],
         stars=stars(op["rating"]), initials=initials, specs=spec_grid(op),
