@@ -483,7 +483,13 @@ def transform(body, review_slug=None):
 
 # Blocks that must never be clipped: the offer table, the FAQ accordions, the
 # responsible-gambling panel and the licensing warning.
-NO_CLAMP = ('afl-list', 'class="faq"', 'class="rg"', 'id="licensing-notice"')
+# Never clip a section whose value is structural rather than prose: the offer
+# table, comparison tables, operator cards, card grids, spec grids, CTA bands,
+# the FAQ accordions, the licensing warning and the RG panel. Hiding a data
+# table behind "Read more" buries the thing the section exists for.
+NO_CLAMP = ('afl-list', 'class="faq"', 'class="rg"', 'id="licensing-notice"',
+            't-scroll', 'class="opcard"', 'class="cardgrid"', 'class="specs"',
+            'class="ctaband"', 'class="checklist"')
 
 def collapse_sections(body):
     """Show ~2 lines under each H2 and put the remainder behind a Read more
