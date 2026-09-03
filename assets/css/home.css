@@ -429,3 +429,26 @@ main{padding:44px 0 60px}
   border:1px solid rgba(227,165,72,.45)}
 .author-av{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:0 0 auto;
   border:2px solid var(--line)}
+
+/* ---------------- collapsed sections ----------------
+   Two lines under each H2, the rest behind a Read more control. The clamp is
+   applied only when JS is present (html.js), so a crawler or a reader without
+   JS gets the full section rather than a truncated one. */
+.sec-collapse{position:relative;margin-bottom:6px}
+.sec-collapse-body>*:first-child{margin-top:0}
+.sec-more{display:none}
+html.js .sec-collapse-body{max-height:3.35em;overflow:hidden;position:relative}
+html.js .sec-collapse:not(.is-open) .sec-collapse-body::after{content:"";position:absolute;
+  left:0;right:0;bottom:0;height:2em;pointer-events:none;
+  background:linear-gradient(180deg,rgba(248,246,241,0),var(--paper) 92%)}
+html.js .sec-collapse.is-open .sec-collapse-body{max-height:none}
+html.js .sec-collapse.is-open .sec-collapse-body::after{display:none}
+html.js .sec-more{display:inline-flex;align-items:center;gap:6px;margin:10px 0 4px;padding:7px 15px;
+  border:1px solid var(--line-2);border-radius:999px;background:var(--card);cursor:pointer;
+  font-family:var(--disp);font-weight:650;font-size:13.6px;color:var(--petrol-4);
+  transition:border-color .14s,background .14s}
+html.js .sec-more::after{content:"▾";font-size:10px;line-height:1;opacity:.75}
+html.js .sec-collapse.is-open .sec-more::after{content:"▴"}
+html.js .sec-more:hover{border-color:var(--brass);background:var(--brass-soft)}
+/* the offer table leads the page — give it a little air under the hero */
+.content>h2#leaderboard{margin-top:0}
