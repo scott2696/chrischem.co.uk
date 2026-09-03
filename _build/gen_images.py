@@ -93,13 +93,9 @@ for slug, ini, accent in AUTH:
 # ---------------------------------------------------------------- operator wordmarks
 # Only for brands with no supplied artwork in /logos. 192x96 so the 96x48 tile
 # in the leaderboard renders at 2x.
-WORD = {
- "gambiva":   ("GAMBIVA",  GOLD),
- "wildzy":    ("WILDZY",   (233, 106, 106, 255)),
- "seven":     ("SEVEN",    (122, 205, 168, 255)),
- "aphrodite": ("APHRODITE",(226, 154, 205, 255)),
- "tenobet":   ("TENOBET",  (109, 168, 232, 255)),
-}
+# All ten operators now have real vendor artwork in /logos, so no wordmark
+# placeholders are generated. Add a brand here only if artwork is unavailable.
+WORD = {}
 for slug, (word, accent) in WORD.items():
     W, H = 384, 192
     c = Image.new("RGBA", (W, H), (0, 0, 0, 0))
