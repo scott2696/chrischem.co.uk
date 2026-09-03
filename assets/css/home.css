@@ -404,3 +404,8 @@ main{padding:44px 0 60px}
 .ctaband strong,.ctaband b{color:#fff}
 .legal strong,.legal b{color:#D9E4E1}
 .datatable thead th strong{color:inherit}
+
+/* Some brands supply only a dark-background lockup (white wordmark). Rather than
+   recolour their artwork, give those tiles a dark ground. */
+.afl-chip--dark{background:var(--petrol);border-color:var(--petrol-3)}
+.oplogo--dark{background:var(--petrol);border-color:var(--petrol-3)}

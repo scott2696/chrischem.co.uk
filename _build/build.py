@@ -227,7 +227,7 @@ def foot_html():
 <div class="rg-mini"><span class="gc-18">18+</span> Gambling can be harmful. Free, confidential help: <a href="tel:08088020133">National Gambling Helpline 0808 8020 133</a> &middot; <a href="https://www.begambleaware.org/" rel="nofollow noopener" target="_blank">BeGambleAware</a> &middot; <a href="https://www.gamstop.co.uk/" rel="nofollow noopener" target="_blank">GamStop</a>.</div></div>
 %s</div>
 <div class="legal">
-<p><strong>Affiliate disclosure:</strong> ChrisChem is reader-supported. When you open an account through a link on this site we may earn a commission, at no cost to you. It never influences our ratings &mdash; the commission rate is identical across every operator we list, position cannot be bought, and our <a href="/how-we-review/">methodology</a> is applied identically to every brand.</p>
+<p><strong>Affiliate disclosure:</strong> ChrisChem is reader-supported. When you open an account through a link on this site we may earn a commission, at no cost to you. Rates vary by operator (30&ndash;45%% revenue share) and are disclosed in full, so our safeguard is the method rather than the rate: rankings come from our published <a href="/how-we-review/">weighted scoring model</a> and are checkable against the scores. Position cannot be bought.</p>
 <p><strong>Important:</strong> every operator featured here is licensed offshore (Cura&ccedil;ao, Anjouan) and is <strong>not licensed by the UK Gambling Commission</strong>. That means they sit outside <strong>GamStop</strong>, outside UKGC stake limits and affordability checks, and outside IBAS dispute resolution. <strong>If you are registered with GamStop, or have ever self-excluded, please do not use these sites</strong> &mdash; <a href="/responsible-gambling/">read this instead</a>.</p>
 <p>&copy; 2026 %s. You must be 18 or over to gamble in the United Kingdom. Bonuses, odds and terms were accurate at our last update (%s) and are subject to change &mdash; always check the operator&rsquo;s current terms. Please gamble responsibly.</p>
 </div>
@@ -258,7 +258,7 @@ UK_NOTICE_BODY = ('No operator on this list holds a <strong>UK Gambling Commissi
   '<strong>If you are registered with GamStop, close this page.</strong>')
 
 
-def lb_row(i, name, sub, offer, terms, rating10, href, logo, badge="", feat=""):
+def lb_row(i, name, sub, offer, terms, rating10, href, logo, badge="", feat="", dark=False):
     """One .afl-row. Shared by the authored-toplist and itemlist paths."""
     plain = re.sub(r'<[^>]+>', '', name)
     slug = re.sub(r'[^a-z0-9]+', '-', plain.lower()).strip('-')
@@ -271,16 +271,17 @@ def lb_row(i, name, sub, offer, terms, rating10, href, logo, badge="", feat=""):
         bcls, btxt = "num", "#%d" % i
     pills = "".join('<span class="afl-pill">%s</span>' % p
                     for p in [x.strip() for x in re.split(r'\s*&middot;\s*|\s*·\s*', sub) if x.strip()][:4])
+    chip = " afl-chip--dark" if dark else ""
     return '''<div class="afl-row%s" id="%s">
 <span class="afl-rank">%02d</span>
-<div class="afl-logo"><span class="afl-chip"><img class="oplogo" src="%s" alt="%s logo" loading="lazy" width="150" height="64"></span><span class="afl-brandname">%s</span></div>
+<div class="afl-logo"><span class="afl-chip%s"><img class="oplogo" src="%s" alt="%s logo" loading="lazy" width="150" height="64"></span><span class="afl-brandname">%s</span></div>
 <div class="afl-body">
 <div class="afl-head"><span class="afl-badge %s">%s</span></div>
 <div class="afl-bonus">%s</div>
 <div class="afl-feats">%s<span class="afl-stars">%s<b>%s/10</b></span></div>
 </div>
 <div class="afl-cta"><a class="cta-btn" href="%s" rel="sponsored nofollow noopener" target="_blank">Get Bonus</a><span class="afl-tc">%s</span></div>
-</div>''' % (" is-top" if feat else "", slug, i, logo, plain, plain,
+</div>''' % (" is-top" if feat else "", slug, i, chip, logo, plain, plain,
               bcls, btxt, offer, pills, stars, rating10, href, terms)
 
 
@@ -319,7 +320,8 @@ def build_leaderboard(toplist_html, heading, sports=False, intro=""):
         logo = op_logo(slug_from(rev_url), sports)
         plain = re.sub(r'<[^>]+>', '', name)
         lis.append(lb_row(i, name, sub, offer, terms, rating10, href, logo,
-                          badge.group(1) if badge else "", feat))
+                          badge.group(1) if badge else "", feat,
+                          bool((OPS.get(slug_from(rev_url)) or {}).get("darkTile"))))
     if not lis:
         return "", ""
     sec = lb_shell(heading, intro, lis)
@@ -344,7 +346,8 @@ def leaderboard_from_ops(fm, heading, sports=False):
                           aff(slug, "sports" if sports else "casino"),
                           op_logo(slug, sports),
                           op["tag"] if i <= 3 else "",
-                          " is-top" if i == 1 else ""))
+                          " is-top" if i == 1 else "",
+                          bool(op.get("darkTile"))))
     notice = ('<div class="callout callout--warn" id="licensing-notice">'
               '<span class="t">One thing to know up front</span><p>%s</p></div>' % UK_NOTICE_BODY)
     return lb_shell(heading, fm.get("lbIntro", ""), lis), notice
@@ -392,8 +395,9 @@ def transform(body, review_slug=None):
         rest = inner[h.end():]
         title, meta, score = h.group(2), h.group(3), h.group(4)
         plain = re.sub(r'<[^>]+>', '', title)
-        mark = ('<img class="oplogo" src="%s" alt="%s logo" loading="lazy" width="88" height="44">'
-                % (op_logo(rid), plain)) if rid in OPS else '<span class="rev-logo">%s</span>' % h.group(1)
+        mark = ('<img class="oplogo%s" src="%s" alt="%s logo" loading="lazy" width="88" height="44">'
+                % (" oplogo--dark" if OPS[rid].get("darkTile") else "", op_logo(rid), plain)) \
+               if rid in OPS else '<span class="rev-logo">%s</span>' % h.group(1)
         head = ('<div class="head">%s<div><div class="opname">%s</div>'
                 '<span class="tag">%s</span></div><div class="r">%s/5</div></div>'
                 % (mark, title, meta, score))
@@ -402,8 +406,9 @@ def transform(body, review_slug=None):
     # standalone review-head (used on the authors page and review pages)
     def head_std(m):
         ini, title, rk, score = m.group(1), m.group(2), m.group(3), m.group(4)
-        mark = ('<img class="oplogo" src="%s" alt="%s logo" loading="lazy" width="88" height="44">'
-                % (op_logo(review_slug), OPS[review_slug]["name"])) if review_slug in OPS \
+        mark = ('<img class="oplogo%s" src="%s" alt="%s logo" loading="lazy" width="88" height="44">'
+                % (" oplogo--dark" if OPS[review_slug].get("darkTile") else "",
+                   op_logo(review_slug), OPS[review_slug]["name"])) if review_slug in OPS \
                else '<span class="rev-logo">%s</span>' % ini
         return ('<div class="opcard opcard--summary"><div class="head">%s'
                 '<div><div class="opname">%s</div>'
