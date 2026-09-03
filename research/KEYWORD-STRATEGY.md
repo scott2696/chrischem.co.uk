@@ -229,3 +229,33 @@ title tags recorded. Patterns that hold across **every** cluster:
   repeats once more in a heading — `lbHeading` overrides where that derivation read awkwardly.
 - Brand review titles follow `{Brand} Casino Review UK 2026 | {the differentiating fact}`, since
   the SERP for brand queries is dominated by "review", the year, and bonus/payout modifiers.
+
+### Month + year in headings
+
+Competitor titles in every cluster carry a month as well as a year — "Best Betting Sites UK
+(Top Rated) New Online Bookmakers September 2026", "Casino Welcome Bonuses & Sign-Up Offers UK |
+August 2026", "Free Spins No Deposit Bonuses UK September 2026". Every H1 and every offer-table
+H2 now carries it.
+
+It is **not hardcoded**. `build.py` derives `MONTH_YEAR` from the existing `UPDATED` constant and
+exposes it as a `{{monthyear}}` token, resolved when the page is written:
+
+```python
+UPDATED = "2026-09-02"
+MONTH_YEAR = "September 2026"   # derived
+```
+
+Fragments and `lbHeading` values contain `{{monthyear}}`, so bumping `UPDATED` refreshes all 37
+H1s and all 29 offer-table H2s at once. A stale month is worse than no month, and this makes
+going stale impossible as long as the date bump happens.
+
+Two placements, chosen by page type:
+
+- **Money and guide pages** put it directly after the head term, before the colon —
+  "Best Payout Casinos UK September 2026: The Highest RTP Online Casinos". The offer-table H2 is
+  derived from the H1's pre-colon segment, so the dated phrase repeats there for free.
+- **Editorial and legal pages** carry it as a currency stamp instead — "Terms and Conditions of
+  Use: Updated September 2026" — because a keyword-style date on a policy page reads as spam.
+
+Content H2s inside the body are deliberately left undated. Pages run 20–38 H2s and dating headings
+like "Wagering requirements" would read as keyword stuffing to both readers and Google.

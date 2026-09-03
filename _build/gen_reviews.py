@@ -384,43 +384,53 @@ META = {
     "aphrodite": (
         'Aphrodite Casino Review UK 2026 | Bonus & Wagering',
         'Aphrodite Casino review for UK players — 200% up to £2,000 at 25x wagering, 10p minimum spins and 96.2% RTP. Built for small stakes. Payouts and verdict.',
-        'Aphrodite Casino Review UK 2026: Best for &pound;10&ndash;&pound;20 Bankrolls, 25x Wagering'),
+        'Aphrodite Casino Review UK {{monthyear}}: Best for &pound;10&ndash;&pound;20 Bankrolls, 25x Wagering',
+        'Aphrodite Casino and the Alternatives, Compared ({{monthyear}})'),
     "gambiva": (
         'Gambiva Casino Review UK 2026 | Bonus & GBP Payments',
         'Gambiva Casino review for UK players — cards, Apple Pay, open banking and six coins in GBP, plus 200 free spins drip-fed daily. Bonus terms, payouts, verdict.',
-        'Gambiva Casino Review UK 2026: The Most Complete GBP Cashier on This Site'),
+        'Gambiva Casino Review UK {{monthyear}}: The Most Complete GBP Cashier on This Site',
+        'Gambiva Casino and the Alternatives, Compared ({{monthyear}})'),
     "kingdom": (
         'Kingdom Casino Review UK 2026 | Bonus & Payout Test',
         'Kingdom Casino review for UK players — 2-4 hour crypto payouts, 600% up to £9,500 at 30x wagering, 7,000+ games and 96.4% RTP. Tested with real GBP deposits.',
-        'Kingdom Casino Review UK 2026: Fastest Payouts of 38 Sites Tested'),
+        'Kingdom Casino Review UK {{monthyear}}: Fastest Payouts of 38 Sites Tested',
+        'Kingdom Casino and the Alternatives, Compared ({{monthyear}})'),
     "rivo": (
         'Rivo Casino Review UK 2026 | 1000% Bonus at 10x',
         'Rivo Casino review for UK players — the biggest match bonus we list at 1000% up to £10,000, 10x wagering and 25% VIP cashback. Payouts, KYC and our verdict.',
-        'Rivo Casino Review UK 2026: Biggest Match Bonus, 10x Wagering, 25% Cashback'),
+        'Rivo Casino Review UK {{monthyear}}: Biggest Match Bonus, 10x Wagering, 25% Cashback',
+        'Rivo Casino and the Alternatives, Compared ({{monthyear}})'),
     "seven": (
         'Seven Casino Review UK 2026 | Live Dealer & Bonus',
         'Seven Casino review for UK players — five live dealer studios, 210+ tables at UK peak and Infinite Blackjack at 99.60% RTP. Limits, bonus terms and payouts.',
-        'Seven Casino Review UK 2026: Deepest Live Dealer Floor, UK-Hours English Tables'),
+        'Seven Casino Review UK {{monthyear}}: Deepest Live Dealer Floor, UK-Hours English Tables',
+        'Seven Casino and the Alternatives, Compared ({{monthyear}})'),
     "smash": (
         'Smash Casino Review UK 2026 | 600% Bonus at 10x',
         'Smash Casino review for UK players — 600% up to £10,000 at just 10x wagering, plus 250% on sport. Bonus terms, payout speed and the Anjouan licence tested.',
-        'Smash Casino Review UK 2026: Lowest Wagering of Any Offshore Site Here'),
+        'Smash Casino Review UK {{monthyear}}: Lowest Wagering of Any Offshore Site Here',
+        'Smash Casino and the Alternatives, Compared ({{monthyear}})'),
     "spinkings": (
         'Spin Kings Casino Review UK 2026 | Bonus & Payouts',
         'Spin Kings review for UK players — casino, sportsbook and crypto payments in one wallet from a 2025 launch. What we know, what is unverified, who it suits.',
-        'Spin Kings Casino Review UK 2026: New Casino and Sportsbook, Still Building a Record'),
+        'Spin Kings Casino Review UK {{monthyear}}: New Casino and Sportsbook, Still Building a Record',
+        'Spin Kings and the Alternatives, Compared ({{monthyear}})'),
     "spinpin": (
         'Spin Pin Casino Review UK 2026 | 550% + 450 Spins',
         'Spin Pin review for UK players — the biggest welcome bonus we list at 550% up to £7,000 plus 450 free spins, with casino, sportsbook and crypto in one wallet.',
-        'Spin Pin Casino Review UK 2026: The Biggest Welcome Bonus on This Site'),
+        'Spin Pin Casino Review UK {{monthyear}}: The Biggest Welcome Bonus on This Site',
+        'Spin Pin and the Alternatives, Compared ({{monthyear}})'),
     "tenobet": (
         'TenoBet Review UK 2026 | Sportsbook Odds & Free Bet',
         'TenoBet review for UK punters — 180+ markets per Premier League fixture, 101.8% overround, a 6x welcome free bet and no stake restrictions. Season-tested.',
-        'TenoBet Review UK 2026: The Sportsbook Specialist &mdash; No Casino Attached'),
+        'TenoBet Review UK {{monthyear}}: The Sportsbook Specialist &mdash; No Casino Attached',
+        'TenoBet and the Alternatives, Compared ({{monthyear}})'),
     "wildzy": (
         'Wildzy Casino Review UK 2026 | Free Spins & Payouts',
         'Wildzy Casino review for UK players — weekly recurring free spins for a £20 deposit, 5,000+ games and fast UK-hours live chat. Wagering, payouts and verdict.',
-        'Wildzy Casino Review UK 2026: Best Recurring Free Spins Programme'),
+        'Wildzy Casino Review UK {{monthyear}}: Best Recurring Free Spins Programme',
+        'Wildzy Casino and the Alternatives, Compared ({{monthyear}})'),
 }
 
 for slug, c in COPY.items():
@@ -441,6 +451,8 @@ for slug, c in COPY.items():
         "crumbs": [["Casino Reviews", "/casino-reviews/"],
                    ["%s Review" % op["name"], "/casino-reviews/%s/" % slug]],
         "reviewOf": slug,
+        "lbHeading": META[slug][3] if slug in META else
+                     "%s and the Alternatives, Compared" % op["name"],
     }
     body = """<section class="hero"><div class="wrap">
 <p class="eyebrow">%(kind)s review &middot; Updated %(upd)s</p>

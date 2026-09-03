@@ -17,6 +17,11 @@ TAGLINE = "UK Casino &amp; Betting Guide"
 UPDATED = "2026-09-02"
 UPDATED_HUMAN = "02/09/2026"
 UPDATED_LONG = "2 September 2026"
+# Month + year shown in H1s and the offer-table H2. Derived from UPDATED so a single
+# date bump refreshes every heading on the site; used via the {{monthyear}} token.
+MONTH_YEAR = "%s %s" % (("January February March April May June July August September "
+                         "October November December").split()[int(UPDATED[5:7]) - 1],
+                        UPDATED[:4])
 
 # The brief asked for every canonical to point at the homepage. That would tell
 # Google the 30+ money pages are duplicates of "/" and drop them from the index —
@@ -121,6 +126,7 @@ def aff(slug, kind="casino"):
     return url
 
 def resolve_tokens(s):
+    s = s.replace("{{monthyear}}", MONTH_YEAR)
     s = re.sub(r"\{\{(aff|affs):([a-z0-9\-]+)\}\}",
                lambda m: html.escape(aff(m.group(2), "sports" if m.group(1)=="affs" else "casino"), quote=True), s)
     s = re.sub(r"\{\{op:([a-z0-9\-]+):([A-Za-z]+)\}\}", lambda m: html.escape(str(OPS[m.group(1)].get(m.group(2),""))), s)
