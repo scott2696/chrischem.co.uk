@@ -127,6 +127,7 @@ def resolve_tokens(s):
     return s
 
 # ---------------------------------------------------------------- chrome
+BRAND_TAG = "We test &middot; You decide"
 TAGLINE_LONG = "The house that checks the numbers."
 HERO_SUB = "Casino &middot; Bonuses &middot; Betting"
 HERO_META = ["Great Britain &middot; Pounds sterling", "Tested from Manchester &mdash; Est. 2026"]
@@ -136,7 +137,8 @@ SCALE = '<span class="scale" aria-hidden="true">' + '<i></i>' * 44 + '</span>'
 def nav_html():
     out = ['<header class="site-header"><div class="wrap">',
       '<a class="brand" href="/"><img src="/favicon.svg" alt="%s logo" width="30" height="30">'
-      '<span>ChrisChem<span class="tld">.uk</span></span></a>' % SITE,
+      '<span class="brand-lockup"><span class="brand-word">ChrisChem<span class="tld">.uk</span></span>'
+      '<span class="brand-tag">%s</span></span></a>' % (SITE, BRAND_TAG),
       '<button class="nav-toggle" aria-label="Menu" aria-expanded="false" '
       'onclick="var n=document.getElementById(\'nav\');n.classList.toggle(\'open\');'
       'this.setAttribute(\'aria-expanded\',n.classList.contains(\'open\'))">&#9776;</button>',
@@ -481,36 +483,6 @@ def transform(body, review_slug=None):
 
 
 
-# Blocks that must never be clipped: the offer table, the FAQ accordions, the
-# responsible-gambling panel and the licensing warning.
-# Never clip a section whose value is structural rather than prose: the offer
-# table, comparison tables, operator cards, card grids, spec grids, CTA bands,
-# the FAQ accordions, the licensing warning and the RG panel. Hiding a data
-# table behind "Read more" buries the thing the section exists for.
-NO_CLAMP = ('afl-list', 'class="faq"', 'class="rg"', 'id="licensing-notice"',
-            't-scroll', 'class="opcard"', 'class="cardgrid"', 'class="specs"',
-            'class="ctaband"', 'class="checklist"')
-
-def collapse_sections(body):
-    """Show ~2 lines under each H2 and put the remainder behind a Read more
-    toggle. Everything stays in the HTML — it is clipped with CSS, not removed —
-    so crawlers and non-JS readers still get the full page."""
-    parts = re.split(r'(<h2\b[^>]*>.*?</h2>)', body, flags=re.S)
-    out = [parts[0]]
-    for i in range(1, len(parts), 2):
-        h2 = parts[i]
-        chunk = parts[i + 1] if i + 1 < len(parts) else ''
-        out.append(h2)
-        if chunk.strip() and not any(t in chunk for t in NO_CLAMP):
-            out.append('<div class="sec-collapse" data-collapse>'
-                       '<div class="sec-collapse-body">%s</div>'
-                       '<button class="sec-more" type="button" aria-expanded="false">Read more</button>'
-                       '</div>' % chunk)
-        else:
-            out.append(chunk)
-    return ''.join(out)
-
-
 SEC_OPEN  = '<section class="section"><div class="wrap">'
 SECA_OPEN = '<section class="section section-alt"><div class="wrap">'
 SEC_CLOSE = '</div></section>'
@@ -670,7 +642,6 @@ def render(fm, lede, body, extra=None):
 %s
 </head>
 <body class="%s">
-<script>document.documentElement.className+=" js";</script>
 %s
 %s
 <main><div class="wrap"><div class="content">
@@ -678,21 +649,6 @@ def render(fm, lede, body, extra=None):
 %s
 </div></div></main>
 %s
-<script>
-(function(){
-  document.querySelectorAll("[data-collapse]").forEach(function(c){
-    var b=c.querySelector(".sec-collapse-body"), btn=c.querySelector(".sec-more");
-    if(!b||!btn) return;
-    // nothing worth hiding — drop the control and leave the section open
-    if(b.scrollHeight<=b.clientHeight+4){ btn.remove(); c.classList.add("is-open"); return; }
-    btn.addEventListener("click",function(){
-      var open=c.classList.toggle("is-open");
-      btn.textContent=open?"Read less":"Read more";
-      btn.setAttribute("aria-expanded",open?"true":"false");
-    });
-  });
-})();
-</script>
 </body>
 </html>
 ''' % (t, d, canonical, url, url, robots, fm.get("ogType", "article"), t, d, url, SITE,
@@ -761,7 +717,7 @@ def main():
         if lb_html:
             # The offer table leads every page it appears on, directly under the hero.
             body = lb_html + body
-        body = collapse_sections(body + lb_notice)
+        body = body + lb_notice
         doc = resolve_tokens(render(fm, resolve_tokens(lede) or html.escape(fm["description"]),
                                     body, extra))
         out_dir = os.path.join(ROOT, fm["url"].strip("/"))
