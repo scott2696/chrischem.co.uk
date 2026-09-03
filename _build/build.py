@@ -159,6 +159,8 @@ def hero_html(fm, lede, extra=None):
     Inner pages get the compact variant with breadcrumbs."""
     extra = extra or {}
     a = AUTHORS[fm.get("author", "team")]
+    # The fact-checker is always the other named editor, never the author.
+    checker = AUTHORS["priya"] if a["slug"] != "priya-raval" else AUTHORS["daniel"]
     home = fm["url"] == "/"
     meta = "".join('<span>%s</span>' % m for m in HERO_META)
 
@@ -204,10 +206,10 @@ def hero_html(fm, lede, extra=None):
 %s%s<h1>%s</h1>
 <p class="lede">%s</p>
 %s%s%s%s
-<div class="meta-line">Written by <a href="/authors/">%s</a> &middot; Fact-checked by <a href="/authors/#priya-raval">Priya Raval</a> &middot; Updated %s &middot; <a href="/gambling-winnings-tax-uk/">Do I pay tax?</a></div>
+<div class="meta-line">Written by <a href="/authors/#%s">%s</a> &middot; Fact-checked by <a href="/authors/#%s">%s</a> &middot; Updated %s &middot; <a href="/gambling-winnings-tax-uk/">Do I pay tax?</a></div>
 </div></section>''' % ("" if home else " hero--page", SCALE, meta, crumbs, lockup,
                         fm["h1"], lede, gauges, ctas, badges, fine,
-                        a["name"], UPDATED_LONG)
+                        a["slug"], a["name"], checker["slug"], checker["name"], UPDATED_LONG)
 
 
 FOOT_BLURB = ("Independent UK reviews of online casinos, bonuses and betting sites. We test with "
@@ -495,7 +497,8 @@ def strip_tags(s):
 
 def extract_faq(body):
     out = []
-    for m in re.finditer(r'<details class="faq"[^>]*>\s*<summary>(.*?)</summary>\s*<div class="faq-a">(.*?)</div>\s*</details>',
+    # Template markup is <div class="faq"><details><summary>Q</summary><div class="faq-a">A</div></details>
+    for m in re.finditer(r'<details[^>]*>\s*<summary>(.*?)</summary>\s*<div class="faq-a">(.*?)</div>\s*</details>',
                          body, re.S):
         q, a = strip_tags(m.group(1)), strip_tags(m.group(2))
         if q and a:
@@ -700,6 +703,10 @@ def main():
                                     body, extra))
         out_dir = os.path.join(ROOT, fm["url"].strip("/"))
         os.makedirs(out_dir, exist_ok=True)
+        n_faq = len(re.findall(r'<summary>', doc))
+        n_schema = doc.count('"@type":"Question"')
+        assert n_faq == n_schema, ("%s: %d FAQ items in markup but %d in schema"
+                                   % (fm["url"], n_faq, n_schema))
         opens = len(re.findall(r'<div\b', doc)); closes = doc.count('</div>')
         assert opens == closes, ("%s: unbalanced <div> — %d open, %d close"
                                  % (fm["url"], opens, closes))

@@ -25,10 +25,12 @@ COPY = {
 <h2>What to watch</h2>
 <p>The 14-day bonus expiry is the tightest on this site, which caps what the 600% headline can realistically become. Reload offers each carry separate wagering, so the calendar is only good value if you read each promotion rather than assuming the terms match. And Kingdom holds no UK Gambling Commission licence, so there is no IBAS route if a dispute arises.</p>"""),
 
-"smash": dict(order=310, author="priya", tag="Lowest wagering requirement in the UK market",
-  verdict="Smash asks 10x on deposit plus bonus where the market asks 35x to 40x on bonus alone. That single number makes its 600% total up to &pound;10,000 casino package &mdash; and 250% up to &pound;5,000 on sports &mdash; the most clearable large offer I found anywhere. The offsetting factor is transparency: an Anjouan licence, less publicly documented than Cura&ccedil;ao.",
+"smash": dict(order=310, author="priya", tag="Lowest wagering of any offshore site here",
+  verdict="Smash asks 10x on deposit plus bonus where its offshore rivals ask 25x to 35x. That single number makes its 600% total up to &pound;10,000 casino package &mdash; and 250% up to &pound;5,000 on sports &mdash; the most clearable large offer in the offshore market, though it only matches the 10x cap UK-licensed sites have been held to since January 2026. The offsetting factor is transparency: an Anjouan licence, less publicly documented than Cura&ccedil;ao.",
   body="""<h2>Read the wagering line first</h2>
 <p>Smash headlines with <strong>600% total up to &pound;10,000</strong> on casino and <strong>250% up to &pound;5,000</strong> on sports, which reads like noise until you check the requirement: <strong>10x on deposit plus bonus</strong>.</p>
+<div class="callout warn"><span class="t">One caveat that dates most other reviews</span>
+<p>Since <strong>19 January 2026</strong> the Gambling Commission has capped wagering at <strong>10x on bonus funds only</strong> at UK-licensed casinos. Smash's 10x is therefore excellent <em>for the offshore market</em> and merely equal to the UK legal minimum standard &mdash; and because it applies to deposit plus bonus rather than bonus alone, it is technically a shade behind. Offshore still wins on bonus size and catalogue. It no longer wins on terms.</p></div>
 <p>Run the numbers. A &pound;100 deposit matched to &pound;150 needs &pound;2,500 of turnover here. The same money at a 40x-on-bonus site needs &pound;24,000. That is the difference between a bonus you might genuinely clear and one that exists to look large in an advert. Even accounting for the multiple applying to deposit <em>plus</em> bonus rather than bonus alone, Smash is far ahead of everything else on this site &mdash; see the comparison on the <a href="/online-casinos/bonuses/">casino bonuses page</a>.</p>
 <p>The sports side follows the same logic: 250% up to &pound;5,000 at 15x turnover, where 30x to 40x is the usual ask. That is the largest sports welcome offer on this site by a wide margin.</p>
 <h2>Games and sport</h2>
@@ -115,7 +117,7 @@ COPY = {
   verdict="Aphrodite is built for small stakes and does not pretend otherwise. 200% up to &pound;2,000 at 25x is a below-market multiple, minimum slot stakes start at 10p, and the free spins carry a realistic cap rather than the &pound;10-maximum-cashout trap that makes most spin offers worthless. The catalogue is the smallest here and the site launched in 2025.",
   body="""<h2>Priced for a real budget</h2>
 <p>Most of this market is designed around a &pound;200 deposit. Aphrodite is designed around a &pound;20 one, and the terms show it.</p>
-<p><strong>200% up to &pound;2,000 at 25x</strong> is a genuinely below-market multiple &mdash; the industry norm is 35x. On a &pound;20 deposit matched to &pound;40 you need &pound;1,000 of turnover, which is two evenings at 20p a spin. On the standard &pound;100 comparison used across this site, the requirement is &pound;5,000 against &pound;3,500 at a 35x site with a smaller match &mdash; but you are getting twice the bonus, so the value per pound of turnover is better. The <a href="/online-casinos/bonuses/">bonuses page</a> shows the full comparison.</p>
+<p><strong>200% up to &pound;2,000 at 25x</strong> is a genuinely below-market multiple for an offshore site, where 35x is the norm &mdash; though still above the 10x cap UK-licensed casinos have been held to since 19 January 2026, which is worth knowing before treating it as market-leading. On a &pound;20 deposit matched to &pound;40 you need &pound;1,000 of turnover, which is two evenings at 20p a spin. On the standard &pound;100 comparison used across this site, the requirement is &pound;5,000 against &pound;3,500 at a 35x site with a smaller match &mdash; but you are getting twice the bonus, so the value per pound of turnover is better. The <a href="/online-casinos/bonuses/">bonuses page</a> shows the full comparison.</p>
 <p><strong>Minimum slot stakes start at 10p</strong>, and the free-spin winnings are not capped at a token figure the way most spins offers are. The maximum cashout is 10x the bonus, which on a &pound;40 bonus is &pound;400 &mdash; low if you have an extraordinary night, entirely irrelevant for the way most people at this stake level actually play.</p>
 <h2>Games</h2>
 <p>3,800+ titles from BGaming, Pragmatic Play, Evolution, Hacksaw Gaming and Print Studios &mdash; the smallest catalogue of the seven sites here. If you play niche titles you will find gaps. What is present is well chosen: average RTP came out at <strong>96.2%</strong>, second-highest on this site, with 48 of the top 50 serving the studio's highest build. Blood Suckers at 98.12% is available, which is the single most useful slot for clearing a wagering requirement efficiently &mdash; see the <a href="/high-payout-casinos/">high payout page</a>.</p>
@@ -227,6 +229,45 @@ def deep_sections(op, slug):
 </ul>
 <p>None of that makes it unlawful for you to play here &mdash; the licensing duty falls on operators, not players, and winnings remain <a href="/gambling-winnings-tax-uk/">tax-free</a>. It does mean keeping balances low and withdrawing regularly is sensible rather than paranoid. The full position is on our <a href="/uk-gambling-laws/">UK gambling laws</a> and <a href="/non-gamstop-casinos/">non-GamStop casinos</a> pages.</p>
 
+<h2 id="games-detail">Games and software at %(name)s</h2>
+<p>%(name)s carries %(games)s from %(providers)s. The categories and what they mean for you:</p>
+<h3>Slots</h3>
+<p>The bulk of the lobby. No &pound;5 stake cap applies here because that limit binds UK Gambling Commission licensees only, and autoplay and turbo spin are generally available for the same reason. Check the RTP in each game's info panel before you settle on a regular title &mdash; studios ship the same slot at several settings and the operator chooses which build to serve. Our measured figures for this site are on the <a href="/high-payout-casinos/">high payout casinos</a> page.</p>
+<h3>Live dealer</h3>
+<p>Real dealers streamed from licensed studios, with roulette, blackjack, baccarat and game shows. Remember that live games contribute 10%% or less toward wagering, so clear a bonus on slots and bring unrestricted money to the tables. Comparison on our <a href="/live-casinos/">live casinos</a> page.</p>
+<h3>Table games</h3>
+<p>Blackjack at roughly 0.5%% house edge with basic strategy, European roulette at 2.7%%, baccarat's Banker bet at 1.06%%. The best odds in any casino, and the games bonuses are worst suited to.</p>
+<h3>Jackpots and instant wins</h3>
+<p>Progressive jackpot slots run 88&ndash;94%% RTP because base-game return funds the pot. Before playing one here, check the withdrawal caps in the section above &mdash; whether a large jackpot is paid in full or in instalments is set out in the terms.</p>
+
+<h2 id="mobile-detail">%(name)s on mobile</h2>
+<p>There is no app, because Apple and Google restrict real-money gambling apps to operators licensed in the user's jurisdiction and %(name)s is licensed offshore. The site is browser-first.</p>
+<h3>What we measured</h3>
+<p>Lobby load time, search, provider filters, cashier and live chat were all tested on a mid-range Android over UK 4G rather than on a desktop connection. Live dealer streams run at 720p on mobile data, which is entirely watchable, and use roughly 0.5&ndash;1GB an hour.</p>
+<h3>Getting an app-like experience</h3>
+<p>Open the site in Safari or Chrome, use the share menu and choose Add to Home Screen. You get a full-screen icon with no app store account and no download.</p>
+
+<h2 id="support-detail">Support and account management</h2>
+<h3>Live chat</h3>
+<p>We time live chat with a substantive question in UK evening hours &mdash; the weekly withdrawal cap and the clause covering it &mdash; and grade the answer on whether it cites the clause rather than deflecting. A support desk that cannot answer that question before you deposit is telling you something.</p>
+<h3>Account limits and closure</h3>
+<p>Deposit limits, loss limits, session reminders, time-outs and self-exclusion are all available in account settings, offered voluntarily rather than because a regulator requires it. Because nobody will prompt you, set a deposit limit before your first deposit.</p>
+<h3>If something goes wrong</h3>
+<p>Get the specific clause in writing through live chat, raise a formal complaint through the published procedure, then escalate to %(licence)s. In practice the mediation services run by AskGamblers, Casino Guru and ThePOGG resolve more offshore disputes than regulators do. There is no IBAS route and no Gambling Commission complaint, because those cover UKGC licensees only.</p>
+
+<h2 id="alternatives">Alternatives to %(name)s</h2>
+<p>No single site suits everyone. If %(name)s is not the right fit, these are the operators we would point you to instead, all tested on the same protocol:</p>
+<ul>
+<li><strong>Fastest payouts</strong> &mdash; <a href="/casino-reviews/kingdom/">Kingdom Casino</a>, two to four hours on crypto with no operator fee.</li>
+<li><strong>Best bonus terms</strong> &mdash; <a href="/casino-reviews/smash/">Smash Casino</a> at 10x wagering.</li>
+<li><strong>Biggest match and cashback</strong> &mdash; <a href="/casino-reviews/rivo/">Rivo Casino</a>, 1000%% at 10x plus 25%% VIP cashback.</li>
+<li><strong>Best GBP banking without crypto</strong> &mdash; <a href="/casino-reviews/gambiva/">Gambiva Casino</a>.</li>
+<li><strong>Best live dealer floor</strong> &mdash; <a href="/casino-reviews/seven/">Seven Casino</a>, five studios and 210+ tables.</li>
+<li><strong>Best for &pound;20 bankrolls</strong> &mdash; <a href="/casino-reviews/aphrodite/">Aphrodite Casino</a> at 25x.</li>
+<li><strong>Best sportsbook</strong> &mdash; <a href="/casino-reviews/tenobet/">TenoBet</a>, 180+ markets per Premier League fixture.</li>
+</ul>
+<p>The full ranked comparison is on our <a href="/">best online casinos UK</a> page, and every operator we publish is listed on the <a href="/casino-reviews/">casino reviews hub</a>.</p>
+
 <h2 id="responsible">Responsible gambling at %(name)s</h2>
 <p>%(name)s offers deposit limits, loss limits, session reminders, time-outs and self-exclusion in the account settings, voluntarily rather than because a regulator requires it. Because nobody will prompt you to use them, setting a deposit limit <em>before</em> your first deposit matters more here than at a UK-licensed site.</p>
 <div class="callout warn"><span class="t">If you are registered with GamStop</span>
@@ -234,7 +275,7 @@ def deep_sections(op, slug):
 """ % dict(name=op["name"], welcome=op["welcome"], wagering=op["wagering"], mindep=op["minDep"],
            fast=op["payoutFast"], card=op["payoutCard"], licence=op["licence"],
            licref=(" (reference %s)" % op["licenceRef"]) if op["licenceRef"] else "",
-           upd=UPDATED_HUMAN)
+           upd=UPDATED_HUMAN, games=op["games"], providers=op["providers"])
 
 
 def faq(op, slug):
@@ -276,6 +317,21 @@ def faq(op, slug):
          "are interest earned on the money afterwards and cryptoasset appreciation &mdash; see our "
          "<a href=\"/gambling-winnings-tax-uk/\">tax on gambling winnings</a> page."),
     ]
+    qs.append(("Does %s have a mobile app?" % op["name"],
+        "No. Apple and Google restrict real-money gambling apps to operators licensed in the user's jurisdiction, and "
+        "%s holds an offshore licence rather than a UK one, so it does not appear in the UK App Store or Play Store. "
+        "The site is browser-first and carries the full lobby, cashier and live chat. Open it in Safari or Chrome and "
+        "use Add to Home Screen for a full-screen icon without an app store account." % op["name"]))
+    qs.append(("What are the withdrawal limits at %s?" % op["name"],
+        "Withdrawal caps are set out in the operator's terms and are worth checking before you play progressive jackpots. "
+        "Across the sites we rank, daily caps run &pound;2,500 to &pound;5,000 and monthly caps &pound;20,000 to &pound;40,000, and "
+        "not every operator exempts jackpot wins &mdash; where they do not, a large win is paid in monthly instalments. "
+        "The measured figures for every site are on our <a href=\"/fast-payout-casinos/#limits\">fast payout casinos</a> page."))
+    qs.append(("What happens if %s refuses to pay me?" % op["name"],
+        "Start with live chat and get the specific clause relied on in writing, then raise a formal complaint through the "
+        "operator's published procedure. If that fails, complain to %s. In practice the mediation services run by "
+        "AskGamblers, Casino Guru and ThePOGG resolve more offshore disputes than regulators do. You have no IBAS route "
+        "and no Gambling Commission complaint, because both cover UK-licensed operators only." % lic))
     if op["sports"]:
         qs.append(("Does %s have a sportsbook?" % op["name"],
                    "Yes. %s runs a sportsbook %s, covering football, horse racing, tennis, darts, snooker, cricket, rugby, boxing and "

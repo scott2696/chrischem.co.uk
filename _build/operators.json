@@ -1,12 +1,14 @@
 {
-"kingdom": {
+ "kingdom": {
   "name": "Kingdom Casino",
   "slug": "kingdom",
   "launched": 2023,
   "operator": "Kingdom Gaming Group",
   "licence": "Curaçao eGaming",
   "licenceRef": null,
-  "casino": true, "sports": true, "crypto": true,
+  "casino": true,
+  "sports": true,
+  "crypto": true,
   "revshare": "45%",
   "games": "7,000+",
   "providers": "Pragmatic Play, Evolution, Play'n GO, Hacksaw Gaming, NetEnt",
@@ -22,15 +24,17 @@
   "payoutCard": "1–3 working days",
   "gamstop": false,
   "tag": "Fastest payouts"
-},
-"smash": {
+ },
+ "smash": {
   "name": "Smash Casino",
   "slug": "smash",
   "launched": 2024,
   "operator": "Smash Gaming N.V.",
   "licence": "Anjouan Gaming Authority",
   "licenceRef": null,
-  "casino": true, "sports": true, "crypto": true,
+  "casino": true,
+  "sports": true,
+  "crypto": true,
   "revshare": "45%",
   "games": "6,000+ from 40+ studios",
   "providers": "Pragmatic Play, Evolution, BGaming, Booongo, Endorphina",
@@ -40,21 +44,23 @@
   "casinoLink": "https://go.afftrackio.com/visit/?bta=36498&nci=5376",
   "sportsLink": "https://go.afftrackio.com/visit/?bta=36498&nci=5376",
   "rating": 4.5,
-  "usp": "The lowest wagering requirement on this site — 10x where the market asks 35x to 40x.",
+  "usp": "The lowest wagering requirement of any offshore site we rank &mdash; 10x, where its rivals ask 25x to 35x.",
   "logo": "/logos/smash.png",
   "payoutFast": "3–12 hours",
   "payoutCard": "1–3 working days",
   "gamstop": false,
   "tag": "Lowest wagering"
-},
-"rivo": {
+ },
+ "rivo": {
   "name": "Rivo Casino",
   "slug": "rivo",
   "launched": 2024,
   "operator": "Rivo Entertainment N.V.",
   "licence": "Curaçao Gaming Control Board",
   "licenceRef": null,
-  "casino": true, "sports": true, "crypto": true,
+  "casino": true,
+  "sports": true,
+  "crypto": true,
   "revshare": "45%",
   "games": "4,000+",
   "providers": "Pragmatic Play, Evolution, Play'n GO, Nolimit City, Push Gaming",
@@ -70,15 +76,17 @@
   "payoutCard": "1–5 working days",
   "gamstop": false,
   "tag": "Biggest match"
-},
-"gambiva": {
+ },
+ "gambiva": {
   "name": "Gambiva Casino",
   "slug": "gambiva",
   "launched": 2025,
   "operator": "Gambiva N.V.",
   "licence": "Curaçao Gaming Control Board",
   "licenceRef": null,
-  "casino": true, "sports": true, "crypto": true,
+  "casino": true,
+  "sports": true,
+  "crypto": true,
   "revshare": "45%",
   "games": "5,500+",
   "providers": "Pragmatic Play, Evolution, Hacksaw Gaming, Relax Gaming, BGaming",
@@ -94,15 +102,17 @@
   "payoutCard": "1–3 working days",
   "gamstop": false,
   "tag": "Best GBP banking"
-},
-"wildzy": {
+ },
+ "wildzy": {
   "name": "Wildzy Casino",
   "slug": "wildzy",
   "launched": 2025,
   "operator": "Wildzy Group N.V.",
   "licence": "Anjouan Gaming Authority",
   "licenceRef": null,
-  "casino": true, "sports": true, "crypto": true,
+  "casino": true,
+  "sports": true,
+  "crypto": true,
   "revshare": "45%",
   "games": "5,000+",
   "providers": "Pragmatic Play, Evolution, Playson, 3 Oaks, Spinomenal",
@@ -118,15 +128,17 @@
   "payoutCard": "1–3 working days",
   "gamstop": false,
   "tag": "Best free spins"
-},
-"seven": {
+ },
+ "seven": {
   "name": "Seven Casino",
   "slug": "seven",
   "launched": 2024,
   "operator": "Seven Entertainment N.V.",
   "licence": "Curaçao Gaming Control Board",
   "licenceRef": null,
-  "casino": true, "sports": true, "crypto": true,
+  "casino": true,
+  "sports": true,
+  "crypto": true,
   "revshare": "45%",
   "games": "4,500+",
   "providers": "Evolution, Pragmatic Play Live, Ezugi, Playtech, Authentic Gaming",
@@ -142,15 +154,17 @@
   "payoutCard": "2–5 working days",
   "gamstop": false,
   "tag": "Best live casino"
-},
-"aphrodite": {
+ },
+ "aphrodite": {
   "name": "Aphrodite Casino",
   "slug": "aphrodite",
   "launched": 2025,
   "operator": "Aphrodite Gaming N.V.",
   "licence": "Curaçao Gaming Control Board",
   "licenceRef": null,
-  "casino": true, "sports": true, "crypto": true,
+  "casino": true,
+  "sports": true,
+  "crypto": true,
   "revshare": "45%",
   "games": "3,800+",
   "providers": "BGaming, Pragmatic Play, Evolution, Hacksaw Gaming, Print Studios",
@@ -166,15 +180,17 @@
   "payoutCard": "2–5 working days",
   "gamstop": false,
   "tag": "Best for small stakes"
-},
-"tenobet": {
+ },
+ "tenobet": {
   "name": "TenoBet",
   "slug": "tenobet",
   "launched": 2025,
   "operator": "TenoBet Ltd",
   "licence": "Anjouan Gaming Authority",
   "licenceRef": null,
-  "casino": false, "sports": true, "crypto": true,
+  "casino": false,
+  "sports": true,
+  "crypto": true,
   "revshare": "45%",
   "games": "Sportsbook — 35+ sports",
   "providers": "In-house sportsbook, BetBy feed",
@@ -190,5 +206,5 @@
   "payoutCard": "1–3 working days",
   "gamstop": false,
   "tag": "Best sportsbook"
-}
+ }
 }
