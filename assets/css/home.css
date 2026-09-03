@@ -225,9 +225,13 @@ main{padding:44px 0 60px}
 .afl-feats{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .afl-pill{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--paper-2);
   border:1px solid var(--line);font-size:12.4px;color:var(--body)}
-.afl-stars{margin-left:auto;display:inline-flex;align-items:center;gap:7px;color:var(--brass);
-  font-size:13px;letter-spacing:.05em;white-space:nowrap}
-.afl-stars b{font-family:var(--disp);color:var(--ink);font-size:14.5px}
+/* Score block. Desktop shows stars + value; mobile swaps to a progress bar
+   with an "Our score" row. One element, styled two ways. */
+.afl-score{display:flex;align-items:center;gap:9px;margin-top:9px}
+.afl-stars{color:var(--brass);font-size:13.5px;letter-spacing:.06em;white-space:nowrap}
+.afl-bar{display:none}
+.afl-score-lab{font-size:12.6px;color:var(--mut)}
+.afl-score-val{font-family:var(--disp);color:var(--ink);font-size:14.5px;margin-left:auto}
 .afl-cta{display:flex;flex-direction:column;align-items:stretch;gap:7px;text-align:center}
 .afl-cta .cta-btn{width:100%}
 .afl-tc{font-size:11.5px;color:var(--mut)}
@@ -452,3 +456,72 @@ html.js .sec-collapse.is-open .sec-more::after{content:"▴"}
 html.js .sec-more:hover{border-color:var(--brass);background:var(--brass-soft)}
 /* the offer table leads the page — give it a little air under the hero */
 .content>h2#leaderboard{margin-top:0}
+
+/* =====================================================================
+   MOBILE (<=760px)
+   Two goals: the offer card matches the card design, and H1 + byline +
+   the table's H2 + the first card all sit above the fold.
+   ===================================================================== */
+@media (max-width:760px){
+
+  /* ---- compact hero so the offer table is reachable without scrolling ---- */
+  .hero{padding-top:16px}
+  .hero-meta{display:none}
+  .wordmark,.hero-tagline,.hero-sub{display:none}   /* header already carries the brand */
+  .gauges,.hero-cta,.badges{display:none}           /* decoration + repeated CTAs */
+  .crumbs{margin-bottom:10px;font-size:10px}
+  .hero h1{font-size:clamp(1.45rem,6.2vw,1.85rem);max-width:none;margin-bottom:.35em}
+  .hero .lede{font-size:14.6px;line-height:1.5;margin-bottom:.9em;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .hero-fine{font-size:10.6px;line-height:1.45;margin-bottom:10px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .meta-line{font-size:12.2px;gap:8px;padding-bottom:14px}
+  .byline-av{width:28px;height:28px}
+  .scale{height:13px}
+  .scale i{height:4px}
+  .scale i:nth-child(5n+1){height:9px}
+  main{padding-top:16px}
+  .content>h2#leaderboard{font-size:1.32rem;margin:0 0 .35em}
+  .content>h2#leaderboard+p{font-size:14.2px;margin-bottom:.9em;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .afl-list{margin-top:14px}
+
+  /* ---- the offer card ---- */
+  .afl-row{display:block;text-align:center;padding:58px 16px 18px;border-radius:16px;
+    border-width:2px}
+  .afl-row.is-top{border-color:var(--brass)}
+  .afl-row.is-top::before{display:none}
+  .afl-rank{position:absolute;top:12px;left:18px;transform:none;background:none;padding:0;
+    font-family:var(--disp);font-weight:800;font-size:1.75rem;letter-spacing:-.02em;
+    color:var(--brass-2);line-height:1}
+  .afl-head{position:absolute;top:16px;right:16px;margin:0}
+  .afl-badge{font-size:10px;padding:6px 13px;letter-spacing:.13em}
+
+  .afl-logo{display:block}
+  .afl-chip{width:190px;height:82px;margin:0 auto 10px}
+  .afl-brandname{display:block;font-size:1.42rem;line-height:1.2;margin-bottom:6px}
+
+  .afl-feats{display:block;font-size:14.4px;color:var(--mut);line-height:1.45;margin-bottom:14px}
+  .afl-pill{display:inline;padding:0;border:0;background:none;font-size:inherit;color:inherit}
+  .afl-pill+.afl-pill::before{content:" · ";color:var(--line-2)}
+
+  .afl-score{display:block;margin:0 0 14px}
+  .afl-stars{display:none}
+  .afl-bar{display:block;height:9px;border-radius:999px;background:var(--paper-3);
+    overflow:hidden;margin-bottom:9px}
+  .afl-bar i{display:block;height:100%;border-radius:999px;
+    background:linear-gradient(90deg,var(--brass-2),var(--brass))}
+  .afl-score-lab{float:left;font-size:15px;color:var(--body)}
+  .afl-score-val{float:right;margin-left:0;font-size:17px;font-weight:700}
+  .afl-score::after{content:"";display:block;clear:both}
+
+  /* Reference order on mobile: name, meta, score bar, then the offer. */
+  .afl-body{display:flex;flex-direction:column}
+  .afl-head{order:0}
+  .afl-feats{order:1;margin-bottom:12px}
+  .afl-score{order:2;margin-bottom:14px}
+  .afl-bonus{order:3;text-align:left;font-size:1.16rem;padding:13px 15px;margin:0 0 14px}
+  .afl-cta{gap:9px}
+  .afl-cta .cta-btn{width:100%;padding:17px 22px;font-size:17px;border-radius:12px}
+  .afl-tc{font-size:12.4px}
+}

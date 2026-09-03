@@ -279,11 +279,12 @@ def lb_row(i, name, sub, offer, terms, rating10, href, logo, badge="", feat="", 
 <div class="afl-body">
 <div class="afl-head"><span class="afl-badge %s">%s</span></div>
 <div class="afl-bonus">%s</div>
-<div class="afl-feats">%s<span class="afl-stars">%s<b>%s/10</b></span></div>
+<div class="afl-feats">%s</div>
+<div class="afl-score"><span class="afl-stars">%s</span><span class="afl-bar" aria-hidden="true"><i style="width:%d%%"></i></span><span class="afl-score-lab">Our score</span><b class="afl-score-val">%s/10</b></div>
 </div>
 <div class="afl-cta"><a class="cta-btn" href="%s" rel="sponsored nofollow noopener" target="_blank">Get Bonus</a><span class="afl-tc">%s</span></div>
 </div>''' % (" is-top" if feat else "", slug, i, chip, logo, plain, plain,
-              bcls, btxt, offer, pills, stars, rating10, href, terms)
+              bcls, btxt, offer, pills, stars, int(round(rating10 * 10)), rating10, href, terms)
 
 
 def lb_shell(heading, intro, lis):
