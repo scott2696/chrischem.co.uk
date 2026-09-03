@@ -9,7 +9,7 @@ OUT = os.path.join(ROOT, "_build", "pages")
 UPDATED_HUMAN = "2 September 2026"
 
 COPY = {
-"kingdom": dict(order=300, author="daniel", tag="Fastest payouts of 38 sites tested",
+"kingdom": dict(order=300, author="charles", tag="Fastest payouts of 38 sites tested",
   verdict="Kingdom won my payout test outright, clearing crypto withdrawals in two to four hours with no operator fee &mdash; and it pairs that with 7,000+ games and one of the largest welcome packages here, 600% total up to &pound;9,500. The catch is the multiple: 30x, so the top of that range is far harder to reach than the headline suggests.",
   body="""<h2>Built around getting paid</h2>
 <p>Kingdom holds a Cura&ccedil;ao eGaming licence and runs a 7,000+ game catalogue alongside a fully integrated sportsbook. What sets it apart is the cashier. Crypto withdrawals completed in <strong>two to four hours</strong> in my testing against an industry median closer to a full day, and Kingdom charges nothing of its own in either direction. My fastest single payout anywhere in 2026 was here: <strong>11 minutes</strong>, on USDT, on a verified account with no bonus active.</p>
@@ -25,7 +25,7 @@ COPY = {
 <h2>What to watch</h2>
 <p>The 14-day bonus expiry is the tightest on this site, which caps what the 600% headline can realistically become. Reload offers each carry separate wagering, so the calendar is only good value if you read each promotion rather than assuming the terms match. And Kingdom holds no UK Gambling Commission licence, so there is no IBAS route if a dispute arises.</p>"""),
 
-"smash": dict(order=310, author="priya", tag="Lowest wagering of any offshore site here",
+"smash": dict(order=310, author="donna", tag="Lowest wagering of any offshore site here",
   verdict="Smash asks 10x on deposit plus bonus where its offshore rivals ask 25x to 35x. That single number makes its 600% total up to &pound;10,000 casino package &mdash; and 250% up to &pound;5,000 on sports &mdash; the most clearable large offer in the offshore market, though it only matches the 10x cap UK-licensed sites have been held to since January 2026. The offsetting factor is transparency: an Anjouan licence, less publicly documented than Cura&ccedil;ao.",
   body="""<h2>Read the wagering line first</h2>
 <p>Smash headlines with <strong>600% total up to &pound;10,000</strong> on casino and <strong>250% up to &pound;5,000</strong> on sports, which reads like noise until you check the requirement: <strong>10x on deposit plus bonus</strong>.</p>
@@ -44,7 +44,7 @@ COPY = {
 <h2>Mobile</h2>
 <p>Browser-first with no app, which is expected for an operator without a UK licence. The responsive build carries the full catalogue, live studios, sportsbook and cashier without breaking, and loaded in under three seconds on a mid-range Android over UK 4G.</p>"""),
 
-"rivo": dict(order=320, author="daniel", tag="Biggest match percentage, 10x wagering, 25% cashback",
+"rivo": dict(order=320, author="charles", tag="Biggest match percentage, 10x wagering, 25% cashback",
   verdict="Rivo runs the highest match percentage on this site &mdash; 1000% total up to &pound;10,000 on the casino side &mdash; at an unusually low 10x wagering, with 25% VIP cashback on top. The sports offer is far smaller at 100% up to &pound;500. The offsetting factors are strict KYC that players report as demanding, and a mid-table catalogue at 4,000 titles.",
   body="""<h2>The ladder</h2>
 <p><strong>1000% total up to &pound;10,000</strong> at <strong>10x wagering</strong> is the highest match percentage I list, on terms that are actually clearable. It is a tiered package, so you step off at whichever rung suits you &mdash; the headline is an upper bound, not a commitment. On a &pound;100 first deposit the bonus is &pound;200 and the turnover required is &pound;2,000, the lowest figure of any offer on this site.</p>
@@ -60,7 +60,7 @@ COPY = {
 <h2>Banking and payouts</h2>
 <p>Crypto four to 24 hours, e-wallets around nine hours, debit cards one to five working days. No operator fee. Daily cap &pound;3,000, monthly &pound;25,000. See the full comparison on <a href="/fast-payout-casinos/">fast payout casinos</a>.</p>"""),
 
-"gambiva": dict(order=330, author="daniel", tag="The most complete GBP cashier on this site",
+"gambiva": dict(order=330, author="charles", tag="The most complete GBP cashier on this site",
   verdict="Gambiva is the site I recommend to people who do not want to touch cryptocurrency. Its cashier is the most complete here for a UK bank account &mdash; cards, Apple Pay, Google Pay, open banking, e-wallets, paysafecard and six coins, all in pounds sterling. The welcome offer is modest by the standards of this list but honest, and the free spins are drip-fed daily rather than dumped in one expiring block.",
   body="""<h2>The cashier is the product</h2>
 <p>Most offshore casinos treat UK banking as an afterthought and push you toward crypto. Gambiva does the opposite. Visa and Mastercard debit, <strong>Apple Pay</strong>, <strong>Google Pay</strong>, <strong>open banking</strong> instant bank transfer, Skrill, Neteller, paysafecard, and six cryptocurrencies &mdash; all with a GBP account balance, so there is no conversion spread on the way in or out.</p>
@@ -73,7 +73,7 @@ COPY = {
 <h2>What to watch</h2>
 <p>Gambiva launched in 2025, so there is no long payment history to check &mdash; the general caution on the <a href="/new-non-gamstop-casinos/">new casinos page</a> applies. Payouts are good rather than fast at six to 24 hours on crypto. And 35x wagering is the industry norm rather than a selling point; if terms are your priority, <a href="/casino-reviews/smash/">Smash</a> or <a href="/casino-reviews/aphrodite/">Aphrodite</a> are the better call.</p>"""),
 
-"wildzy": dict(order=340, author="priya", tag="Best recurring free spins programme",
+"wildzy": dict(order=340, author="donna", tag="Best recurring free spins programme",
   verdict="Most casinos front-load everything into a welcome offer and give returning players almost nothing. Wildzy inverts that: a &pound;20 deposit triggers a fresh batch of free spins every week, indefinitely. For someone who plays a little each weekend, that recurring value beats a &pound;10,000 headline they will never approach. The 35x wagering and an easily breached max-bet rule are the weak points.",
   body="""<h2>The weekly drop</h2>
 <p>The welcome offer is a reasonable 150% up to &pound;750 plus 150 spins, but it is not why Wildzy is on this page. The draw is the recurring promotion: <strong>a &pound;20 deposit triggers a fresh batch of free spins every week</strong>, with no end date.</p>
@@ -90,7 +90,7 @@ COPY = {
 <h2>Licensing</h2>
 <p>Anjouan Gaming Authority, which offers weaker practical recourse than a Cura&ccedil;ao Gaming Control Board licence. Launched 2025, so a short track record. Both are reasons to keep balances small and withdraw regularly.</p>"""),
 
-"seven": dict(order=350, author="daniel", tag="Deepest live dealer floor, UK-hours English tables",
+"seven": dict(order=350, author="charles", tag="Deepest live dealer floor, UK-hours English tables",
   verdict="If live dealer is why you play, Seven is the site here. Five studios give it English-speaking roulette and blackjack staffed through UK evening hours, 210+ tables running at 9pm, limits from 50p to &pound;500,000, and an Infinite Blackjack table at 99.60% RTP &mdash; the highest single figure I recorded anywhere. The slots catalogue is smaller and the 35x welcome terms are unremarkable.",
   body="""<h2>Five studios, and why that matters</h2>
 <p>Casinos do not run live tables; they rent feeds from studio providers. Seven integrates <strong>five</strong> &mdash; Evolution, Pragmatic Play Live, Ezugi, Playtech and Authentic Gaming &mdash; against two or three at every other site on this page. The practical consequences:</p>
@@ -113,7 +113,7 @@ COPY = {
 <h2>What to watch</h2>
 <p>Card withdrawals ran to five working days, the slowest here, and Seven is the only operator on this site charging a fee &mdash; &pound;5 on withdrawals under &pound;50. Crypto is six to 24 hours. The sportsbook is the weakest here at 80 markets per Premier League fixture with no bet builder.</p>"""),
 
-"aphrodite": dict(order=360, author="priya", tag="Best for &pound;10&ndash;&pound;20 bankrolls, 25x wagering",
+"aphrodite": dict(order=360, author="donna", tag="Best for &pound;10&ndash;&pound;20 bankrolls, 25x wagering",
   verdict="Aphrodite is built for small stakes and does not pretend otherwise. 200% up to &pound;2,000 at 25x is a below-market multiple, minimum slot stakes start at 10p, and the free spins carry a realistic cap rather than the &pound;10-maximum-cashout trap that makes most spin offers worthless. The catalogue is the smallest here and the site launched in 2025.",
   body="""<h2>Priced for a real budget</h2>
 <p>Most of this market is designed around a &pound;200 deposit. Aphrodite is designed around a &pound;20 one, and the terms show it.</p>
@@ -128,7 +128,7 @@ COPY = {
 <p>Aphrodite has no long payment history, no complaint record and no demonstrated response to a large win, because it has not been trading long enough to have one. I withdrew twice without issue and the terms are clean. Treat it as a good place for a small monthly budget rather than as somewhere to accumulate a balance, and withdraw regularly. The general vetting checklist is on the <a href="/new-non-gamstop-casinos/">new non-GamStop casinos page</a>.</p></div>
 <p>Also note: card withdrawals ran to five working days, crypto eight to 24 hours, and the withdrawal caps are the tightest here alongside Wildzy at &pound;2,500 daily and &pound;20,000 monthly, with progressive jackpot wins paid in instalments rather than in full.</p>"""),
 
-"spinpin": dict(order=380, author="daniel", tag="The biggest welcome package on this site",
+"spinpin": dict(order=380, author="charles", tag="The biggest welcome package on this site",
   verdict="Spin Pin headlines with the largest total welcome package we list &mdash; 550% up to &pound;7,000 plus 450 free spins &mdash; across a casino, a sportsbook and a crypto cashier on one GBP wallet. It is a 2025 launch, so the size of that offer is doing the work that a track record does elsewhere, and the wagering terms need checking at the cashier before you commit.",
   body="""<h2>The offer, and what to check before you take it</h2>
 <p><strong>550% up to &pound;7,000 plus 450 free spins</strong> is the largest total package on this site by headline value. As with every laddered offer, that figure describes the total across a deposit sequence rather than your first deposit &mdash; the first-deposit match is a fraction of it.</p>
@@ -144,7 +144,7 @@ COPY = {
 <h2>How to approach a first deposit</h2>
 <p>Deposit the minimum, decline the welcome offer on the first pass so your balance is unrestricted, complete identity verification immediately, then withdraw half and time it. That single test tells you more about an unproven operator than any review, and it costs almost nothing."""),
 
-"spinkings": dict(order=390, author="daniel", tag="New casino and sportsbook, still building a record",
+"spinkings": dict(order=390, author="charles", tag="New casino and sportsbook, still building a record",
   verdict="Spin Kings pairs a casino, a sportsbook and crypto payments on one GBP wallet, from a 2025 launch. It is a competent, conventional offering rather than a standout on any single measure, and it has not yet been through a full cycle of our withdrawal testing &mdash; so treat it as unproven rather than as either good or bad.",
   body="""<h2>What Spin Kings offers</h2>
 <p>Casino, sportsbook and crypto payments on a single pounds-sterling balance. Roughly 4,500 titles from Pragmatic Play, Evolution, Playson, BGaming and 3 Oaks &mdash; a solid mainstream set that covers the slots most UK players look for, without the depth of the 7,000-title lobbies at the top of our ranking.</p>
@@ -160,7 +160,7 @@ COPY = {
 <h2>Who it suits</h2>
 <p>A player who wants casino and sport on one wallet with crypto payouts and is comfortable being an early customer. If you want proven payout speed, <a href="/casino-reviews/kingdom/">Kingdom</a> is the tested choice; if you want verified bonus terms, <a href="/casino-reviews/smash/">Smash</a>."""),
 
-"tenobet": dict(order=370, author="daniel", tag="The sportsbook specialist &mdash; no casino attached",
+"tenobet": dict(order=370, author="charles", tag="The sportsbook specialist &mdash; no casino attached",
   verdict="TenoBet is the only pure sportsbook on this site and it shows in the depth: 35+ sports, 180+ markets on a typical Premier League fixture, a 101.8% overround on match result, and settlement inside ten minutes of the final whistle on every football bet I placed. Its welcome free bet asks only 6x at 1.80, the most clearable sports offer I found anywhere. There is no casino, which is the point.",
   body="""<h2>A sportsbook, not a casino with a betting tab</h2>
 <p>Six of the seven operators on this site are casinos that added a sportsbook. TenoBet is the reverse, and across a Premier League matchweek the difference was obvious.</p>
@@ -467,7 +467,7 @@ for slug, c in COPY.items():
                     else "Broad traditional banking coverage"),
         wagering=op["wagering"], licence=op["licence"],
         cta=cta(op, slug), faq=faq(op, slug),
-        author="Daniel Fairhurst" if c["author"] == "daniel" else "Priya Raval",
+        author="Charles Hatfield" if c["author"] == "charles" else "Donna McKean",
     )
     path = os.path.join(OUT, "%d-review-%s.html" % (c["order"], slug))
     with open(path, "w", encoding="utf-8") as f:

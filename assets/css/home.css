@@ -409,3 +409,10 @@ main{padding:44px 0 60px}
    recolour their artwork, give those tiles a dark ground. */
 .afl-chip--dark{background:var(--petrol);border-color:var(--petrol-3)}
 .oplogo--dark{background:var(--petrol);border-color:var(--petrol-3)}
+
+/* ---------------- author photographs ---------------- */
+.meta-line{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.byline-av{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:0 0 auto;
+  border:1px solid rgba(227,165,72,.45)}
+.author-av{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:0 0 auto;
+  border:2px solid var(--line)}

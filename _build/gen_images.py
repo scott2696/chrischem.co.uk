@@ -76,19 +76,10 @@ d.text((70, 540), "chrischem.co.uk  ·  18+  ·  Gamble responsibly", font=font(
 og.convert("RGB").save(os.path.join(IMG, "og-chrischem.jpg"), quality=88)
 
 # ---------------------------------------------------------------- author avatars
-# Flat monogram tiles, not photographs. We do not want a stock face standing in
-# for a named reviewer — swap these for real photographs of the editorial team
-# and E-E-A-T improves immediately.
-AUTH = [("daniel-fairhurst", "DF", GOLD), ("priya-raval", "PR", (109, 168, 232, 255))]
-for slug, ini, accent in AUTH:
-    for scale, suffix in ((256, ""), (512, "@2x")):
-        a = Image.new("RGBA", (scale, scale), NAVY2)
-        dd = ImageDraw.Draw(a)
-        dd.ellipse((scale*.06, scale*.06, scale*.94, scale*.94), fill=NAVY)
-        dd.arc((scale*.06, scale*.06, scale*.94, scale*.94), 0, 360, fill=accent,
-               width=max(2, int(scale*.022)))
-        centre(dd, (0, 0, scale, scale), ini, font(int(scale*.40)), accent)
-        a.convert("RGB").save(os.path.join(IMG, "authors", "%s%s.jpg" % (slug, suffix)), quality=92)
+# Author photographs are real images supplied by the editorial team and committed
+# to images/authors/. Nothing is generated here — regenerating monograms would
+# overwrite them. Sizes: <slug>.jpg at 64px, <slug>@2x.jpg at 128px, square.
+AUTH = []
 
 # ---------------------------------------------------------------- operator wordmarks
 # Only for brands with no supplied artwork in /logos. 192x96 so the 96x48 tile

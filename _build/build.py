@@ -27,19 +27,19 @@ CANONICAL_TO_HOME = False
 OPS = json.load(open(os.path.join(ROOT, "_build", "operators.json")))
 
 AUTHORS = {
- "daniel": dict(name="Daniel Fairhurst", slug="daniel-fairhurst", initials="DF",
+ "charles": dict(name="Charles Hatfield", slug="charles-hatfield", initials="CH",
    role="Lead Casino Reviewer",
-   photo="/images/authors/daniel-fairhurst.jpg",
+   photo="/images/authors/charles-hatfield.jpg",
    knows=["online casinos","UK online slots","GBP payments","withdrawal testing","cryptocurrency gambling","sports betting","non-GamStop casinos"],
-   bio="Daniel spent six years in payments operations for a UK-licensed operator before moving to the other side of the cashier. He opens every account on this site himself, deposits his own pounds, and times each withdrawal from a Manchester connection."),
- "priya": dict(name="Priya Raval", slug="priya-raval", initials="PR",
+   bio="Charles spent six years in payments operations for a UK-licensed operator before moving to the other side of the cashier. He opens every account on this site himself, deposits his own pounds, and times each withdrawal from a Manchester connection."),
+ "donna": dict(name="Donna McKean", slug="donna-mckean", initials="DM",
    role="Editor, Regulation &amp; Bonuses",
-   photo="/images/authors/priya-raval.jpg",
+   photo="/images/authors/donna-mckean.jpg",
    knows=["gambling law","UK Gambling Commission regulation","Gambling Act 2005","GamStop","bonus terms and conditions","gambling taxation","responsible gambling"],
-   bio="Priya read law at the University of Leeds and reported on gambling regulation before joining us. She reads the full terms on every offer we publish, tracks UK Gambling Commission enforcement and the Gambling Act review week by week, and fact-checks every legal and tax claim on this site."),
+   bio="Donna read law at the University of Leeds and reported on gambling regulation before joining us. She reads the full terms on every offer we publish, tracks UK Gambling Commission enforcement and the Gambling Act review week by week, and fact-checks every legal and tax claim on this site."),
  "team": dict(name="The ChrisChem Team", slug="editorial-team", initials="CC",
    role="Editorial Team",
-   photo="/images/authors/daniel-fairhurst.jpg",
+   photo="/images/authors/charles-hatfield.jpg",
    knows=["online casinos","UK gambling","sports betting"],
    bio="Our editorial team is based in the UK and tests every site we write about with real money in pounds sterling."),
 }
@@ -160,7 +160,7 @@ def hero_html(fm, lede, extra=None):
     extra = extra or {}
     a = AUTHORS[fm.get("author", "team")]
     # The fact-checker is always the other named editor, never the author.
-    checker = AUTHORS["priya"] if a["slug"] != "priya-raval" else AUTHORS["daniel"]
+    checker = AUTHORS["donna"] if a["slug"] != "donna-mckean" else AUTHORS["charles"]
     home = fm["url"] == "/"
     meta = "".join('<span>%s</span>' % m for m in HERO_META)
 
@@ -206,9 +206,10 @@ def hero_html(fm, lede, extra=None):
 %s%s<h1>%s</h1>
 <p class="lede">%s</p>
 %s%s%s%s
-<div class="meta-line">Written by <a href="/authors/#%s">%s</a> &middot; Fact-checked by <a href="/authors/#%s">%s</a> &middot; Updated %s &middot; <a href="/gambling-winnings-tax-uk/">Do I pay tax?</a></div>
+<div class="meta-line"><img class="byline-av" src="%s" srcset="%s 1x, %s 2x" alt="%s" width="34" height="34" loading="eager"><span>Written by <a href="/authors/#%s">%s</a> &middot; Fact-checked by <a href="/authors/#%s">%s</a> &middot; Updated %s &middot; <a href="/gambling-winnings-tax-uk/">Do I pay tax?</a></span></div>
 </div></section>''' % ("" if home else " hero--page", SCALE, meta, crumbs, lockup,
                         fm["h1"], lede, gauges, ctas, badges, fine,
+                        a["photo"], a["photo"], a["photo"].replace(".jpg", "@2x.jpg"), a["name"],
                         a["slug"], a["name"], checker["slug"], checker["name"], UPDATED_LONG)
 
 
@@ -395,21 +396,40 @@ def transform(body, review_slug=None):
         rest = inner[h.end():]
         title, meta, score = h.group(2), h.group(3), h.group(4)
         plain = re.sub(r'<[^>]+>', '', title)
-        mark = ('<img class="oplogo%s" src="%s" alt="%s logo" loading="lazy" width="88" height="44">'
-                % (" oplogo--dark" if OPS[rid].get("darkTile") else "", op_logo(rid), plain)) \
-               if rid in OPS else '<span class="rev-logo">%s</span>' % h.group(1)
+        badge = h.group(1)
+        if rid in OPS:
+            mark = ('<img class="oplogo%s" src="%s" alt="%s logo" loading="lazy" width="88" height="44">'
+                    % (" oplogo--dark" if OPS[rid].get("darkTile") else "", op_logo(rid), plain))
+        elif badge.startswith("photo:"):
+            slug = badge.split(":", 1)[1]
+            mark = ('<img class="author-av" src="/images/authors/%s.jpg" '
+                    'srcset="/images/authors/%s.jpg 1x, /images/authors/%s@2x.jpg 2x" '
+                    'alt="%s" width="64" height="64" loading="lazy">'
+                    % (slug, slug, slug, plain))
+        else:
+            mark = '<span class="rev-logo">%s</span>' % badge
+        pill = '' if score in ("0", "0.0") else '<div class="r">%s/5</div>' % score
         head = ('<div class="head">%s<div><div class="opname">%s</div>'
-                '<span class="tag">%s</span></div><div class="r">%s/5</div></div>'
-                % (mark, title, meta, score))
+                '<span class="tag">%s</span></div>%s</div>'
+                % (mark, title, meta, pill))
         return '<div class="opcard" id="%s">%s%s</div>' % (rid, head, rest)
     body = re.sub(r'<article class="review" id="([^"]+)">(.*?)</article>', rev, body, flags=re.S)
     # standalone review-head (used on the authors page and review pages)
     def head_std(m):
         ini, title, rk, score = m.group(1), m.group(2), m.group(3), m.group(4)
-        mark = ('<img class="oplogo%s" src="%s" alt="%s logo" loading="lazy" width="88" height="44">'
-                % (" oplogo--dark" if OPS[review_slug].get("darkTile") else "",
-                   op_logo(review_slug), OPS[review_slug]["name"])) if review_slug in OPS \
-               else '<span class="rev-logo">%s</span>' % ini
+        if review_slug in OPS:
+            mark = ('<img class="oplogo%s" src="%s" alt="%s logo" loading="lazy" width="88" height="44">'
+                    % (" oplogo--dark" if OPS[review_slug].get("darkTile") else "",
+                       op_logo(review_slug), OPS[review_slug]["name"]))
+        elif ini.startswith("photo:"):
+            # authored as <span class="op-logo">photo:slug</span> — a real headshot
+            slug = ini.split(":", 1)[1]
+            mark = ('<img class="author-av" src="/images/authors/%s.jpg" '
+                    'srcset="/images/authors/%s.jpg 1x, /images/authors/%s@2x.jpg 2x" '
+                    'alt="%s" width="64" height="64" loading="lazy">'
+                    % (slug, slug, slug, slug.replace("-", " ").title()))
+        else:
+            mark = '<span class="rev-logo">%s</span>' % ini
         return ('<div class="opcard opcard--summary"><div class="head">%s'
                 '<div><div class="opname">%s</div>'
                 '<span class="tag">%s</span></div><div class="r">%s/5</div></div></div>'
