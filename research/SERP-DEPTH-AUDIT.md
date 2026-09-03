@@ -159,3 +159,37 @@ bonuses beat UK ones *on terms* has been rewritten, because the 19 January 2026
 cap makes it false. Affected: the homepage comparison table and wagering
 section, the non-GamStop comparison table, the bonuses page answer box and CTA,
 and the Smash, Gambiva and Aphrodite reviews.
+
+---
+
+## 9. FAQPage schema: now on all 35 pages, with a caveat worth knowing
+
+All 35 pages now emit `FAQPage` structured data — **357 questions**, with the
+markup count asserted equal to the schema count on every build. The nine pages
+that previously had none (about, authors, contact, terms, privacy, cookies,
+how-we-review, casino-reviews, responsible-gambling) were given genuine,
+visible FAQ sections rather than schema alone. Injecting `FAQPage` without
+matching on-page content is a structured-data violation and risks a manual
+action, so it was never an option.
+
+**However: FAQ rich results no longer appear in Google.** Google restricted them
+to authoritative government and health sites in August 2023, and multiple SEO
+industry sources report full deprecation from **7 May 2026**, with the search
+appearance, Rich Results Test support and Search Console reporting withdrawn
+across June–August 2026. We could not confirm the 2026 dates from Google's own
+blog directly, so treat them as well-sourced industry reporting rather than
+primary.
+
+The markup is still worth having:
+
+- It remains valid Schema.org and causes no harm.
+- It is still crawled and used by **Bing**, and by AI answer engines and
+  retrieval crawlers (PerplexityBot and similar), which is an increasingly
+  material referral channel for this category.
+- It supports entity and topic understanding independently of rich results.
+- The **visible FAQ content** is the part that actually earns traffic: those
+  357 questions target long-tail and question-shaped queries directly in the
+  page body, which is unaffected by the rich-result change.
+
+**Do not expect FAQ accordions in Google SERPs.** Expect the questions to earn
+their keep as body content and as AI-answer source material.
