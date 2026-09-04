@@ -14,9 +14,9 @@ DOMAIN = "https://chrischem.co.uk"
 SITE = "ChrisChem"
 BRAND_WORD = "CHRIS&nbsp;CHEM"
 TAGLINE = "UK Casino &amp; Betting Guide"
-UPDATED = "2026-09-02"
-UPDATED_HUMAN = "02/09/2026"
-UPDATED_LONG = "2 September 2026"
+UPDATED = "2026-09-04"
+UPDATED_HUMAN = "04/09/2026"
+UPDATED_LONG = "4 September 2026"
 # Month + year shown in H1s and the offer-table H2. Derived from UPDATED so a single
 # date bump refreshes every heading on the site; used via the {{monthyear}} token.
 MONTH_YEAR = "%s %s" % (("January February March April May June July August September "
@@ -32,12 +32,12 @@ CANONICAL_TO_HOME = False
 OPS = json.load(open(os.path.join(ROOT, "_build", "operators.json")))
 
 AUTHORS = {
- "charles": dict(name="Charles Hatfield", slug="charles-hatfield", initials="CH",
+ "charles": dict(name="Charles Hatfield", slug="charles-hatfield", profiled=True, initials="CH",
    role="Lead Casino Reviewer",
    photo="/images/authors/charles-hatfield.jpg",
    knows=["online casinos","UK online slots","GBP payments","withdrawal testing","cryptocurrency gambling","sports betting","non-GamStop casinos"],
    bio="Charles spent six years in payments operations for a UK-licensed operator before moving to the other side of the cashier. He opens every account on this site himself, deposits his own pounds, and times each withdrawal from a Manchester connection."),
- "donna": dict(name="Donna McKean", slug="donna-mckean", initials="DM",
+ "donna": dict(name="Donna McKean", slug="donna-mckean", profiled=True, initials="DM",
    role="Editor, Regulation &amp; Bonuses",
    photo="/images/authors/donna-mckean.jpg",
    knows=["gambling law","UK Gambling Commission regulation","Gambling Act 2005","GamStop","bonus terms and conditions","gambling taxation","responsible gambling"],
@@ -544,46 +544,79 @@ def schema_blocks(fm, body, url):
     a = AUTHORS[fm.get("author","team")]
     org_site = {"@context":"https://schema.org","@graph":[
       {"@type":"Organization","@id":DOMAIN+"/#organization","name":SITE,"url":DOMAIN,
-       "logo":{"@type":"ImageObject","url":DOMAIN+"/images/logo.png","width":400,"height":120},
+       "logo":{"@type":"ImageObject","@id":DOMAIN+"/#logo","url":DOMAIN+"/images/logo.png",
+               "contentUrl":DOMAIN+"/images/logo.png","width":400,"height":120,"caption":SITE},
+       "image":{"@id":DOMAIN+"/#logo"},
+       "description":"Independent UK casino and betting reviews. Every site is tested with real "
+                     "GBP deposits and timed withdrawals under a published scoring methodology.",
        "areaServed":{"@type":"Country","name":"United Kingdom"},
-       "email":"editor@chrischem.co.uk","sameAs":[]},
+       "foundingDate":"2026","email":"editor@chrischem.co.uk",
+       "knowsAbout":["online casinos","UK gambling regulation","casino bonuses","sports betting",
+                     "non-GamStop casinos","responsible gambling"],
+       "publishingPrinciples":DOMAIN+"/how-we-review/",
+       "actionableFeedbackPolicy":DOMAIN+"/contact/"},
+      # No SearchAction: the site has no search endpoint, and declaring one that 404s
+      # is a false capability claim in structured data.
       {"@type":"WebSite","@id":DOMAIN+"/#website","name":SITE,"url":DOMAIN,
-       "publisher":{"@id":DOMAIN+"/#organization"},"inLanguage":"en-GB",
-       "potentialAction":{"@type":"SearchAction","target":DOMAIN+"/?s={search_term_string}",
-                          "query-input":"required name=search_term_string"}}]}
-    g = [{"@type":"Person","@id":DOMAIN+"/#author-"+a["slug"],"name":a["name"],
-          "url":DOMAIN+"/authors/","jobTitle":html.unescape(a["role"]),
-          "worksFor":{"@id":DOMAIN+"/#organization"},"knowsAbout":a["knows"]},
+       "publisher":{"@id":DOMAIN+"/#organization"},"inLanguage":"en-GB"}]}
+    def person(p):
+        return {"@type":"Person","@id":DOMAIN+"/#author-"+p["slug"],"name":p["name"],
+                "url":DOMAIN+"/authors/"+("#"+p["slug"] if p.get("profiled") else ""),
+                "jobTitle":html.unescape(p["role"]),
+                "image":{"@type":"ImageObject","url":DOMAIN+p["photo"],"width":64,"height":64},
+                "description":strip_tags(p["bio"]),
+                "worksFor":{"@id":DOMAIN+"/#organization"},"knowsAbout":p["knows"]}
+    checker = AUTHORS["donna"] if a["slug"] != AUTHORS["donna"]["slug"] else AUTHORS["charles"]
+    g = [person(a), person(checker),
          {"@type":["WebPage","CollectionPage"] if fm.get("itemlist") else "WebPage",
-          "@id":url+"#webpage","url":url,"name":fm["title"],"description":fm["description"],
+          "@id":url+"#webpage","url":url,
+          # name mirrors the visible H1, not the meta title — the title carries a
+          # pipe-separated brand tail that is not the page's heading.
+          "name":strip_tags(fm["h1"]),"headline":strip_tags(fm["h1"]),
+          "alternateName":fm["title"],"description":fm["description"],
           "inLanguage":"en-GB","isPartOf":{"@id":DOMAIN+"/#website"},
+          "primaryImageOfPage":{"@type":"ImageObject","@id":url+"#primaryimage",
+                                "url":DOMAIN+"/images/og-chrischem.jpg","width":1200,"height":630},
           "author":{"@id":DOMAIN+"/#author-"+a["slug"]},"publisher":{"@id":DOMAIN+"/#organization"},
+          "reviewedBy":{"@id":DOMAIN+"/#author-"+checker["slug"]},
           "datePublished":fm.get("published","2026-01-12"),"dateModified":fm.get("modified",UPDATED),
           "breadcrumb":{"@id":url+"#breadcrumb"}}]
     if fm.get("itemlist"):
-        g[1]["mainEntity"] = {"@id": url + "#ranking"}
+        g[2]["mainEntity"] = {"@id": url + "#ranking"}
     items = [{"@type":"ListItem","position":1,"name":"Home","item":DOMAIN+"/"}]
     for i,(n,h) in enumerate(fm.get("crumbs",[]), start=2):
         items.append({"@type":"ListItem","position":i,"name":n,"item":DOMAIN+h})
     g.append({"@type":"BreadcrumbList","@id":url+"#breadcrumb","itemListElement":items})
     if fm.get("itemlist"):
         g.append({"@type":"ItemList","@id":url+"#ranking",
-          "name":fm.get("itemlistName", fm["h1"]),
+          "name":strip_tags(fm.get("itemlistName", fm["h1"])),
           "numberOfItems":len(fm["itemlist"]),
           "itemListOrder":"https://schema.org/ItemListOrderDescending",
           "itemListElement":[{"@type":"ListItem","position":i,
-            "item":{"@type":"Organization","name":OPS[s]["name"],
-                    "url":DOMAIN+"/casino-reviews/"+s+"/"}} for i,s in enumerate(fm["itemlist"],1)]})
+            "name":OPS[sl]["name"],
+            "url":DOMAIN+"/casino-reviews/"+sl+"/",
+            "item":{"@type":"Organization","name":OPS[sl]["name"],
+                    "description":strip_tags(OPS[sl]["usp"]),
+                    "image":DOMAIN+OPS[sl]["logo"],
+                    "url":DOMAIN+"/casino-reviews/"+sl+"/"}}
+            for i,sl in enumerate(fm["itemlist"],1)]})
     faqs = extract_faq(body)
     if faqs:
         g.append({"@type":"FAQPage","@id":url+"#faq","mainEntity":faqs})
     if fm.get("reviewOf"):
         op = OPS[fm["reviewOf"]]
         g.append({"@type":"Review","@id":url+"#review",
-          "itemReviewed":{"@type":"Organization","name":op["name"],"description":op["usp"],
-                          "url":DOMAIN+"/casino-reviews/"+op["slug"]+"/"},
-          "author":{"@id":DOMAIN+"/#author-"+a["slug"]},"publisher":{"@id":DOMAIN+"/#organization"},
+          "name":strip_tags(fm["h1"]),
+          "itemReviewed":{"@type":"Organization","@id":url+"#operator","name":op["name"],
+                          "description":strip_tags(op["usp"]),
+                          "image":DOMAIN+op["logo"],
+                          "url":DOMAIN+"/casino-reviews/"+op["slug"]+"/",
+                          "foundingDate":str(op["launched"]),
+                          "legalName":op["operator"]},
+          "author":{"@id":DOMAIN+"/#author-"+a["slug"]},
+          "publisher":{"@id":DOMAIN+"/#organization"},
           "datePublished":fm.get("published","2026-01-12"),
+          "dateModified":fm.get("modified",UPDATED),
           "reviewRating":{"@type":"Rating","ratingValue":round(op["rating"]*2,1),
                           "bestRating":10,"worstRating":1}})
     for extra in fm.get("extraSchema", []):
@@ -744,6 +777,21 @@ def main():
         sm.append("  <url>\n    <loc>%s%s</loc>\n    <lastmod>%s</lastmod>\n"
                   "    <changefreq>%s</changefreq>\n    <priority>%s</priority>\n  </url>" % (DOMAIN, u, lm, cf, pr))
     sm.append("</urlset>")
+
+    # The sitemap must list exactly the pages that were written and are indexable.
+    # A sitemap that names a missing page, or omits a live one, is a crawl-budget leak.
+    listed = set(u for u, _, _, _ in urls)
+    written = set(fm["url"] for _, fm, _ in pages)
+    noindexed = set(fm["url"] for _, fm, _ in pages if "noindex" in fm.get("robots",""))
+    assert listed == written - noindexed, (
+        "sitemap/pages mismatch — only in sitemap: %s; missing from sitemap: %s"
+        % (sorted(listed - written), sorted(written - noindexed - listed)))
+    for u, lm, cf, pr in urls:
+        assert re.match(r"^\d{4}-\d{2}-\d{2}$", lm), "%s: bad lastmod %r" % (u, lm)
+        assert cf in ("always","hourly","daily","weekly","monthly","yearly","never"), \
+            "%s: bad changefreq %r" % (u, cf)
+        assert 0.0 <= float(pr) <= 1.0, "%s: bad priority %r" % (u, pr)
+
     open(os.path.join(ROOT,"sitemap.xml"),"w",encoding="utf-8").write("\n".join(sm)+"\n")
 
     open(os.path.join(ROOT,"robots.txt"),"w",encoding="utf-8").write("""# robots.txt for %s
