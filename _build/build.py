@@ -300,9 +300,22 @@ def lb_shell(heading, intro, lis):
     intro_html = '<p>%s</p>' % intro if intro else ""
     return '''<h2 id="leaderboard">%s</h2>
 %s<div class="afl-list">%s</div>
-<p style="font-size:.86rem;color:#71827E">Ranked by our verdict &mdash; number one scored highest across payout speed, game range, bonus value and cashier reliability. Full scoring weights are on our <a href="/how-we-review/">review methodology</a> page and every brand has a <a href="/casino-reviews/">written review</a>. Bonuses shown were the advertised new-player offers at our last update. 18+, T&amp;Cs apply, wagering requirements vary &mdash; always read the operator&rsquo;s full terms.</p>
+<p style="font-size:.86rem;color:#71827E"><strong>The top slot is a featured partner placement, not a scored result.</strong> Everything below it is ranked by our verdict across payout speed, game range, bonus value and cashier reliability, and every operator&rsquo;s score is shown on its own row so you can compare the featured brand against the ranked ones directly. Full scoring weights are on our <a href="/how-we-review/">review methodology</a> page and every brand has a <a href="/casino-reviews/">written review</a>. Bonuses shown were the advertised new-player offers at our last update. 18+, T&amp;Cs apply, wagering requirements vary &mdash; always read the operator&rsquo;s full terms.</p>
 ''' % (heading, intro_html, "".join(lis))
 
+
+FEATURED = "spinkings"
+FEATURED_NOTE = ('<strong>%s is a featured partner and holds the top slot by commercial '
+                 'arrangement, not by score.</strong> Its ChrisChem score is shown on its row '
+                 'like every other; the operators below it are in scored order.')
+
+def featured_intro(intro, itemlist):
+    """Append the paid-placement disclosure wherever the featured brand is listed."""
+    if FEATURED not in (itemlist or []):
+        return intro
+    name = OPS[FEATURED]["name"]
+    note = FEATURED_NOTE % name
+    return (intro + " " + note).strip() if intro else note
 
 def build_leaderboard(toplist_html, heading, sports=False, intro=""):
     """Convert an authored .toplist block into the template's .lb leaderboard."""
@@ -360,7 +373,7 @@ def leaderboard_from_ops(fm, heading, sports=False):
                           bool(op.get("darkTile"))))
     notice = ('<div class="callout callout--warn" id="licensing-notice">'
               '<span class="t">One thing to know up front</span><p>%s</p></div>' % UK_NOTICE_BODY)
-    return lb_shell(heading, fm.get("lbIntro", ""), lis), notice
+    return lb_shell(heading, featured_intro(fm.get("lbIntro", ""), fm.get("itemlist")), lis), notice
 
 
 def transform(body, review_slug=None):
@@ -742,7 +755,8 @@ def main():
         splice_at = None
         tl = re.search(r'<div class="toplist">(.*?</article>)\s*</div>', unwrapped, re.S)
         if tl:
-            lb_html, lb_notice = build_leaderboard(tl.group(1), heading, sports, fm.get("lbIntro", ""))
+            lb_html, lb_notice = build_leaderboard(tl.group(1), heading, sports,
+                                                   featured_intro(fm.get("lbIntro", ""), fm.get("itemlist")))
             if lb_html:
                 splice_at = tl.start()
                 unwrapped = unwrapped[:tl.start()] + unwrapped[tl.end():]

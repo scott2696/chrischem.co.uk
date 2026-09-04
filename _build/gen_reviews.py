@@ -129,36 +129,41 @@ COPY = {
 <p>Also note: card withdrawals ran to five working days, crypto eight to 24 hours, and the withdrawal caps are the tightest here alongside Wildzy at &pound;2,500 daily and &pound;20,000 monthly, with progressive jackpot wins paid in instalments rather than in full.</p>"""),
 
 "spinpin": dict(order=380, author="charles", tag="The biggest welcome package on this site",
-  verdict="Spin Pin headlines with the largest total welcome package we list &mdash; 550% up to &pound;7,000 plus 450 free spins &mdash; across a casino, a sportsbook and a crypto cashier on one GBP wallet. It is a 2025 launch, so the size of that offer is doing the work that a track record does elsewhere, and the wagering terms need checking at the cashier before you commit.",
+  verdict="Spin Pin headlines with the largest casino welcome package we list &mdash; 550% up to &pound;7,000 plus 450 free spins &mdash; across a casino and a sportsbook on one GBP wallet. It does not take cryptocurrency, so every withdrawal runs on the standard GBP rails. It is a 2025 launch, so the size of that offer is doing the work that a track record does elsewhere, and the wagering terms need checking at the cashier before you commit.",
   body="""<h2>The offer, and what to check before you take it</h2>
 <p><strong>550% up to &pound;7,000 plus 450 free spins</strong> is the largest total package on this site by headline value. As with every laddered offer, that figure describes the total across a deposit sequence rather than your first deposit &mdash; the first-deposit match is a fraction of it.</p>
 <div class="callout warn"><span class="t">Verify the wagering before you claim</span>
 <p>We have not yet been able to verify Spin Pin's wagering multiple, its base (bonus only, or deposit plus bonus), the maximum bet while wagering or any cashout cap. Those four terms decide what a 550% headline is actually worth, and on a package this size the difference between 25x and 40x is thousands of pounds of turnover. <strong>Read the promotion's own terms page at the cashier before you deposit</strong>, and use the method on our <a href="/online-casinos/bonuses/#evaluate">casino bonuses page</a> to convert the multiple into a figure in pounds. We will publish verified terms here once our next test cycle completes.</p></div>
-<h2>Casino, sportsbook and crypto on one wallet</h2>
-<p>Spin Pin runs all three products on a single GBP balance, which is the configuration most UK players want and only six of the ten operators here offer. The casino carries roughly 5,000 titles from Pragmatic Play, Evolution, Play'n GO, Hacksaw Gaming and BGaming &mdash; the mainstream studio set, so the slots people actually search for are present.</p>
-<p>The sportsbook shares the balance rather than requiring a transfer. Note that casino and sports offers are separate promotions with separate terms wherever they sit on one wallet, so check which product the turnover has to be completed on.</p>
-<h2>Crypto payments</h2>
-<p>Crypto deposits and withdrawals are supported alongside the standard GBP rails. As everywhere, crypto is the fastest route out and the one that bypasses UK bank gambling blocks &mdash; a feature if you never set one, and a warning sign if you did. Use USDT rather than Bitcoin so the value does not move while a withdrawal confirms. Our <a href="/best-crypto-casinos/">crypto casinos guide</a> covers the setup.</p>
+<h2>Casino and sportsbook on one wallet</h2>
+<p>Spin Pin runs both products on a single GBP balance, so the sportsbook shares the casino balance rather than requiring a transfer. The casino carries roughly 5,000 titles from Pragmatic Play, Evolution, Play'n GO, Hacksaw Gaming and BGaming &mdash; the mainstream studio set, so the slots people actually search for are present. Note that casino and sports offers are separate promotions with separate terms wherever they sit on one wallet, so check which product the turnover has to be completed on.</p>
+<h2>No cryptocurrency &mdash; and what that means for you</h2>
+<p><strong>Spin Pin does not accept cryptocurrency</strong>, for deposits or withdrawals. It is the only operator on this site that does not, and it is the reason you will not find it on our <a href="/best-crypto-casinos/">crypto casinos</a> list.</p>
+<p>That cuts both ways. Crypto is normally the fastest route out of an offshore site, so the quickest exit here is an e-wallet instead, and payouts sit in the 6&ndash;24 hour band rather than the two-to-four hours the crypto-first sites manage. What you gain is that every payment runs on rails your bank can see: a card or open-banking withdrawal lands in a British account with a normal paper trail, which matters if you ever need to evidence where money came from. It also means a <a href="/responsible-gambling/">bank gambling block</a> will actually stop deposits here, which is a genuine safety feature rather than an inconvenience.</p>
 <h2>What we do not know yet</h2>
 <p>Spin Pin launched in 2025 and has not yet been through a full cycle of our withdrawal protocol, so the payout figures shown above are indicative rather than measured. There is no long payment history to check, no meaningful complaint record, and no evidence of how it handles a large win. That is not a criticism &mdash; it is the normal position for any new brand, and the vetting checklist on our <a href="/new-non-gamstop-casinos/#vet">new casinos page</a> is written for exactly this situation.</p>
 <h2>How to approach a first deposit</h2>
 <p>Deposit the minimum, decline the welcome offer on the first pass so your balance is unrestricted, complete identity verification immediately, then withdraw half and time it. That single test tells you more about an unproven operator than any review, and it costs almost nothing."""),
 
-"spinkings": dict(order=390, author="charles", tag="New casino and sportsbook, still building a record",
-  verdict="Spin Kings pairs a casino, a sportsbook and crypto payments on one GBP wallet, from a 2025 launch. It is a competent, conventional offering rather than a standout on any single measure, and it has not yet been through a full cycle of our withdrawal testing &mdash; so treat it as unproven rather than as either good or bad.",
+"spinkings": dict(order=390, author="charles", tag="Biggest package, casino and sports",
+  verdict="Spin Kings is the only operator here running the biggest casino package on this site &mdash; 550% up to &pound;7,000 plus 450 free spins &mdash; alongside a separate 350% sports offer with &pound;15 in free bets, on one GBP wallet that also takes crypto. That is the widest welcome on the list. It is also a 2025 launch that has not been through a full cycle of our withdrawal testing, and its wagering multiple is still unverified, so the size of the offer is doing the work a track record does elsewhere.",
   body="""<h2>What Spin Kings offers</h2>
 <p>Casino, sportsbook and crypto payments on a single pounds-sterling balance. Roughly 4,500 titles from Pragmatic Play, Evolution, Playson, BGaming and 3 Oaks &mdash; a solid mainstream set that covers the slots most UK players look for, without the depth of the 7,000-title lobbies at the top of our ranking.</p>
-<h2>The welcome offer</h2>
-<div class="callout warn"><span class="t">We do not yet have verified terms for this offer</span>
-<p>We have not been able to verify Spin Kings' welcome package, its wagering multiple, the maximum bet while wagering or any cashout cap. Rather than publish an unverified figure, we have left it blank. <strong>Check the promotion's own terms page at the cashier</strong> and convert the multiple into a turnover figure in pounds using the method on our <a href="/online-casinos/bonuses/#evaluate">casino bonuses page</a> before you decide whether it is worth taking. We will publish verified terms once our next test cycle completes.</p></div>
+<h2>The welcome offer, on both products</h2>
+<p>Spin Kings is the only operator on this site carrying a headline package of this size on <em>both</em> products:</p>
+<ul>
+<li><strong>Casino &mdash; 550% up to &pound;7,000 plus 450 free spins.</strong> Equal to <a href="/casino-reviews/spinpin/">Spin Pin</a> for the largest casino package we list. As with every laddered offer, that figure is the total across a deposit sequence, not your first deposit &mdash; the first-deposit match is a fraction of it.</li>
+<li><strong>Sports &mdash; 350% plus &pound;15 in free bets.</strong> The largest sports welcome on this site by match percentage. Note that a free bet does not return the stake: &pound;15 at even money returns &pound;15 of profit, not &pound;30.</li>
+</ul>
+<div class="callout warn"><span class="t">The headline is the operator's figure &mdash; the wagering is not verified</span>
+<p>Both offers above come from the operator's own published terms. We have <strong>not</strong> been able to verify the wagering multiple, its base (bonus only, or deposit plus bonus), the maximum bet while wagering or any cashout cap, because the site geo-blocks its promotion pages from outside the UK. Those four terms decide what a 550% headline is actually worth, and on a package this size the difference between 25x and 40x is thousands of pounds of turnover. <strong>Read the promotion's own terms page at the cashier before you deposit</strong> and convert the multiple into a figure in pounds using the method on our <a href="/online-casinos/bonuses/#evaluate">casino bonuses page</a>. We will publish verified terms once our next test cycle completes.</p></div>
 <h2>Sportsbook</h2>
-<p>Shares the casino balance, so there is no transfer between wallets. As with every combined operator, the casino and sports offers are separate promotions with separate terms &mdash; check which product each one's turnover must be completed on before you claim either.</p>
+<p>Shares the casino balance, so there is no transfer between wallets. The casino and sports offers are separate promotions with separate terms &mdash; check which product each one's turnover must be completed on before you claim either, and do not assume clearing one contributes to the other.</p>
 <h2>Crypto payments</h2>
 <p>Supported alongside cards and bank transfer. Crypto remains the fastest route out of any casino and the only one that bypasses UK bank gambling blocks entirely. Use a dollar-pegged stablecoin such as USDT so the value does not shift while the withdrawal confirms.</p>
 <h2>The honest position on a 2025 launch</h2>
 <p>Spin Kings has no payment history to check, no meaningful complaint record and no demonstrated response to a large win, because it has not been trading long enough to have any of those. New sites often compete on terms precisely because they cannot compete on reputation, which can genuinely favour you &mdash; but it also means the unknowns are real. Keep balances low, withdraw regularly, and run the twelve-point check on our <a href="/new-non-gamstop-casinos/#vet">new non-GamStop casinos page</a> before committing anything meaningful.</p>
 <h2>Who it suits</h2>
-<p>A player who wants casino and sport on one wallet with crypto payouts and is comfortable being an early customer. If you want proven payout speed, <a href="/casino-reviews/kingdom/">Kingdom</a> is the tested choice; if you want verified bonus terms, <a href="/casino-reviews/smash/">Smash</a>."""),
+<p>A player who wants the largest available welcome on both casino and sport, on one wallet with crypto payouts, and is comfortable being an early customer at an operator whose terms are not yet verified. If you want proven payout speed, <a href="/casino-reviews/kingdom/">Kingdom</a> is the tested choice; if you want a large headline with a <em>verified</em> low multiple, <a href="/casino-reviews/smash/">Smash</a> clears at 10x."""),
 
 "tenobet": dict(order=370, author="charles", tag="The sportsbook specialist &mdash; no casino attached",
   verdict="TenoBet is the only pure sportsbook on this site and it shows in the depth: 35+ sports, 180+ markets on a typical Premier League fixture, a 101.8% overround on match result, and settlement inside ten minutes of the final whistle on every football bet I placed. Its welcome free bet asks only 6x at 1.80, the most clearable sports offer I found anywhere. There is no casino, which is the point.",
@@ -222,10 +227,27 @@ def cta(op, slug):
 
 def deep_sections(op, slug):
     """The standard blocks every review carries: bonus terms, payouts, safety, RG."""
+    # An operator whose wagering we could not read must not carry a caption saying
+    # its terms were verified. The headline may still be the operator's own figure.
+    verified = "check" not in op["wagering"].lower()
+    if verified:
+        captionline = ("%s welcome offer, from the operator's published terms, verified %s."
+                       % (op["name"], UPDATED_HUMAN))
+        freshline = ("The figures above were verified on %s; always read the current terms at "
+                     "the cashier before depositing." % UPDATED_HUMAN)
+    else:
+        captionline = ("%s welcome offer. The headline is the operator's own published figure; the "
+                       "<strong>wagering multiple is unverified</strong> &mdash; the site geo-blocks its "
+                       "promotion pages, so we could not read the terms. Last checked %s."
+                       % (op["name"], UPDATED_HUMAN))
+        freshline = ("The headline above is the operator's own figure and the wagering multiple is "
+                     "still unverified, so read the promotion's own terms page at the cashier before "
+                     "you deposit.")
+    fastroute = "cryptocurrency" if op["crypto"] else "e-wallet"
     return """<h2 id="bonus-terms">The offer, term by term</h2>
 <div class="table-scroll">
 <table class="data">
-<caption>%(name)s welcome offer, from the operator's published terms, verified %(upd)s.</caption>
+<caption>%(captionline)s</caption>
 <thead><tr><th scope="col">Term</th><th scope="col">Detail</th><th scope="col">How it compares</th></tr></thead>
 <tbody>
 <tr><th scope="row">Headline</th><td>%(welcome)s</td><td>Judge this last &mdash; the wagering line below matters more</td></tr>
@@ -237,12 +259,12 @@ def deep_sections(op, slug):
 </tbody>
 </table>
 </div>
-<p>Offers change without notice. The figures above were verified on %(upd)s; always read the current terms at the cashier before depositing. The full method for valuing an offer is on our <a href="/online-casinos/bonuses/">casino bonuses guide</a>.</p>
+<p>Offers change without notice. %(freshline)s The full method for valuing an offer is on our <a href="/online-casinos/bonuses/">casino bonuses guide</a>.</p>
 
 <h2 id="payouts">Payouts and banking</h2>
 <p>Measured on a verified account with no bonus active, across at least three withdrawals:</p>
 <ul>
-<li><strong>Fastest route out:</strong> %(fast)s (cryptocurrency)</li>
+<li><strong>Fastest route out:</strong> %(fast)s (%(fastroute)s)</li>
 <li><strong>Debit card:</strong> %(card)s</li>
 <li><strong>Bank transfer:</strong> typically one working day longer than card</li>
 <li><strong>Operator fee:</strong> see the comparison on our <a href="/fast-payout-casinos/">fast payout casinos</a> page</li>
@@ -307,7 +329,8 @@ def deep_sections(op, slug):
 """ % dict(name=op["name"], welcome=op["welcome"], wagering=op["wagering"], mindep=op["minDep"],
            fast=op["payoutFast"], card=op["payoutCard"], licence=op["licence"],
            licref=(" (reference %s)" % op["licenceRef"]) if op["licenceRef"] else "",
-           upd=UPDATED_HUMAN, games=op["games"], providers=op["providers"])
+           upd=UPDATED_HUMAN, games=op["games"], providers=op["providers"],
+           captionline=captionline, freshline=freshline, fastroute=fastroute)
 
 
 def faq(op, slug):
@@ -325,10 +348,12 @@ def faq(op, slug):
          "that most often cost players money."
          % (op["welcome"], op["wagering"].lower(), op["minDep"])),
         ("How long do %s withdrawals take?" % op["name"],
-         "Cryptocurrency is fastest at %s once your account is verified, e-wallets take a few hours to a day, and debit card or bank "
-         "transfers take %s. Completing identity verification on the day you register removes the single biggest source of delay. "
-         "See our <a href=\"/fast-payout-casinos/\">fast payout rankings</a> for the full comparison."
-         % (op["payoutFast"], op["payoutCard"])),
+         ("Cryptocurrency is fastest at %s once your account is verified, e-wallets take a few hours to a day, and debit card or bank "
+          "transfers take %s." if op["crypto"] else
+          "%s does not accept cryptocurrency, so an e-wallet is the fastest route out at %s, and debit card or bank transfers take %s.")
+         % ((op["payoutFast"], op["payoutCard"]) if op["crypto"] else (op["name"], op["payoutFast"], op["payoutCard"]))
+         + " Completing identity verification on the day you register removes the single biggest source of delay. "
+           "See our <a href=\"/fast-payout-casinos/\">fast payout rankings</a> for the full comparison."),
         ("Is %s on GamStop?" % op["name"],
          "No. %s holds an offshore licence rather than a UK Gambling Commission licence, and GamStop registration is only mandatory for "
          "UKGC licensees. That is why it remains accessible after self-exclusion &mdash; and exactly why you should not use it if you have "
@@ -413,12 +438,12 @@ META = {
         'Smash Casino and the Alternatives, Compared ({{monthyear}})'),
     "spinkings": (
         'Spin Kings Casino Review UK 2026 | Bonus & Payouts',
-        'Spin Kings review for UK players — casino, sportsbook and crypto payments in one wallet from a 2025 launch. What we know, what is unverified, who it suits.',
+        'Spin Kings review for UK players — 550% up to £7,000 plus 450 spins on casino, 350% plus £15 free bets on sport, one GBP wallet. Wagering unverified.',
         'Spin Kings Casino Review UK {{monthyear}}: New Casino and Sportsbook, Still Building a Record',
         'Spin Kings and the Alternatives, Compared ({{monthyear}})'),
     "spinpin": (
         'Spin Pin Casino Review UK 2026 | 550% + 450 Spins',
-        'Spin Pin review for UK players — the biggest welcome bonus we list at 550% up to £7,000 plus 450 free spins, with casino, sportsbook and crypto in one wallet.',
+        'Spin Pin review for UK players — our biggest casino welcome at 550% up to £7,000 plus 450 free spins, on one GBP wallet with a sportsbook. No crypto accepted.',
         'Spin Pin Casino Review UK {{monthyear}}: The Biggest Welcome Bonus on This Site',
         'Spin Pin and the Alternatives, Compared ({{monthyear}})'),
     "tenobet": (
@@ -432,6 +457,23 @@ META = {
         'Wildzy Casino Review UK {{monthyear}}: Best Recurring Free Spins Programme',
         'Wildzy Casino and the Alternatives, Compared ({{monthyear}})'),
 }
+
+# Casino operators in house order. TenoBet is sportsbook-only, so it appears in a
+# review's comparison table only on its own page.
+CASINO_ORDER = ["kingdom", "smash", "rivo", "gambiva", "wildzy", "seven",
+                "aphrodite", "spinpin", "spinkings"]
+
+def review_itemlist(slug):
+    """Reviewed operator first, then Spin Kings, then house order."""
+    rest = [s for s in CASINO_ORDER if s != slug]
+    if slug == "tenobet":
+        rest = [s for s in CASINO_ORDER]
+    out = [slug]
+    if "spinkings" in rest:
+        rest.remove("spinkings")
+        out.append("spinkings")
+    return out + rest
+
 
 for slug, c in COPY.items():
     op = OPS[slug]
@@ -451,6 +493,10 @@ for slug, c in COPY.items():
         "crumbs": [["Casino Reviews", "/casino-reviews/"],
                    ["%s Review" % op["name"], "/casino-reviews/%s/" % slug]],
         "reviewOf": slug,
+        # The comparison table on a review page. Previously these lived only in the
+        # committed fragments, so regenerating silently deleted every review's offer
+        # table; they are generated here now so that cannot happen again.
+        "itemlist": review_itemlist(slug),
         "lbHeading": META[slug][3] if slug in META else
                      "%s and the Alternatives, Compared" % op["name"],
     }
