@@ -601,8 +601,14 @@ def schema_blocks(fm, body, url):
         items.append({"@type":"ListItem","position":i,"name":n,"item":DOMAIN+h})
     g.append({"@type":"BreadcrumbList","@id":url+"#breadcrumb","itemListElement":items})
     if fm.get("itemlist"):
+        il_desc = ("Ranked by our published weighted scoring model. One position is a "
+                   "featured partner placement held by commercial arrangement rather than "
+                   "by score, and is labelled as such on the page."
+                   if FEATURED in fm["itemlist"] else
+                   "Ranked by our published weighted scoring model.")
         g.append({"@type":"ItemList","@id":url+"#ranking",
           "name":strip_tags(fm.get("itemlistName", fm["h1"])),
+          "description":il_desc,
           "numberOfItems":len(fm["itemlist"]),
           "itemListOrder":"https://schema.org/ItemListOrderDescending",
           "itemListElement":[{"@type":"ListItem","position":i,
@@ -782,6 +788,12 @@ def main():
         opens = len(re.findall(r'<div\b', doc)); closes = doc.count('</div>')
         assert opens == closes, ("%s: unbalanced <div> — %d open, %d close"
                                  % (fm["url"], opens, closes))
+        # A schema image that 404s is an invalid rich result, and nothing else
+        # in the build would notice a renamed or missing logo.
+        for blob in re.findall(r'<script type="application/ld\+json">(.*?)</script>', doc, re.S):
+            for rel in re.findall(r'"%s(/[^"]*\.(?:png|jpg|jpeg|svg))"' % re.escape(DOMAIN), blob):
+                assert os.path.exists(os.path.join(ROOT, rel.lstrip("/"))), \
+                    "%s: schema references missing image %s" % (fm["url"], rel)
         open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8").write(doc)
 
     urls = [(fm["url"], fm.get("modified",UPDATED), fm.get("changefreq","weekly"), fm.get("priority","0.7"))
