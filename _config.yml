@@ -1,0 +1,17 @@
+# GitHub Pages serves this repo's root from `main`. The site is pre-built by
+# _build/build.py and committed, so Jekyll has nothing to generate — it only
+# needs to copy the built files through untouched.
+#
+# These paths are excluded because they must never be published or processed:
+#   _build   — source fragments and the build script, not site output
+#   research — internal keyword strategy and competitor analysis
+#   README   — repo documentation
+# _build and research also contain `{{aff:slug}}`-style tokens in code spans,
+# which are invalid Liquid and would fail the Pages build if Jekyll parsed them.
+exclude:
+  - _build
+  - research
+  - README.md
+
+# Nothing here needs Sass, layouts or plugins; the HTML is already final.
+plugins: []
