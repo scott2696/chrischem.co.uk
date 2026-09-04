@@ -260,5 +260,32 @@
   "gamstop": false,
   "tag": "Biggest package, casino and sports",
   "status": "new"
+ },
+ "evospin": {
+  "name": "EvoSpin",
+  "slug": "evospin",
+  "launched": 2021,
+  "operator": "EvoSpin (operating company not published on site)",
+  "licence": "Curaçao — verify on the register before depositing",
+  "licenceRef": null,
+  "casino": true,
+  "sports": false,
+  "crypto": true,
+  "revshare": "50%",
+  "games": "5,000+",
+  "providers": "Pragmatic Play, Evolution, Play'n GO, BGaming, Booongo",
+  "welcome": "285% up to €7,500 + 285 free spins",
+  "wagering": "Advertised terms not published in full — verify at the cashier",
+  "minDep": "£20",
+  "casinoLink": "https://evospinlink.com/hapug4hlu",
+  "sportsLink": null,
+  "rating": 3.9,
+  "usp": "The largest headline package on this site — and the only one quoted in euros rather than pounds, which is the first thing to check at the cashier.",
+  "logo": "/logos/evospin.png",
+  "payoutFast": "Operator claim only — unverified",
+  "payoutCard": "Operator claim only — unverified",
+  "gamstop": false,
+  "tag": "Biggest headline offer",
+  "status": "new"
  }
 }

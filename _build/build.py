@@ -236,7 +236,7 @@ def foot_html():
 <div class="rg-mini"><span class="gc-18">18+</span> Gambling can be harmful. Free, confidential help: <a href="tel:08088020133">National Gambling Helpline 0808 8020 133</a> &middot; <a href="https://www.begambleaware.org/" rel="nofollow noopener" target="_blank">BeGambleAware</a> &middot; <a href="https://www.gamstop.co.uk/" rel="nofollow noopener" target="_blank">GamStop</a>.</div></div>
 %s</div>
 <div class="legal">
-<p><strong>Affiliate disclosure:</strong> ChrisChem is reader-supported. When you open an account through a link on this site we may earn a commission, at no cost to you. Rates vary by operator (30&ndash;45%% revenue share) and are disclosed in full, so our safeguard is the method rather than the rate: rankings come from our published <a href="/how-we-review/">weighted scoring model</a> and are checkable against the scores. Position cannot be bought.</p>
+<p><strong>Affiliate disclosure:</strong> ChrisChem is reader-supported. When you open an account through a link on this site we may earn a commission, at no cost to you. Rates vary by operator (30&ndash;50%% revenue share) and are disclosed in full, so our safeguard is the method rather than the rate: rankings come from our published <a href="/how-we-review/">weighted scoring model</a> and are checkable against the scores. One slot on each offer table is a labelled featured partner placement; every other position is scored and cannot be bought.</p>
 <p><strong>Important:</strong> every operator featured here is licensed offshore (Cura&ccedil;ao, Anjouan) and is <strong>not licensed by the UK Gambling Commission</strong>. That means they sit outside <strong>GamStop</strong>, outside UKGC stake limits and affordability checks, and outside IBAS dispute resolution. <strong>If you are registered with GamStop, or have ever self-excluded, please do not use these sites</strong> &mdash; <a href="/responsible-gambling/">read this instead</a>.</p>
 <p>&copy; 2026 %s. You must be 18 or over to gamble in the United Kingdom. Bonuses, odds and terms were accurate at our last update (%s) and are subject to change &mdash; always check the operator&rsquo;s current terms. Please gamble responsibly.</p>
 </div>
@@ -300,14 +300,14 @@ def lb_shell(heading, intro, lis):
     intro_html = '<p>%s</p>' % intro if intro else ""
     return '''<h2 id="leaderboard">%s</h2>
 %s<div class="afl-list">%s</div>
-<p style="font-size:.86rem;color:#71827E"><strong>The top slot is a featured partner placement, not a scored result.</strong> Everything below it is ranked by our verdict across payout speed, game range, bonus value and cashier reliability, and every operator&rsquo;s score is shown on its own row so you can compare the featured brand against the ranked ones directly. Full scoring weights are on our <a href="/how-we-review/">review methodology</a> page and every brand has a <a href="/casino-reviews/">written review</a>. Bonuses shown were the advertised new-player offers at our last update. 18+, T&amp;Cs apply, wagering requirements vary &mdash; always read the operator&rsquo;s full terms.</p>
+<p style="font-size:.86rem;color:#71827E"><strong>One slot on this table is a featured partner placement rather than a scored result, and is marked as such above.</strong> Every other position is ranked by our verdict across payout speed, game range, bonus value and cashier reliability, and every operator&rsquo;s score is shown on its own row so you can compare the featured brand against the ranked ones directly. Full scoring weights are on our <a href="/how-we-review/">review methodology</a> page and every brand has a <a href="/casino-reviews/">written review</a>. Bonuses shown were the advertised new-player offers at our last update. 18+, T&amp;Cs apply, wagering requirements vary &mdash; always read the operator&rsquo;s full terms.</p>
 ''' % (heading, intro_html, "".join(lis))
 
 
-FEATURED = "spinkings"
-FEATURED_NOTE = ('<strong>%s is a featured partner and holds the top slot by commercial '
+FEATURED = "evospin"
+FEATURED_NOTE = ('<strong>%s is a featured partner and holds second place by commercial '
                  'arrangement, not by score.</strong> Its ChrisChem score is shown on its row '
-                 'like every other; the operators below it are in scored order.')
+                 'like every other; every other position on this table is in scored order.')
 
 def featured_intro(intro, itemlist):
     """Append the paid-placement disclosure wherever the featured brand is listed."""

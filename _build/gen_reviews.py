@@ -144,6 +144,23 @@ COPY = {
 <h2>How to approach a first deposit</h2>
 <p>Deposit the minimum, decline the welcome offer on the first pass so your balance is unrestricted, complete identity verification immediately, then withdraw half and time it. That single test tells you more about an unproven operator than any review, and it costs almost nothing."""),
 
+"evospin": dict(order=375, author="donna", tag="The biggest headline offer here &mdash; and the only one in euros",
+  verdict="EvoSpin runs the largest headline package on this site at 285% up to &euro;7,500 plus 285 free spins. Two things qualify it heavily. The offer is denominated in <em>euros</em>, not pounds, so a UK player carries a conversion on every deposit and withdrawal and the &pound; value of that cap moves with the exchange rate. And the operator does not publish its wagering terms in full, so the multiple that decides what the headline is worth cannot be checked before you deposit. Trading since 2021, which is longer than the other new entries here, but we have not put it through our withdrawal protocol.",
+  body="""<h2>The offer, and the currency problem</h2>
+<p><strong>285% up to &euro;7,500 plus 285 free spins</strong> is the biggest headline on this site. Before you compare it with anything else on the list, note that it is the only offer here quoted in euros.</p>
+<div class="callout warn"><span class="t">This offer is in euros, not pounds</span>
+<p>Every other operator on this site quotes in pounds and holds a GBP balance. EvoSpin quotes &euro;7,500, and a euro account costs a UK player twice: once converting pounds in, once converting winnings back out, at whatever spread the cashier or your card issuer applies. That is commonly 2&ndash;3% on each leg. It also means the cap you are chasing is not a fixed &pound; figure &mdash; at the time of writing &euro;7,500 is roughly &pound;6,400, and that moves daily. <strong>Check at registration whether a GBP balance is available</strong>; if it is, take it, because the currency is usually locked once chosen.</p></div>
+<div class="callout warn"><span class="t">The wagering terms are not published in full</span>
+<p>EvoSpin does not publish the wagering multiple, its base, the maximum bet while wagering or any cashout cap in a form we could read and verify. Those four terms decide what a 285% headline is actually worth, and without them the offer cannot be valued at all. <strong>Read the promotion's own terms page at the cashier before you deposit</strong> and convert the multiple into a turnover figure in pounds using the method on our <a href="/online-casinos/bonuses/#evaluate">casino bonuses page</a>. Compare it against <a href="/casino-reviews/smash/">Smash</a>, whose 10x is published and verified.</p></div>
+<h2>Games</h2>
+<p>Roughly 5,000 titles from Pragmatic Play, Evolution, Play'n GO, BGaming and Booongo &mdash; the mainstream studio set, so the slots most UK players search for are present. The Booongo coverage is better than most of this list; Nolimit City and Push Gaming are thinner. We have not measured average RTP across the lobby, so EvoSpin does not appear in our <a href="/high-payout-casinos/">high payout rankings</a>.</p>
+<h2>Payments</h2>
+<p>Cards, e-wallets and cryptocurrency are all accepted. The payout figures we publish for other operators come from timed withdrawals on verified accounts; we have not run that protocol here, so the speeds EvoSpin advertises are <strong>operator claims we have not checked</strong> and are labelled as such throughout. Crypto is normally the fastest route out of an offshore site and the one that bypasses UK bank gambling blocks &mdash; useful if you never set one, a warning sign if you did.</p>
+<h2>What we have not verified</h2>
+<p>The wagering multiple, the payout speeds, the withdrawal limits and the identity checks. EvoSpin has been trading since 2021, which is longer than <a href="/casino-reviews/spinpin/">Spin Pin</a> or <a href="/casino-reviews/spinkings/">Spin Kings</a>, so there is more of a record here than at a 2025 launch &mdash; but a longer record is only useful once someone checks it, and we have not. Treat the figures above as advertised rather than measured.</p>
+<h2>Who it suits</h2>
+<p>A player chasing the largest possible headline who is comfortable holding a euro balance and reading the bonus terms themselves at the cashier. If you want a large headline with a <em>published, verified</em> multiple, <a href="/casino-reviews/smash/">Smash</a> clears at 10x in pounds. If you want measured payout speed, <a href="/casino-reviews/kingdom/">Kingdom</a> is the tested choice."""),
+
 "spinkings": dict(order=390, author="charles", tag="Biggest package, casino and sports",
   verdict="Spin Kings is the only operator here running the biggest casino package on this site &mdash; 550% up to &pound;7,000 plus 450 free spins &mdash; alongside a separate 350% sports offer with &pound;15 in free bets, on one GBP wallet that also takes crypto. That is the widest welcome on the list. It is also a 2025 launch that has not been through a full cycle of our withdrawal testing, and its wagering multiple is still unverified, so the size of the offer is doing the work a track record does elsewhere.",
   body="""<h2>What Spin Kings offers</h2>
@@ -406,6 +423,11 @@ def faq(op, slug):
 # SERP-tuned meta titles and descriptions, keyed by operator slug.
 # Keep these in sync with _build/pages/*-review-*.html; regeneration reapplies them.
 META = {
+    "evospin": (
+        'EvoSpin Casino Review UK 2026 | 285% up to €7,500',
+        'EvoSpin review for UK players — the biggest headline on this site at 285% up to €7,500 plus 285 free spins, quoted in euros. Wagering terms unpublished.',
+        'EvoSpin Casino Review UK {{monthyear}}: The Biggest Headline Here, and the Currency Catch',
+        'EvoSpin and the Alternatives, Compared ({{monthyear}})'),
     "aphrodite": (
         'Aphrodite Casino Review UK 2026 | Bonus & Wagering',
         'Aphrodite Casino review for UK players — 200% up to £2,000 at 25x wagering, 10p minimum spins and 96.2% RTP. Built for small stakes. Payouts and verdict.',
@@ -460,19 +482,27 @@ META = {
 
 # Casino operators in house order. TenoBet is sportsbook-only, so it appears in a
 # review's comparison table only on its own page.
-CASINO_ORDER = ["kingdom", "smash", "rivo", "gambiva", "wildzy", "seven",
+CASINO_ONLY = {"evospin": True}
+CASINO_ORDER = ["kingdom", "evospin", "smash", "rivo", "gambiva", "wildzy", "seven",
                 "aphrodite", "spinpin", "spinkings"]
 
 def review_itemlist(slug):
-    """Reviewed operator first, then Spin Kings, then house order."""
+    """Reviewed operator first, then the featured brand, house order, Spin Kings last."""
     rest = [s for s in CASINO_ORDER if s != slug]
     if slug == "tenobet":
-        rest = [s for s in CASINO_ORDER]
+        # TenoBet's page resolves every CTA through sports links, so a casino-only
+        # brand must not appear on it.
+        rest = [s for s in CASINO_ORDER if not CASINO_ONLY.get(s)]
     out = [slug]
+    for featured in ("evospin",):
+        if featured in rest:
+            rest.remove(featured)
+            out.append(featured)
+    tail = []
     if "spinkings" in rest:
         rest.remove("spinkings")
-        out.append("spinkings")
-    return out + rest
+        tail = ["spinkings"]
+    return out + rest + tail
 
 
 for slug, c in COPY.items():
