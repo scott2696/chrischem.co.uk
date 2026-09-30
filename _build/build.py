@@ -7,6 +7,7 @@ writes clean-URL pages at {url}index.html using the template's exact markup:
 No .html extensions anywhere — every page is a directory with an index.html.
 """
 import json, os, re, html
+import seo_titles
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "_build", "pages")
@@ -14,9 +15,9 @@ DOMAIN = "https://chrischem.co.uk"
 SITE = "ChrisChem"
 BRAND_WORD = "CHRIS&nbsp;CHEM"
 TAGLINE = "UK Casino &amp; Betting Guide"
-UPDATED = "2026-09-04"
-UPDATED_HUMAN = "04/09/2026"
-UPDATED_LONG = "4 September 2026"
+UPDATED = "2026-10-01"
+UPDATED_HUMAN = "01/10/2026"
+UPDATED_LONG = "1 October 2026"
 # Month + year shown in H1s and the offer-table H2. Derived from UPDATED so a single
 # date bump refreshes every heading on the site; used via the {{monthyear}} token.
 MONTH_YEAR = "%s %s" % (("January February March April May June July August September "
@@ -794,6 +795,7 @@ def main():
             for rel in re.findall(r'"%s(/[^"]*\.(?:png|jpg|jpeg|svg))"' % re.escape(DOMAIN), blob):
                 assert os.path.exists(os.path.join(ROOT, rel.lstrip("/"))), \
                     "%s: schema references missing image %s" % (fm["url"], rel)
+        doc = seo_titles.apply(doc, os.path.relpath(os.path.join(out_dir, "index.html"), ROOT), MONTH_YEAR)
         open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8").write(doc)
 
     urls = [(fm["url"], fm.get("modified",UPDATED), fm.get("changefreq","weekly"), fm.get("priority","0.7"))
