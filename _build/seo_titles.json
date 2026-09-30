@@ -1,0 +1,154 @@
+{
+ "about/index.html": {
+  "title": "About ChrisChem [{{month}}]: UK Casino Review Site",
+  "h1": "About ChrisChem [{{month}}]: The UK Casino and Betting Review Site"
+ },
+ "authors/index.html": {
+  "title": "Our Authors [{{month}}]: ChrisChem Casino Experts",
+  "h1": "Our Authors [{{month}}]: The Casino and Betting Experts Behind ChrisChem"
+ },
+ "best-crypto-casinos/index.html": {
+  "title": "Best Crypto Casinos UK [{{month}}]: Bitcoin Casinos",
+  "h1": "Best Crypto Casinos UK [{{month}}]: Top Bitcoin Casino Sites, Tested"
+ },
+ "best-sports-betting-sites/index.html": {
+  "title": "Best Betting Sites UK [{{month}}]: Top Online Bookmakers",
+  "h1": "Best Betting Sites UK [{{month}}]: Top Online Bookmakers, Tested and Rated"
+ },
+ "casino-reviews/aphrodite/index.html": {
+  "title": "Aphrodite Casino Review UK [{{month}}]: Bonus & Wagering",
+  "h1": "Aphrodite Casino Review UK [{{month}}]: Best for &pound;10&ndash;&pound;20 Bankrolls, 25x Wagering"
+ },
+ "casino-reviews/evospin/index.html": {
+  "title": "EvoSpin Casino Review UK [{{month}}]: 285% Bonus",
+  "h1": "EvoSpin Casino Review UK [{{month}}]: A 2021 Brand With Unpublished Bonus Terms"
+ },
+ "casino-reviews/gambiva/index.html": {
+  "title": "Gambiva Casino Review UK [{{month}}]: GBP Payments",
+  "h1": "Gambiva Casino Review UK [{{month}}]: The Most Complete GBP Cashier on This Site"
+ },
+ "casino-reviews/index.html": {
+  "title": "Online Casino Reviews UK [{{month}}]: Expert Rated Sites",
+  "h1": "Online Casino Reviews UK [{{month}}]: Every Site We Tested, Rated and Scored"
+ },
+ "casino-reviews/kingdom/index.html": {
+  "title": "Kingdom Casino Review UK [{{month}}]: Payout Test",
+  "h1": "Kingdom Casino Review UK [{{month}}]: Fastest Payouts of 38 Sites Tested"
+ },
+ "casino-reviews/rivo/index.html": {
+  "title": "Rivo Casino Review UK [{{month}}]: 1000% Bonus at 10x",
+  "h1": "Rivo Casino Review UK [{{month}}]: Biggest Match Bonus, 10x Wagering, 25% Cashback"
+ },
+ "casino-reviews/seven/index.html": {
+  "title": "Seven Casino Review UK [{{month}}]: Live Dealer & Bonus",
+  "h1": "Seven Casino Review UK [{{month}}]: Deepest Live Dealer Floor, UK-Hours English Tables"
+ },
+ "casino-reviews/smash/index.html": {
+  "title": "Smash Casino Review UK [{{month}}]: 600% Bonus at 10x",
+  "h1": "Smash Casino Review UK [{{month}}]: Lowest Wagering of Any Offshore Site Here"
+ },
+ "casino-reviews/spinkings/index.html": {
+  "title": "Spin Kings Casino Review UK [{{month}}]: Bonus & Payouts",
+  "h1": "Spin Kings Casino Review UK [{{month}}]: New Casino and Sportsbook, Still Building a Record"
+ },
+ "casino-reviews/spinpin/index.html": {
+  "title": "Spin Pin Casino Review UK [{{month}}]: 550% + 450 Spins",
+  "h1": "Spin Pin Casino Review UK [{{month}}]: The Biggest Welcome Bonus on This Site"
+ },
+ "casino-reviews/tenobet/index.html": {
+  "title": "TenoBet Review UK [{{month}}]: Sportsbook Odds",
+  "h1": "TenoBet Review UK [{{month}}]: The Sportsbook Specialist &mdash; No Casino Attached"
+ },
+ "casino-reviews/wildzy/index.html": {
+  "title": "Wildzy Casino Review UK [{{month}}]: Free Spins & Payouts",
+  "h1": "Wildzy Casino Review UK [{{month}}]: Best Recurring Free Spins Programme"
+ },
+ "contact/index.html": {
+  "title": "Contact Us [{{month}}]: ChrisChem Casino Guide",
+  "h1": "Contact ChrisChem [{{month}}]: Corrections, Questions and Operator Enquiries"
+ },
+ "cookie-policy/index.html": {
+  "title": "Cookie Policy [{{month}}]: ChrisChem Cookie Settings",
+  "h1": "Cookie Policy [{{month}}]: Cookie Settings and Choices"
+ },
+ "fast-payout-casinos/index.html": {
+  "title": "Fast Withdrawal Casinos UK [{{month}}]: Instant Payouts",
+  "h1": "Fast Withdrawal Casinos UK [{{month}}]: Instant Payout Sites, Timed"
+ },
+ "football-betting-sites-not-on-gamstop/index.html": {
+  "title": "Football Betting Sites Not on GamStop [{{month}}]: Odds",
+  "h1": "Football Betting Sites Not on GamStop [{{month}}]: Premier League Markets, Odds and Value"
+ },
+ "gambling-winnings-tax-uk/index.html": {
+  "title": "Gambling Winnings Tax UK [{{month}}]: Do You Pay Tax?",
+  "h1": "Tax on Gambling Winnings UK [{{month}}]: Are Casino and Betting Wins Taxable?"
+ },
+ "high-payout-casinos/index.html": {
+  "title": "Best Payout Casinos UK [{{month}}]: Highest RTP Sites",
+  "h1": "Best Payout Casinos UK [{{month}}]: The Highest RTP Online Casinos"
+ },
+ "how-we-review/index.html": {
+  "title": "How We Review Casinos [{{month}}]: Our Methodology",
+  "h1": "How We Review Online Casinos [{{month}}]: Our Testing Methodology in Full"
+ },
+ "index.html": {
+  "title": "Best Online Casinos UK [{{month}}]: Real Money Casinos",
+  "h1": "Best Online Casinos UK [{{month}}]: Real Money Casino Sites, Tested and Ranked"
+ },
+ "live-casinos/index.html": {
+  "title": "Best Live Casino Sites UK [{{month}}]: Live Dealer Casinos",
+  "h1": "Best Live Casino Sites UK [{{month}}]: Live Dealer Casinos Ranked"
+ },
+ "new-non-gamstop-casinos/index.html": {
+  "title": "New Casinos Not on GamStop UK [{{month}}]: Latest Sites",
+  "h1": "New Non GamStop Casinos [{{month}}]: The Latest Casino Sites Not on GamStop, Vetted"
+ },
+ "no-deposit-casinos/index.html": {
+  "title": "No Deposit Bonus UK [{{month}}]: Free Spins No Deposit",
+  "h1": "No Deposit Bonus UK [{{month}}]: Free Spins No Deposit Offers, Valued"
+ },
+ "non-gamstop-betting-sites-uk/index.html": {
+  "title": "Non GamStop Betting Sites UK [{{month}}]: Top Bookies",
+  "h1": "Non GamStop Betting Sites UK [{{month}}]: Bookmakers Not on GamStop"
+ },
+ "non-gamstop-casinos-with-free-spins/index.html": {
+  "title": "Non GamStop Free Spins [{{month}}]: No Deposit Spins",
+  "h1": "Non GamStop Casinos With Free Spins [{{month}}]: No Deposit Spin Offers, Valued"
+ },
+ "non-gamstop-casinos/index.html": {
+  "title": "Non GamStop Casinos UK [{{month}}]: Top Casino Sites",
+  "h1": "Non GamStop Casinos UK [{{month}}]: Casino Sites Not on GamStop, and Who Should Avoid Them"
+ },
+ "online-betting/index.html": {
+  "title": "Online Betting UK [{{month}}]: Odds & Betting Sites",
+  "h1": "Online Betting UK [{{month}}]: How Betting Sites Work and Odds Explained"
+ },
+ "online-casinos/bonuses/index.html": {
+  "title": "Casino Bonuses UK [{{month}}]: Welcome Offers Ranked",
+  "h1": "Best Casino Bonuses UK [{{month}}]: Welcome Offers and Sign Up Bonuses Ranked"
+ },
+ "online-casinos/index.html": {
+  "title": "Online Casinos UK [{{month}}]: Real Money Casino Sites",
+  "h1": "Online Casinos UK [{{month}}]: How Real Money Casino Sites Work"
+ },
+ "payment-methods/index.html": {
+  "title": "Casino Payment Methods UK [{{month}}]: GBP Deposits",
+  "h1": "Casino Payment Methods UK [{{month}}]: The Best Deposit and Withdrawal Options"
+ },
+ "privacy/index.html": {
+  "title": "Privacy Policy [{{month}}]: ChrisChem UK GDPR Notice",
+  "h1": "Privacy Policy [{{month}}]: UK GDPR Notice"
+ },
+ "responsible-gambling/index.html": {
+  "title": "Responsible Gambling UK [{{month}}]: GamStop & Help",
+  "h1": "Responsible Gambling UK [{{month}}]: GamStop, Gambling Blockers and Where to Get Help"
+ },
+ "terms/index.html": {
+  "title": "Terms and Conditions [{{month}}]: ChrisChem UK",
+  "h1": "Terms and Conditions [{{month}}]: Using ChrisChem"
+ },
+ "uk-gambling-laws/index.html": {
+  "title": "UK Gambling Laws [{{month}}]: Gambling Act & UKGC",
+  "h1": "UK Gambling Laws [{{month}}]: The Gambling Act, UKGC Rules and Player Protections"
+ }
+}

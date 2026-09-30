@@ -6,7 +6,8 @@ import json, os, html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OPS = json.load(open(os.path.join(ROOT, "_build", "operators.json")))
 OUT = os.path.join(ROOT, "_build", "pages")
-UPDATED_HUMAN = "2 September 2026"
+UPDATED_HUMAN = "2 September 2026"   # date the review figures were verified
+LAST_UPDATED = "1 October 2026"      # shown as the page's "Updated" date
 
 COPY = {
 "kingdom": dict(order=300, author="charles", tag="Fastest payouts of 38 sites tested",
@@ -345,7 +346,7 @@ def deep_sections(op, slug):
 """ % dict(name=op["name"], welcome=op["welcome"], wagering=op["wagering"], mindep=op["minDep"],
            fast=op["payoutFast"], card=op["payoutCard"], licence=op["licence"],
            licref=(" (reference %s)" % op["licenceRef"]) if op["licenceRef"] else "",
-           upd=UPDATED_HUMAN, games=op["games"], providers=op["providers"],
+           upd=LAST_UPDATED, games=op["games"], providers=op["providers"],
            captionline=captionline, freshline=freshline, fastroute=fastroute)
 
 
@@ -588,7 +589,7 @@ for slug, c in COPY.items():
 </div></section>
 """ % dict(
         kind="Sportsbook" if not op["casino"] else "Casino",
-        upd=UPDATED_HUMAN, name=op["name"], tag=c["tag"], verdict=c["verdict"],
+        upd=LAST_UPDATED, name=op["name"], tag=c["tag"], verdict=c["verdict"],
         fullh1=(META[slug][2] if slug in META else "%s Review UK 2026: %s" % (op["name"], c["tag"])),
         rating=op["rating"], lic=op["licence"].split("(")[0].strip()[:22],
         wag=op["wagering"].split(" ")[0], fast=op["payoutFast"],
